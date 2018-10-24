@@ -1,0 +1,32 @@
+\contentsline {section}{\numberline {1}MBROLA Sources General condition of use}{1}
+\contentsline {section}{\numberline {2}A brief description of MBROLA}{1}
+\contentsline {section}{\numberline {3}Distribution}{2}
+\contentsline {section}{\numberline {4}Installation and Tests\nobreakspace {} }{5}
+\contentsline {subsection}{\numberline {4.1}On Unix}{5}
+\contentsline {subsection}{\numberline {4.2}On PCs/Dos}{7}
+\contentsline {subsection}{\numberline {4.3}On PC/Windows}{7}
+\contentsline {subsubsection}{\numberline {4.3.1}Black magic}{8}
+\contentsline {subsection}{\numberline {4.4}Using the standalone binary}{8}
+\contentsline {subsubsection}{\numberline {4.4.1}Changing the pitch}{10}
+\contentsline {subsubsection}{\numberline {4.4.2}Using Pipes}{11}
+\contentsline {subsubsection}{\numberline {4.4.3}Renaming and Cloning phonemes}{11}
+\contentsline {subsection}{\numberline {4.5}Machine dependant hints for best using Mbrola}{12}
+\contentsline {subsubsection}{\numberline {4.5.1}On MSDOS}{12}
+\contentsline {subsubsection}{\numberline {4.5.2}On modern Unix systems such as Solaris or HPUX or Linux}{12}
+\contentsline {subsubsection}{\numberline {4.5.3}On Sun4 ( old audio interface )}{13}
+\contentsline {subsubsection}{\numberline {4.5.4}On VAX or AXP workstations}{13}
+\contentsline {subsection}{\numberline {4.6}Default Parser Manual}{13}
+\contentsline {subsubsection}{\numberline {4.6.1}Input file format}{13}
+\contentsline {subsubsection}{\numberline {4.6.2}Changing the Frequency Ratio or Time Ratio}{14}
+\contentsline {subsubsection}{\numberline {4.6.3}Flush the output stream}{14}
+\contentsline {subsubsection}{\numberline {4.6.4}Limitations of MBROLA}{15}
+\contentsline {section}{\numberline {5}Programmer's Manual}{15}
+\contentsline {subsection}{\numberline {5.1}Philosophy and architecture}{15}
+\contentsline {subsection}{\numberline {5.2}Encapsulation of Object's attributes}{16}
+\contentsline {subsubsection}{\numberline {5.2.1}Inheritance and Polymorphism}{17}
+\contentsline {subsubsection}{\numberline {5.2.2}Inheritance and cross-reference graph}{18}
+\contentsline {section}{\numberline {6}Application Programming Interface}{18}
+\contentsline {subsection}{\numberline {6.1}One channel mode}{18}
+\contentsline {subsubsection}{\numberline {6.1.1}Multi channel mode}{19}
+\contentsline {subsubsection}{\numberline {6.1.2}Designing and plugging your own parser}{21}
+\contentsline {subsection}{\numberline {6.2}Mbrola architecture}{22}

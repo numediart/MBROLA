@@ -1,0 +1,91 @@
+Release 3.02a
+
+This is a short introduction to ROM databases (this section will be
+moved in the full documentation):
+
+Mbrola now offers a way to initialize database from a ROM
+dump. Previously, initialization was:
+
+Database* init_Database(char* dbaname);
+/* Generic initialization, calls the appropriate constructor 
+ * Returning NULL means fail (check LastError)
+ */
+
+One had to provide a file name, and the header of the database was
+indicating the type of the database ( Raw, Bacon compressed, Cebab
+compressed and other types to come).
+
+The new mechanism is:
+
+Database* init_ROM_Database(void* input_ptr);
+/*
+ * Initialize a database from a ROM image
+ */
+
+Where one provides as an input a pointer to a ROM map. Mbrola internal
+structures were heavily modified so that most of database information
+are actually kept in ROM and not copied in RAM through mallocs.
+
+To build those ROM images from different types of databases, one must
+use the standalone version of MBROLA with the new -W option:
+
+    mbrola  -W fr1
+
+Launching this command line generates a fr1.rom dump in a file. You
+can then embed this dump in the resources of your mbrola instance.
+
+If you need renaming or cloning, you can freeze it in the ROM database
+once for all (renaming cannot of course be called on a ROM image). For
+example you can call the command:
+
+   mbrola -R "a b  c d" -C "b i" fr1
+
+It will download fr1, rename a into b, and c into d, clone b into i
+and THEN dump memory image into fr1.rom
+
+For debugging purposes, the standalone "mbrola" program can use a ROM
+dump instead of a regular database file, it is indicated through the
+new -w option:
+
+    mbrola -w fr1 TEST/bonjour.pho output.wav
+
+This command initializes the mbrola engine with the fr1.rom dump (it
+mallocs a memory copy of fr1.rom and then call init_ROM_Database on
+it) 
+
+Once the programmer has built a new Database object (either from a
+file, either from a memory map) Mbrola's functionality remain the
+same, thus refer to the standard manual.
+
+----------------------------------------------------------------
+Building the code:
+
+To be able to save ROM images from regular diphone databases you must
+define compilers symbol ROMDATABASE_STORE, see the line in the
+Makefile:
+
+CFLAGS += -DROMDATABASE_STORE
+
+To be able to initialize a Database from a ROM image, you must define
+compilers symbol ROMDATABASE_INIT, see the line in the makefile:
+ 
+# Uncomment if you wish to use init_ROM_Database(ROM_pointer)
+CFLAGS += -DROMDATABASE_INIT
+ 
+If you work with a Visual C++ project, you must include the C files:
+
+Database/rom_handling.c Database/rom_database.c
+
+IF YOU ARE ON A "ROM ONLY" PLATFORM AND WANT FILE* TO DISAPPEAR FROM 
+THE SOURCE CODE:
+
+CFLAGS += -DROMDATABASE_PURE
+  
+------------------------------------------------------
+WARNINGS: please note than endianess should be the same on the
+embedded system and on the system where you build the .rom image
+(see BIG_ENDIAN LITTLE_ENDIAN). In other word if the target system is
+a LITTLE_ENDIAN platform use a PC, if the system is a BIG_ENDIAN
+platform use a Macintosh or a SUN.
+
+The same remark is valid for FLOAT as well in case of compressed databases

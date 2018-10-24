@@ -1,0 +1,2943 @@
+#This file was created by <vincent> Fri Apr  7 06:29:47 2000
+#LyX 0.12 (C) 1995-1998 Matthias Ettrich and the LyX Team
+\lyxformat 2.15
+\textclass article
+\language default
+\inputencoding latin1
+\fontscheme default
+\graphics default
+\paperfontsize default
+\spacing single 
+\papersize a4paper
+\paperpackage a4
+\use_geometry 0
+\use_amsmath 0
+\paperorientation portrait
+\secnumdepth 3
+\tocdepth 3
+\paragraph_separation indent
+\defskip medskip
+\quotes_language english
+\quotes_times 2
+\papercolumns 1
+\papersides 1
+\paperpagestyle default
+
+\layout Title
+
+MBROLA 
+\layout Date
+
+(Multi-Band Resynthesis OverLap Add)
+\layout Date
+
+System documentation
+\layout Date
+
+Edition 7.0 - Mbrola release 3.02
+\layout Date
+
+March 12th, 2000
+\layout Standard
+
+
+\protected_separator 
+
+\layout Quote
+
+"It would be a considerable invention indeed, that of a machine able to
+ mimic speech, with its sounds and articulations.
+ I think it is not impossible." Leonhard Euler (1761)
+\layout Quote
+
+
+\protected_separator 
+
+\layout Right Address
+
+by Vincent Pagel and Thierry Dutoit
+\newline 
+
+\layout Standard
+
+
+\protected_separator 
+
+\layout Standard
+
+
+\begin_inset LatexCommand \tableofcontents
+
+\end_inset 
+
+
+\layout Standard
+
+
+\protected_separator 
+
+\layout Section
+
+MBROLA Sources General condition of use
+\layout Standard
+
+The source code of MBROLA may only be used to produce the object code sold
+ by your company.
+ It is confidential and should remain safely locked, as well as its documentatio
+n.
+\layout Section
+
+A brief description of MBROLA
+\layout Standard
+
+MBROLA v3.01 is a speech synthesizer based on the concatenation of diphones.
+ One synthesis channel takes a list of phonemes as input, together with
+ prosodic information (duration of phonemes and a piecewise linear description
+ of pitch), and produces speech samples on 16 bits (linear), at the sampling
+ frequency of the diphone database.
+ It is therefore 
+\noun on 
+not
+\noun toggle 
+ a Text-To-Speech synthesizer, since it does not accept raw text as input.
+\layout Standard
+
+It is distributed as a ZIP file whose name respect the format 
+\emph on 
+"mbrXXXX.zip"
+\emph toggle 
+ where 
+\emph on 
+XXXX
+\emph toggle 
+ represent the version number (e.g.
+ 
+\emph on 
+\latex latex 
+"mbr3.01e.zip"
+\emph toggle 
+\latex default 
+).
+\newline 
+
+\layout Standard
+
+It may be compiled in 3 modes depending on which stream drives the process:
+ 
+\layout Itemize
+
+Driven by the input phonetic file: it is compiled as a standalone program
+ named "synth" which outputs audio in a file or a pipe.
+ This mode is a good choice under Unix platforms for end-user applications.
+ In the following we call this mode 
+\series bold 
+"
+\emph on 
+standalone mode
+\series default 
+\emph toggle 
+".
+\layout Itemize
+
+Driven by the audio output: compiled as a library, which outputs audio data
+ into buffers of the size, requested by the main program.
+ This allows you to easily include MBROLA inside your TTS application without
+ temporary file mechanisms.
+ In the following we call this mode "
+\series bold 
+\emph on 
+library mode
+\series default 
+\emph toggle 
+".
+ 
+\layout Itemize
+
+Same as above, included in a DLL for Windows95-98/NT (which is of course
+ the preferred mode for Windows platforms).
+ In the following we call this mode "
+\series bold 
+\emph on 
+DLL mode
+\series default 
+\emph toggle 
+".
+ 
+\layout Standard
+
+While using 
+\emph on 
+library
+\emph toggle 
+ or 
+\emph on 
+DLL
+\emph toggle 
+ mode, we now differentiate one channel and multi channel mbrola.
+ In the first mode, one database is associated to one and only one synthesis
+ channel, which generally fits for end-user applications.
+ In the second mode, one can run many synthesis channel instantiations with
+ one or more Database instances and many phonetic input streams.
+ This second solution is adapted to multi channel telecom TTS applications.
+\layout Standard
+
+
+\protected_separator 
+
+\layout Standard
+
+In all those compilation modes MBROLA requires a language/voice database
+ to run properly.
+ For your internal use (i.e.
+ non-commercial) you can test the voices made available on the MBROLA project
+ homepage:
+\layout Standard
+
+
+\protected_separator 
+
+\layout Standard
+
+http://tcts.fpms.ac.be/synthesis
+\layout Standard
+
+
+\protected_separator 
+
+\layout Standard
+
+Refer to your contract to check your rights for commercial exploitation
+ of the different Diphone Databases.
+\layout Standard
+
+
+\protected_separator 
+
+\layout Section
+
+Distribution
+\layout Standard
+
+Since release 3.01, Mbrola has been transformed into pure ANSI/C code, and
+ object like programming with a strong encapsulation of data (strong because
+ we have respected the fences we put!).
+ One file in the distribution is generally equivalent to one object (pointer
+ on struct).
+ You can find an exhaustive description in the programmer's section 6.
+\layout Standard
+
+This distribution of MBROLA contains the following files: 
+\layout Description
+
+Makefile: Unix makefile for Gnu Make (gmake command)
+\layout Description
+
+
+\protected_separator 
+
+\layout Description
+
+DOCUMENTATION/Programmer/documentation302: this document
+\layout Description
+
+DOCUMENTATION/Programmer/HISTORY.txt: history of revisions
+\layout Description
+
+DOCUMENTATION/User/readme.txt: standalone version manual
+\layout Description
+
+
+\protected_separator 
+
+\layout Description
+
+Database: handling of different database formats 
+\layout Description
+
+Database/database.c: functions to read diphones in the speech database
+\layout Description
+
+Database/database.h
+\layout Description
+
+Database/database_bacon.c: functions to read compressed diphone databases
+\layout Description
+
+Database/database_bacon.h
+\layout Description
+
+Database/database_old.c: functions to read diphone databases older than 2.06
+\layout Description
+
+Database/database_old.h
+\layout Description
+
+
+\protected_separator 
+
+\layout Description
+
+Database/diphone_info.c: description of the diphone structures
+\layout Description
+
+Database/diphone_info.h
+\layout Description
+
+
+\protected_separator 
+
+\layout Description
+
+Database/hash_tab.c: hash table of DiphoneInfo (access to the diphone database)
+\layout Description
+
+Database/hash_tab.h
+\layout Description
+
+
+\protected_separator 
+
+\layout Description
+
+Database/little_big.c: handles the little and big endian numeric conversions
+\layout Description
+
+Database/little_big.h
+\layout Description
+
+
+\protected_separator 
+
+\layout Description
+
+Database/rename_list.c: list of phoneme pairs (used for renaming and cloning)
+\layout Description
+
+Database/rename_list.h
+\layout Description
+
+
+\protected_separator 
+
+\layout Description
+
+Parser: functions to read phonemes in the input stream
+\layout Description
+
+Parser/fifo.c: First In First Out with chars
+\layout Description
+
+Parser/fifo.h
+\layout Description
+
+Parser/input.h: define abstract input stream 
+\layout Description
+
+Parser/input_fifo.c: 
+\series bold 
+i
+\series default 
+nstantiation of input.h with Fifo
+\layout Description
+
+Parser/input_fifo.h
+\layout Description
+
+Parser/input_file.c: instantiation of input.h with File
+\layout Description
+
+Parser/input_file.h
+\layout Description
+
+Parser/parser.h: define abstract phoneme parser
+\layout Description
+
+Parser/parser_input.c: instantiation of parser.h with Input
+\layout Description
+
+Parser/parser_input.h
+\layout Description
+
+Parser/phonbuff.c: handle a phoneme buffer for pitch interpolation
+\layout Description
+
+Parser/phonbuff.h
+\layout Description
+
+Parser/phone.c: phoneme type
+\layout Description
+
+Parser/phone.h
+\layout Description
+
+
+\protected_separator 
+
+\layout Description
+
+Engine: Mbrola synthesis engine
+\layout Description
+
+Engine/diphone.c: diphone with info for synthesis
+\layout Description
+
+Engine/diphone.h
+\layout Description
+
+Engine/mbrola.c: mbrola algorithm (Ola, Smoothing...)
+\layout Description
+
+Engine/mbrola.h
+\layout Description
+
+
+\protected_separator 
+
+\layout Description
+
+Misc: Miscellaneous functions basically unrelated to synthesis 
+\layout Description
+
+Misc/audio.c: audio output and audio file header (au, wav, aiff, raw)
+\layout Description
+
+Misc/audio.h
+\layout Description
+
+Misc/common.c: useful little functions (uppercase, swab...)
+\layout Description
+
+Misc/common.h
+\layout Description
+
+Misc/g711.c: G711 audio coding (ALAW and MULAW)
+\layout Description
+
+Misc/g711.h
+\layout Description
+
+Misc/incdll.h: external definitions used outside of the Mbrola package
+\layout Description
+
+Misc/mbralloc.c: memory allocators are here and ONLY here
+\layout Description
+
+Misc/mbralloc.h
+\layout Description
+
+Misc/vp_error.c: deals with fatal error and warnings
+\layout Description
+
+Misc/vp_error.h: macros for debugging purposes
+\layout Description
+
+
+\protected_separator 
+
+\layout Description
+
+Standalone: Standalone compilation front-end
+\layout Description
+
+Standalone/Posix 
+\layout Description
+
+Standalone/Posix/getopt.c: provided for non-POSIX Unixes
+\layout Description
+
+Standalone/Posix/getopt.h
+\layout Description
+
+Standalone/synth.c: front-end for the compilation in the standalone mode.
+ Main()
+\layout Description
+
+Standalone/synth.h
+\layout Description
+
+LibOneChannel: library providing one MBROLA synthesis channel
+\layout Description
+
+LibOneChannel/demo1.c: small demonstration program running with the library
+ 
+\layout Description
+
+LibOneChannel/demo1b.c: small demo showing error handling with the library
+\layout Description
+
+LibOneChannel/onechannel.c: library providing one mbrola channel at a time
+\layout Description
+
+LibOneChannel/onechannel.h
+\layout Description
+
+LibOneChannel/lib1.c: wrapper file to build the library lib1.c (mono channel)
+\layout Description
+
+
+\protected_separator 
+
+\layout Description
+
+LibMultiChannel: library for multi MBROLA synthesis channel for telecom
+\layout Description
+
+LibMultiChannel/multichannel.c: many synthesis channel from one dba
+\layout Description
+
+LibMultiChannel/multichannel.h
+\layout Description
+
+LibMultiChannel/demo2.c: demo using lib2
+\layout Description
+
+LibMultiChannel/lib2.c: wrapper file to build the library lib2.c (multi channel)
+\layout Description
+
+
+\protected_separator 
+
+\layout Description
+
+VisualC++: compilation projects for Microsoft Visual C++
+\layout Description
+
+VisualC++/DLL: Visual C++ project to build the DLL
+\layout Description
+
+VisualC++/DLL_USE: sample program using the DLL
+\layout Description
+
+VisualC++/Standalone: Visual C++ project to build a standalone binary
+\layout Description
+
+
+\protected_separator 
+
+\layout Description
+
+Bin: directory containing the output of the compilation with Make under
+ Unix architectures.
+\layout Section
+
+Installation and Tests
+\protected_separator 
+ 
+\layout Subsection
+
+On Unix
+\layout Standard
+
+You must first unzip the distribution file mbrXXXX.zip where XXXX stand for
+ the version number:
+\layout Description
+
+unzip mbrXXXX.zip
+\layout Description
+
+Mbrola can be compiled with the 'gmake' (gnu make) command on the following
+ platforms:
+\layout Itemize
+
+SUN Sparc 5/S5R4 (Solaris2.4)
+\layout Itemize
+
+HPUX9.0 and HPUX10.0 
+\layout Itemize
+
+VAX/VMS V6.2 (V5.5-2 won't work)
+\layout Itemize
+
+DECALPHA(AXP)/VMS 6.2
+\layout Itemize
+
+AlphaStation 200 4/233
+\layout Itemize
+
+AlphaStation 200 4/166
+\layout Itemize
+
+IBM RS6000 Aix 4.12
+\layout Itemize
+
+PC/LINUX 1.2.11
+\layout Itemize
+
+PCPentium120/Solaris2.4
+\layout Itemize
+
+OS/2
+\layout Itemize
+
+BeBox
+\layout Itemize
+
+QNX OS
+\layout Standard
+
+Though, as Mbrola is written in standard ANSI/C, we also support POSIX compliant
+ UNIX Platforms.
+ Please send acknowledgment when Mbrola works on a machine/system not listed
+ here.
+ Before you compile anything you must define some symbols depending on the
+ architecture you're working with:
+\layout Description
+
+LITTLE_ENDIAN ® 80x86 based platforms
+\layout Description
+
+BIG_ENDIAN ® motorola or HP based platforms 
+\layout Description
+
+VMS ® VAX/VMS stations
+\layout Description
+
+DOS ® PC80x86 with Dos or Windows
+\layout Description
+
+SUN4 ® old Sun4 stations (not Posix compliant)
+\layout Description
+
+DEBUG ® Huge debugging flag
+\layout Description
+
+DEBUG_HASH ® Runs the database and print info about the hash table management
+ (used to tune the memory management of the database)
+\layout Description
+
+According to the compilation mode you wish, you can comment or uncomment
+ following lines of Makefile : 
+\layout Quote
+
+#CFLAGS += -DDEBUG
+\layout Quote
+
+#CFLAGS += -DDEBUG_HASH
+\layout Quote
+
+#CFLAGS += -DLITTLE_ENDIAN
+\layout Quote
+
+CFLAGS += -DBIG_ENDIAN
+\layout Standard
+
+You can add any definitions to the CFLAGS (compilation flags) variable of
+ the Makefile, as in the following example:
+\layout Description
+
+optimized compilation on a Sun Station :
+\layout Quote
+
+CFLAGS= -Wall -DBIG_ENDIAN -O6
+\layout Description
+
+debug mode on a VAX/VMS :
+\layout Quote
+
+CFLAGS= -Wall -DLITTLE_ENDIAN -DVMS -g -DDEBUG
+\layout Standard
+
+By default the compiler is set with CC = gcc ; though on many platforms
+ cc may also work.
+ As the hardware manufacturer generally provides cc, it is preferred when
+ possible since the object code performance can be higher by an order of
+ magnitude.
+ You can type :
+\layout Description
+
+"make" or "make all" to generate the 'synth' binary (standalone mode).
+\layout Description
+
+"make clean" removes the entire object files and binaries.
+\layout Description
+
+"make lib1" compiles lib1.c in the library mode (one channel synth)
+\layout Description
+
+"make demo1" builds a demo exemplifying the use of lib1
+\layout Description
+
+"make lib2" compiles lib1.c in the library mode (multi channel synth)
+\layout Description
+
+"make demo2" builds a demo exemplifying the use of lib2
+\layout Description
+
+"make tags" to build Emacs popular tags (helps finding your way through
+ the code with ESC-.
+ ).
+ SUN Workshop uses an internal btags program for that purpose.
+\layout Standard
+
+The intermediate object code goes into a Bin directory that is created on
+ the occasion.
+\layout Subsection
+
+On PCs/Dos
+\layout Standard
+
+On PC/Dos platforms, use "pkunzip synthXXXX.zip" to restore the files (don't
+ forget to restore the embedded paths in the archive).
+ Mbrola can be compiled with Microsoft Visual C++ (4 .0 or higher), or Borland
+ C++ (4 .5 or higher), on the following platforms:
+\layout Itemize
+
+PC486/DOS6 (but other PC/DOS should do, too)
+\layout Itemize
+
+PC486/Windows 3.1
+\layout Itemize
+
+PC486/Windows 95 
+\layout Itemize
+
+PC-Pentium/Windows 98
+\layout Itemize
+
+PC-Pentium/Windows NT
+\layout Standard
+
+Always check that in your project the following preprocessor directives
+ are defined: LITTLE_ENDIAN and DOS.
+ A project to build such a release with Visual C++ is provided under VisualC++/S
+tandalone.
+\layout Subsection
+
+On PC/Windows
+\layout Standard
+
+First proceed like for the PC/DOS platforms.
+ Once synthXXXX is installed you can start building a DLL in the VisualC++
+\backslash 
+DLL directory.
+ MbrolaDll.dsw is a Microsoft VisualC++ 5.0 project file to build a DLL.
+ In any project you make to build a DLL with Mbrola don't forget to define
+ the DLL, LITTLE_ENDIAN, DOS preprocessor definitions.
+\layout Standard
+
+The Mbrola source files and a wrapper DLL interface is included in the project,
+ it should compile smoothly.
+ In case you have to build a new project from scratch remember that you
+ should include only file from either LibOneChannel/ or LibMultiChannel/.
+ Never include files from Standalone/, as this directory is only relevant
+ for a standalone mode (see section above for an exe binary).
+\layout Standard
+
+Several compilation modes are available, the "Win32 Bacon Static" is a good
+ one to start with (Bacon compression scheme is included, DLL are statically
+ linked).
+\layout Standard
+
+In the directory VisualC++/DLL_USE , little sample programs are given that
+ use the Mbrola DLL.
+\layout Subsubsection
+
+Black magic
+\layout Standard
+
+There is a strange bug in Visual C++ 5.0, when you compile the project you
+ sometime get:
+\layout Quote
+
+Linking...
+\layout Quote
+
+nafxcw.lib(dllmodul.cbj) : error LNK2005: _DllMain@12 already defined in LIBCMT.lib
+(dllmain.cbj)
+\layout Quote
+
+nafxcw.lib(afxmem.cbj) : error LNK2005: "void * __cdecl operator new(unsigned
+ int)" (??2@YAPAXI@Z) already defined in LIBCMT.lib(new.cbj)
+\layout Quote
+
+nafxcw.lib(afxmem.cbj) : error LNK2005: "void __cdecl operator delete(void
+ *)" (??3@YAXPAX@Z) already defined in LIBCMT.lib(delete.cbj)
+\layout Quote
+
+nafxcw.lib(dllmodul.cbj) : warning LNK4006: _DllMain@12 already defined in
+ LIBCMT.lib(dllmain.cbj); second definition ignored
+\layout Quote
+
+nafxcw.lib(afxmem.cbj) : warning LNK4006: "void * __cdecl operator new(unsigned
+ int)" (??2@YAPAXI@Z) already defined in LIBCMT.lib(new.cbj); second definition
+ ignored
+\layout Quote
+
+nafxcw.lib(afxmem.cbj) : warning LNK4006: "void __cdecl operator delete(void
+ *)" (??3@YAXPAX@Z) already defined in LIBCMT.lib(delete.cbj); second definition
+ ignored
+\layout Quote
+
+Creating library MbrolaDl/Mbrola.lib and object MbrolaDl/Mbrola.exp
+\layout Quote
+
+Output
+\backslash 
+Release_Static
+\backslash 
+Mbrola.dll : fatal error LNK1169: one or more multiply defined symbols found
+\layout Quote
+
+Error executing link.exe.
+\layout Quote
+
+Mbrola.dll - 4 error(s), 7 warning(s)
+\layout Standard
+
+Solution: remove one file from the project and include it again in the list
+ of source files, and build the project again.
+ The problem vanishes.
+\layout Subsection
+
+Using the standalone binary
+\layout Standard
+
+You are now ready to test the program.
+ First try: "synth" to get an information screen about the copyright.
+ Then, for a help screen on how to use the standalone version of the software,
+ try :
+\layout Quotation
+
+synth -h 
+\layout Standard
+
+You get a help screen like the following:
+\layout Quotation
+
+> USAGE: ./synth [COMMAND LINE OPTIONS] database pho_file+ output_file
+\layout Quotation
+
+>
+\layout Quotation
+
+>A - instead of pho_file or output_file means stdin or stdout
+\layout Quotation
+
+>Extension of output_file ( raw, au, wav, aiff ) tells the wanted audio
+ format
+\layout Quotation
+
+>
+\layout Quotation
+
+> Options can be any of the following:
+\layout Quotation
+
+> -i = display the database information if any
+\layout Quotation
+
+> -e = IGNORE fatal errors on unkown diphone
+\layout Quotation
+
+> -c CC = set COMMENT char (escape sequence in pho files)
+\layout Quotation
+
+> -F FC = set FLUSH command name
+\layout Quotation
+
+> -v VR = VOLUME ratio, float ratio applied to ouput samples
+\layout Quotation
+
+> -f FR = FREQ ratio, float ratio applied to pitch points
+\layout Quotation
+
+> -t TR = TIME ratio, float ratio applied to phone durations
+\layout Quotation
+
+> -l VF = VOICE freq, target freq for voice quality
+\layout Quotation
+
+> -R RL = Phoneme RENAME list of the form a A b B ...
+\layout Quotation
+
+> -C CL = Phoneme CLONE list of the form a A b B ...
+\layout Quotation
+
+> 
+\layout Quotation
+
+> -I IF = Initialization file containing one command per line
+\layout Quotation
+
+> CLONE, RENAME, VOICE, TIME, FREQ, VOLUME, FLUSH, 
+\layout Quotation
+
+> COMMENT, and IGNORE are available
+\layout Standard
+
+Now in order to go further, you need to get a version of an MBROLA language/voic
+e database from the MBROLA project homepage.
+ Let us assume you have copied the FR1 database and referred to the accompanying
+ fr1.txt file for its installation.
+ Then try: 
+\layout Quotation
+
+synth fr1/fr1 fr1/TEST/bonjour.pho bonjour.wav
+\layout Standard
+
+it uses the format:
+\layout Quotation
+
+synth diphone_database command_file1 command_file2 ...
+ output_file
+\layout Standard
+
+and creates a sound file for the word 'bonjour' (Hello! in French)
+\layout Standard
+
+
+\protected_separator 
+
+\layout Standard
+
+Basically the output file is composed of signed integer numbers on 16 bits,
+ corresponding to samples at the sampling frequency of the MBROLA voice/language
+ database (16 kHz for the diphone database supplied by the authors of MBROLA
+ : Fr1).
+ MBROLA can produce different audio file formats: .au, .wav, .aiff, .aif, and
+ .raw files depending on the ouput_file extension.
+ If the extension is not recognized, the format is RAW (no header).
+ We recommend .wav for Windows, and .au for Unix platforms.
+ To display information about the phoneme set used by the database, type:
+\layout Quotation
+
+synth -i fr1/fr1
+\layout Standard
+
+It displays the phonetic alphabet as well as copyright information about
+ the database.
+ 
+\layout Standard
+
+
+\protected_separator 
+
+\layout Standard
+
+Option -e makes Mbrola ignore wrong or missing diphone sequences (replaced
+ by silence) which can be quite useful when debugging your TTS.
+ Equivalent to "IGNORE" directive in the initialization file (N.B replace
+ the obsolete ;;E=OFF , unsupported in .pho file).
+\layout Subsubsection
+
+Changing the pitch
+\layout Standard
+
+Optional parameters let you shorten or lengthen synthetic speech and transpose
+ it by providing optional time and frequency ratios:
+\layout Quotation
+
+synth -t 1.2 -f 0.8 -v 0.7 fr1/fr1 TEST/bonjour.pho bonjour.wav
+\layout Standard
+
+or its equivalent in the initialization file:
+\layout Quotation
+
+TIME 1.2
+\layout Quotation
+
+FREQ 0.8
+\layout Standard
+
+for instance, will result in a RIFF Wav file bonjour.wav 1.2 times longer
+ than the previous one (slower rate), and containing speech in which all
+ fundamental frequency values have been multiplied by 0.8 (sounds lower).
+ You can also set the values of these coefficients directly in a .pho file
+ by adding special escape sequence like :
+\layout Quotation
+
+;; F=0.8
+\layout Quotation
+
+;; T=1.2
+\layout Standard
+
+You can change the voice characteristics with the -l parameter.
+ If the sampling rate of your database is 16000, indicating -l 18000 allows
+ you to shorten the vocal tract by a ratio 16/18 (children voice, or women
+ voice depending on the voice you're working on).
+ With -l 10000,you can lengthen the vocal tract by a ratio 18/10 (namely
+ the voice of a Troll).
+ The same command in an initialization file becomes "VOICE 10000".
+\layout Standard
+
+
+\protected_separator 
+
+\layout Standard
+
+Option 
+\series bold 
+-v
+\series default 
+ gives a VolumeRatio that multiplies each output sample.
+ In the example below, each sample is multiplied by 0.7 (the loudness goes
+ down).
+ Warning: setting VolumeRatio too high generates saturation.
+\layout Quotation
+
+synth -v 0.7 fr1/fr1 TEST/bonjour.pho bonjour.wav
+\layout Standard
+
+or add the line 
+\series bold 
+"VOLUME 0.7" 
+\series default 
+in an initialization file
+\layout Standard
+
+
+\protected_separator 
+
+\layout Standard
+
+The 
+\series bold 
+-c
+\series default 
+ option lets you specify which symbol will be used as an escape sequence
+ for comments and commands in .pho files.
+ The default value is the semi-colon ';', but you may want to change this
+ if your phonetic alphabet use this symbol, like in:
+\layout Quotation
+
+synth -c ! fr1/fr1 TEST/test1.pho test2.pho test.wav
+\layout Standard
+
+equivalent to "
+\series bold 
+COMMENT !
+\series default 
+" in an initialization file
+\layout Standard
+
+
+\protected_separator 
+
+\layout Standard
+
+The 
+\series bold 
+-F
+\series default 
+ option lets you specify which symbol will be used to Flush the audio output.
+ The default value is 
+\series bold 
+#
+\series default 
+, you may want to change the symbol like in:
+\layout Quotation
+
+mbrola -F FLUSH_COMMAND fr1/fr1 test.pho test.wav
+\layout Standard
+
+equivalent to "
+\series bold 
+FLUSH FLUSH_COMMAND
+\series default 
+" in the initialization file.
+\layout Subsubsection
+
+Using Pipes
+\layout Standard
+
+A - instead of command_file or output_file means stdin or stdout.
+ On multitasking machines, it is easy to run the synthesizer in real time
+ to obtain audio output from the audio device, by using pipes.
+\layout Subsubsection
+
+Renaming and Cloning phonemes
+\layout Standard
+
+It may happen that the language-processing module connected to MBROLA doesn't
+ use the same phonemic alphabet as the voice used.
+ The Renaming and Cloning mechanisms help you to quickly solve such problems
+ (without adding extra CPU load).
+ The only limitation about phoneme names is that they can't contain blank
+ characters.
+\layout Standard
+
+
+\protected_separator 
+
+\layout Standard
+
+If, for instance, phoneme a in the mbrola voice you use is called my_a in
+ your alphabet, and phoneme b is called my_b, then the following command
+ solves the problem:
+\layout Quotation
+
+synth -R "a my_a b my_b" fr1/fr1 test.pho test.wav
+\layout Standard
+
+You can give as many renaming pairs as you want.
+ Circular definition is not a problem.
+ E.g.
+ "
+\series bold 
+a b b c
+\series default 
+" will rename original 
+\emph on 
+[a]
+\emph toggle 
+ into [b] and original 
+\emph on 
+[b]
+\emph toggle 
+ into 
+\emph on 
+[c] 
+\emph toggle 
+independently 
+\emph on 
+([a] 
+\emph toggle 
+won't be renamed to 
+\emph on 
+[c]
+\emph toggle 
+).
+\layout Standard
+
+
+\protected_separator 
+
+\layout Standard
+
+LIMITATION: you can't rename a phoneme into another that already exists.
+\layout Standard
+
+
+\protected_separator 
+
+\layout Standard
+
+The cloning mechanism does exactly the same thing, though the old phoneme
+ still exists after renaming.
+ This is useful if you have 2 allophones in your alphabet, but the Mbrola
+ voice only provides one.
+\layout Standard
+
+
+\protected_separator 
+
+\layout Standard
+
+Imagine for instance, that you make the distinction between the voiced [r]
+ and its unvoiced counterpart [r0] and that you are using a syllabic version
+ [r=].
+ If as a first approximation using [r] for both is OK, then you may use
+ an Mbrola voice that only provides one version of [r] by running:
+\layout Quotation
+
+synth -C "r r0 r r=" fr1/fr1 test.pho test.wav
+\layout Standard
+
+which tells the synthesizer that [r0] and [r=] should be both synthesized
+ as [r].
+ You can write a long cloning list of phoneme pairs to fit your needs.
+ 
+\layout Standard
+
+
+\protected_separator 
+
+\layout Standard
+
+Renaming and cloning eats CPU since the complete diphone hash table has
+ to be rebuilt, but once the renaming or cloning has occurred there is absolutel
+y NO RELATED PERFORMANCE DROP.
+ So using this feature is more efficient than a pre-processor is, though
+ a simple phoneme mapping cannot always solve incompatibilities.
+\layout Standard
+
+
+\protected_separator 
+
+\layout Standard
+
+Before renaming anything as 
+\series bold 
+#
+\series default 
+, check section 5.1.2
+\layout Standard
+
+
+\protected_separator 
+
+\layout Standard
+
+When one has long cloning and renaming lists, you can conveniently write
+ them into an initialization file according to the following format:
+\layout Quotation
+
+RENAME a my_a
+\layout Quotation
+
+RENAME b my_b
+\layout Quotation
+
+CLONE r r0
+\layout Quotation
+
+CLONE r r=
+\layout Standard
+
+The obsolete "
+\series bold 
+;; RENAME a my_a
+\series default 
+" can't be used in .pho file anymore, but is correctly parsed in initialization
+ files.
+ Note to EN1 and MRPA users: the consequence of the change above is that
+ you must change the previous call format "
+\emph on 
+mbrola en1 en1mrpa...
+\emph toggle 
+" into "
+\emph on 
+mbrola -I en1mrpa en1 ...
+\emph toggle 
+".
+\layout Subsection
+
+Machine dependant hints for best using Mbrola
+\layout Standard
+
+\layout Subsubsection
+
+On MSDOS
+\layout Standard
+
+\layout Standard
+
+With the standalone version, generating wav files is easier:
+\layout Standard
+
+\layout Quotation
+
+synth fr1/fr1 TEST/bonjour.pho bonjour.wav
+\layout Standard
+
+\layout Standard
+
+Then you can play the RIFF Wav file with your favorite DOS or Windows sound
+ utility.
+ On OS/2 pipes may be used just like below.
+\layout Subsubsection
+
+On modern Unix systems such as Solaris or HPUX or Linux
+\layout Standard
+
+Type:
+\layout Quotation
+
+synth fr1 bonjour.pho -.au | audioplay
+\layout Standard
+
+where audioplay is your audio file player (* the name vary with the platform,
+ e.g.
+ splayer for HPUX *).
+\layout Standard
+
+If your audioplayer has problems with sun .AU files, try with .wav or .raw.
+ Never use .wav format when you pipe the output (mbrola can't rewind the
+ file to write the audio size in the header).
+ Wav format was not developed for Unix (on the contrary Au format let you
+ specify in the header "we're on a pipe, read until end of file").
+ 
+\layout Standard
+
+
+\protected_separator 
+
+\layout Standard
+
+NOTE FOR LINUX: you can use the GPL rawplay program provided at
+\layout Quotation
+
+ftp://tcts.fpms.ac.be/pub/mbrola/pclinux/
+\layout Subsubsection
+
+On Sun4 ( old audio interface )
+\layout Standard
+
+Those machines are now quite old and only provide a mulaw 8Khz output.
+ A hack is:
+\layout Quotation
+
+synth fr1 input.pho - | sox -t raw -sw -r 16000 - -t raw -Ub -r 8000 - >
+ /dev/audio
+\layout Standard
+
+Provided you have the public domain sox utility developed by Ircam, you
+ should hear 
+\emph on 
+'bonjour' 
+\emph toggle 
+without the need to create intermediate files.
+ Note that we strongly recommend that you DON'T use SOX, since its resampling
+ method (linear interpolation) will permanently damage the sound.
+\layout Standard
+
+Other solution: The UTILITY.ZIP file available from the MBROLA homepage provides
+ RAW2SUN that does this conversion.
+\layout Subsubsection
+
+On VAX or AXP workstations
+\layout Standard
+
+To make it easier for users to find MBROLA, you should add the following
+ command to your system startup procedure: 
+\layout Quotation
+
+$ DEFINE/SYSTEM/EXEC MBROLA_DIR disk:[dir]
+\layout Standard
+
+where "disk:[dir]" is the name of the directory you created for the MBROLA_DIR
+ files.
+ You could also add the following command to your system login command procedure
+: 
+\layout Quotation
+
+$ MBROLA :== $MBROLA_DIR:MBROLA.EXE
+\layout Quotation
+
+$ RAW2SUN :== $MBROLA_DIR:RAW2SUN.EXE
+\layout Standard
+
+to use the decsound device:
+\layout Quotation
+
+$ MCR DECSOUND - volume 40 -play sound.au 
+\layout Standard
+
+See also the MBR_OLA.COM batch file in the UTILITY.ZIP file available from
+ the MBROLA Homepage if you cannot play 16 bits sound files on your machine.
+ 
+\layout Subsection
+
+Default Parser Manual
+\layout Standard
+
+The default parser is the parser that was provided before release 3.01.
+ Implicitly it means that you can replace it with your own one, thanks to
+ the setParser_MBR function.
+ Basically the work of the parser is to return to Mbrola a phoneme with
+ a length, and its pitch points.
+\layout Standard
+
+
+\protected_separator 
+
+\layout Standard
+
+We provide a default parser that allows you to give optional pitch points,
+ the intonation curve being linearly interpolated between those points.
+\layout Subsubsection
+
+Input file format
+\layout Standard
+
+Example of a command line :
+\layout Quotation
+
+synth fr1/fr1 bonjour.pho bonjour.wav 
+\layout Standard
+
+For example the phonetic input file bonjour.pho simply contains : 
+\layout Quotation
+
+; 
+\series bold 
+Bonjour
+\layout Quotation
+
+_ 
+\series bold 
+51 25 114
+\layout Quotation
+
+b 
+\series bold 
+62 
+\layout Quotation
+
+o~ 
+\series bold 
+127 48 170.42
+\layout Quotation
+
+Z 
+\series bold 
+110 53.5 116 
+\layout Quotation
+
+u 
+\series bold 
+211 
+\layout Quotation
+
+R 
+\series bold 
+150 50 91 
+\layout Quotation
+
+_ 
+\series bold 
+91
+\layout Standard
+
+This shows the format of the input data required by MBROLA.
+ Each line contains a phoneme name, a duration (in ms), and a series (possibly
+ none) of pitch pattern points composed of two float numbers each: the position
+ of the pitch pattern point within the phoneme (in % of its total duration),
+ and the pitch value (in Hz) at this position.
+\layout Standard
+
+
+\protected_separator 
+
+\layout Standard
+
+Hence, the second line of bonjour.pho : 
+\layout Quotation
+
+_ 51 25 114 
+\layout Standard
+
+tells the synthesizer to produce a silence of 51 ms, and to put a pitch
+ pattern point of 114 Hz at 25% of 51 ms.
+ Pitch pattern points define a piecewise linear pitch curve.
+ Notice that the pitch pattern they define is continuous, since the program
+ automatically drops pitch information when synthesizing unvoiced phones.
+\layout Standard
+
+
+\protected_separator 
+
+\layout Standard
+
+Blank characters or tabs separate the data on each line.
+ Comments can optionally be introduced in command files, starting with a
+ semi-colon 
+\series bold 
+';'
+\series default 
+.
+ This default can be overrun with the 
+\series bold 
+-c
+\series default 
+ option of the command line.
+\layout Standard
+
+
+\protected_separator 
+
+\layout Standard
+
+Another special escape sequence 
+\series bold 
+';;'
+\series default 
+ allow the user to introduce commands in the middle of .pho files as described
+ below.
+ This escape sequence is also affected by the 
+\series bold 
+-c
+\series default 
+ option.
+\layout Subsubsection
+
+Changing the Frequency Ratio or Time Ratio
+\layout Standard
+
+A command escape sequence containing a line like 
+\series bold 
+"T=x.x" 
+\series default 
+modifies the time ratio to 
+\series bold 
+x.x
+\series default 
+, the same result is obtained on the fundamental frequency by replacing
+ T with F, like in:
+\layout Quotation
+
+;; T = 1.2
+\layout Quotation
+
+;;F=0.8
+\layout Subsubsection
+
+Flush the output stream
+\layout Standard
+
+Note, finally, that the synthesizer outputs chunks of synthetic speech determine
+d as sections of the piecewise linear pitch curve.
+ Phones inside a section of this curve are synthesized in one go.
+ The last one of each chunk, however, cannot be properly synthesized while
+ the next phone is not known (since the program uses diphones as base speech
+ units).
+ When using mbrola with pipes, this may be a problem.
+ Imagine, for instance, that mbrola is used to create a pipe-based speaking
+ clock on a HP:
+\layout Quotation
+
+speaking_clock | mbrola fr1 - -.au | splayer
+\layout Standard
+
+which tells the time, say, every 30 seconds.
+ The last phone of each time announcement will only be synthesized when
+ the next announcement starts.
+ To bypass this problem, mbrola accepts a special command phone, which flushes
+ the synthesis buffer : "
+\series bold 
+#
+\series default 
+"
+\layout Standard
+
+This default character can be replaced by another symbol thanks to the command:
+\layout Quotation
+
+;; FLUSH new_flush_symbol
+\layout Standard
+
+Another important issue with piping under UNIX, is the possibility to prematurel
+y end the audio output, if for example the user presses the stop button
+ of your application.
+ Since release 3.01, Mbrola handles signals.
+\layout Standard
+
+
+\protected_separator 
+
+\layout Standard
+
+If in the previous example the user wants to interrupt the speaking clock
+ message, the application just needs to send the USR1 signal.
+ You can send such a signal from the console with:
+\layout Quotation
+
+kill -16 mbrola_process_number
+\layout Standard
+
+Once mbrola catches the signal, it reads its input stream until it gets
+ EOF or a FLUSH command (hence, surrounding sections with flush is a good
+ habit).
+\layout Subsubsection
+
+Limitations of MBROLA
+\layout Standard
+
+There is no more limitation on the number of pitch points one can assign
+ to a phoneme, or on the number of phonemes without pitch points.
+ There is no more limitation on extra low pitch (sometime used to produce
+ vocal fry).
+\layout Standard
+
+Phonemes can be synthesized with a maximum duration that depends on the
+ fundamental frequency with which they are produced.
+ The higher the frequency, the lower the duration.
+ For a frequency of 133 Hz, the maximum duration is 7.5 sec.
+ For a frequency of 66.5 Hz, is 5 sec.
+ For a frequency of 266 Hz, is 3.75 sec.
+\layout Section
+
+Programmer's Manual
+\layout Standard
+
+First, we describe in this section the object oriented philosophy used since
+ release 3.01.
+\layout Subsection
+
+Philosophy and architecture
+\layout Standard
+
+Actually nothing (or nearly nothing) prevents us to program in standard
+ C/ANSI with an object like convention which authorize: 
+\layout Enumerate
+
+"weak" encapsulation
+\layout Enumerate
+
+Inheritance
+\layout Enumerate
+
+Polymorphism
+\layout Subsection
+
+Encapsulation of Object's attributes
+\layout Standard
+
+Let's exemplify the programming conventions with the char Fifo found in
+ Parser/fifo.h.
+ First we define a structure describing a Fifo.
+\layout Quotation
+
+typedef struct 
+\layout Quotation
+
+{
+\layout Quotation
+
+char* charbuff;
+\protected_separator 
+
+\protected_separator 
+
+\protected_separator 
+
+\protected_separator 
+
+\protected_separator 
+
+\protected_separator 
+
+\protected_separator 
+
+\protected_separator 
+
+\protected_separator 
+ /* circular buffer for phonetic input */
+\layout Quotation
+
+int buffer_pos;
+\protected_separator 
+
+\protected_separator 
+
+\protected_separator 
+
+\protected_separator 
+
+\protected_separator 
+
+\protected_separator 
+
+\protected_separator 
+
+\protected_separator 
+
+\protected_separator 
+
+\protected_separator 
+
+\protected_separator 
+
+\protected_separator 
+
+\protected_separator 
+
+\protected_separator 
+
+\protected_separator 
+
+\protected_separator 
+
+\protected_separator 
+ /* Current position */
+\layout Quotation
+
+int buffer_end;
+\protected_separator 
+
+\protected_separator 
+
+\protected_separator 
+
+\protected_separator 
+
+\protected_separator 
+
+\protected_separator 
+
+\protected_separator 
+
+\protected_separator 
+
+\protected_separator 
+
+\protected_separator 
+
+\protected_separator 
+
+\protected_separator 
+
+\protected_separator 
+
+\protected_separator 
+
+\protected_separator 
+
+\protected_separator 
+
+\protected_separator 
+ /* Last available phoneme */
+\layout Quotation
+
+int buffer_size;
+\protected_separator 
+
+\protected_separator 
+
+\protected_separator 
+
+\protected_separator 
+
+\protected_separator 
+
+\protected_separator 
+
+\protected_separator 
+
+\protected_separator 
+
+\protected_separator 
+
+\protected_separator 
+
+\protected_separator 
+
+\protected_separator 
+
+\protected_separator 
+
+\protected_separator 
+
+\protected_separator 
+
+\protected_separator 
+ /* number of chars in Phobuffer */
+\layout Quotation
+
+} Fifo;
+\layout Standard
+
+To make distinction between public and private data, the convention is to
+ never directly access the features of a Fifo out of its fifo.c implementation
+ file.
+ To reach this goal we exclusively access members through function-like
+ macros.
+\layout Quotation
+
+#define charbuff(ff) ff->charbuff
+\layout Quotation
+
+#define buffer_pos(ff) ff->buffer_pos
+\layout Quotation
+
+#define buffer_end(ff) ff->buffer_end
+\layout Quotation
+
+#define buffer_size(ff) ff->buffer_size
+\layout Standard
+
+It allows the following: 
+\layout Quotation
+
+Fifo* my_fifo; 
+\layout Quotation
+
+..
+\layout Quotation
+
+int length= buffer_size(my_fifo);
+\layout Standard
+
+The programmer should not cheat to discover whether buffer_size is a function
+ or a macro, thus encapsulating the data and making them independent of
+ the Fifo's real implementation (modulo a complete recompiling).
+ C is not C++ and your compiler won't be able to carry out strong type checking
+ just as with inline functions, that's the reason why attributes don't respect
+ the full convention below (according to our conventions we should have
+ use the name buffer_size_Fifo() ).
+\layout Standard
+
+The methods always respect the format: functionname_ObjectName just like
+ below and take a pointer on the object as a first argument.
+ Methods beginning with init are always constructor, and those beginning
+ with close are destructors:
+\layout Quotation
+
+Fifo* init_Fifo(int size);
+\layout Quotation
+
+/*
+\layout Quotation
+
+
+\protected_separator 
+
+\protected_separator 
+* Constructor with size of the buffer
+\layout Quotation
+
+
+\protected_separator 
+
+\protected_separator 
+*/
+\layout Quotation
+
+void close_Fifo(Fifo* ff); 
+\layout Quotation
+
+/*
+\layout Quotation
+
+
+\protected_separator 
+
+\protected_separator 
+* Release the memory
+\layout Quotation
+
+
+\protected_separator 
+
+\protected_separator 
+*/
+\layout Quotation
+
+void reset_Fifo(Fifo* ff);
+\layout Quotation
+
+/*
+\layout Quotation
+
+
+\protected_separator 
+
+\protected_separator 
+* Forget previously entered data in the circular buffer
+\layout Quotation
+
+
+\protected_separator 
+
+\protected_separator 
+*/
+\layout Quotation
+
+int write_Fifo(Fifo* ff, char *buffer_in);
+\layout Quotation
+
+/*
+\layout Quotation
+
+
+\protected_separator 
+
+\protected_separator 
+* Write a string of phoneme in the input buffer
+\layout Quotation
+
+
+\protected_separator 
+
+\protected_separator 
+* Return the number of chars actually written
+\layout Quotation
+
+
+\protected_separator 
+
+\protected_separator 
+*/
+\layout Quotation
+
+int readline_Fifo(Fifo* ff, char *line, int size);
+\layout Quotation
+
+/* 
+\layout Quotation
+
+
+\protected_separator 
+
+\protected_separator 
+* Read a line from the input stream in a circular buffer
+\layout Quotation
+
+
+\protected_separator 
+
+\protected_separator 
+* Return 0 if there's nothing to read
+\layout Quotation
+
+
+\protected_separator 
+
+\protected_separator 
+*/
+\layout Subsubsection
+
+Inheritance and Polymorphism
+\layout Standard
+
+Inheritance alone can always be simulated through the is_a_client_of relation,
+ the most interesting case being polymorphism.
+ Polymorphism is interesting for multiple format database handling, and
+ live input parser definition inside of the synthesizer.
+\layout Standard
+
+
+\protected_separator 
+
+\layout Standard
+
+The abstract type below specifies an Input object providing the methods
+ close, reset and readline .
+\layout Quotation
+
+typedef struct Input Input;
+\layout Quotation
+
+typedef int (*readline_InputFunction)(Input* in, char *line, int size);
+\layout Quotation
+
+typedef void (*close_InputFunction)(Input* in);
+\layout Quotation
+
+typedef void (*reset_InputFunction)(Input* in);
+\layout Quotation
+
+struct Input
+\layout Quotation
+
+{
+\layout Quotation
+
+void* self;
+\layout Quotation
+
+readline_InputFunction readline_Input;
+\layout Quotation
+
+close_InputFunction close_Input;
+\layout Quotation
+
+close_InputFunction reset_Input;
+\layout Quotation
+
+};
+\layout Standard
+
+This type can be derived into Input_File (the input stream is a file) or
+ Input_Fifo (the input stream comes from a Fifo as described above).
+ The part of the object corresponding to the features overloaded on the
+ basic Input type is stored in the self part.
+\layout Quotation
+
+#include "input.h"
+\layout Quotation
+
+#include "fifo.h"
+\layout Quotation
+
+static int readline_InputFifo(Input* in, char *line, int size)
+\layout Quotation
+
+{ return( readline_Fifo((Fifo*) in->self,line,size) ); }
+\layout Quotation
+
+static void reset_InputFifo(Input* in)
+\layout Quotation
+
+{ reset_Fifo((Fifo*) in->self); }
+\layout Quotation
+
+static void close_InputFifo(Input* in)
+\layout Quotation
+
+{ MBR_free(in); }
+\layout Quotation
+
+Input* init_InputFifo(Fifo* my_fifo)
+\layout Quotation
+
+{
+\layout Quotation
+
+Input* self= (Input*) MBR_malloc( sizeof(Input) );
+\layout Quotation
+
+self->self= (void*) my_fifo;
+\layout Quotation
+
+self->readline_Input= readline_InputFifo;
+\layout Quotation
+
+self->close_Input= close_InputFifo;
+\layout Quotation
+
+self->reset_Input= reset_InputFifo;
+\layout Quotation
+
+return self;
+\layout Quotation
+
+}
+\layout Subsubsection
+
+Inheritance and cross-reference graph
+\layout Standard
+
+The Database, Input and Parser objects contain deferred (=virtual) methods
+ and thus allow polymorphism.
+\layout Section
+
+Application Programming Interface
+\layout Standard
+
+The explanations given in the previous section are particularly useful to
+ the user who wants to design ad-hoc parsers.
+ Though one can keep on working with the default parser.
+\layout Subsection
+
+One channel mode
+\layout Standard
+
+You can build a demo by running "
+\series bold 
+make demo1
+\series default 
+" under Unix, or simply build the library with "make lib1".
+ With Windows and Visual C++ the DLL project builds an equivalent of lib1,
+ and numerous examples are provided in the DLL_USE directory.
+ The complete one channel mode interface is given section 7.24.
+ Let's exemplify the use below:
+\layout Standard
+
+
+\protected_separator 
+
+\layout Standard
+
+First, initialize the engine with a diphone database.
+ All the functions in the API return an error code.
+ A negative value means there was a flaw during the process, in case of
+ error, an explicit error message can be obtained from 
+\series bold 
+lastErrorStr_MBR
+\series default 
+().
+\layout Quotation
+
+err_code= init_MBR("h:/mbrola/database/fr1" );
+\layout Quotation
+
+if (err_code<0) 
+\layout Quotation
+
+
+\protected_separator 
+
+\protected_separator 
+
+\protected_separator 
+
+\protected_separator 
+handle_error();
+\layout Standard
+
+If the default parser is plugged, one can use the regular syntax in write_MBR
+ to send phonemes to the engine:
+\layout Quotation
+
+if ( ( write_MBR("_ 51 
+\backslash 
+n b 62 
+\backslash 
+n") < 0) ||
+\layout Quotation
+
+( write_MBR("o~ 127 50 170 
+\backslash 
+n Z 110
+\backslash 
+n") <0) ||
+\layout Quotation
+
+( WriteSpeechFile(output)<0) ||
+\layout Quotation
+
+( write_MBR("u 211 100 200
+\backslash 
+n R 150 
+\backslash 
+n_ 9
+\backslash 
+n#
+\backslash 
+n") < 0) ||
+\layout Quotation
+
+( WriteSpeechFile(output)<0) )
+\layout Quotation
+
+
+\protected_separator 
+
+\protected_separator 
+
+\protected_separator 
+
+\protected_separator 
+
+\protected_separator 
+
+\protected_separator 
+
+\protected_separator 
+handle_error();
+\layout Quotation
+
+close_MBR();
+\layout Standard
+
+Each time one calls 
+\series bold 
+init_MBR
+\series default 
+(), one should call a pending 
+\series bold 
+close_MBR
+\series default 
+() to release allocated memory.
+ Once 
+\series bold 
+close_MBR
+\series default 
+() is called, one can call init_MBR() for a brand new database.
+ If one wish to work with the same database but forget previously entered
+ phonemes, then use 
+\series bold 
+reset_MBR
+\series default 
+().
+\layout Standard
+
+
+\protected_separator 
+
+\layout Standard
+
+Let's describe how 
+\series bold 
+WriteSpeechFile
+\series default 
+ works:
+\layout Quotation
+
+int WriteSpeechFile(FILE *output)
+\layout Quotation
+
+{
+\layout Quotation
+
+int i;
+\layout Quotation
+
+while ( (i=readtype_MBR(buffer, 16000, LIN16)) == 16000)
+\layout Quotation
+
+
+\protected_separator 
+
+\protected_separator 
+fwrite(buffer, 2, i, output);
+\layout Quotation
+
+if (i>0)
+\layout Quotation
+
+{ /* write last chunk */
+\layout Quotation
+
+
+\protected_separator 
+
+\protected_separator 
+fwrite(buffer,size,i,output);
+\layout Quotation
+
+
+\protected_separator 
+
+\protected_separator 
+return 0;
+\layout Quotation
+
+}
+\layout Quotation
+
+else
+\layout Quotation
+
+
+\protected_separator 
+
+\protected_separator 
+return i; /* return an error code */
+\layout Quotation
+
+}
+\layout Standard
+
+It reads sample buffers from the engine until it can't get any more ( 
+\series bold 
+readtype_MBR
+\series default 
+ returns 0), or an error occurs.
+ Readtype can return 0 for two reasons: either a flush has been encountered,
+ either we don't have enough data in the default parser, as it needs a look
+ ahead to interpolate pitch values.
+ This is the case after 
+\series bold 
+write_MBR
+\series default 
+("o~ 127 50 170 
+\backslash 
+n Z 110
+\backslash 
+n"), synthesis on the /Z/ can't be carried out until we get the pitch point
+ on "u 211 100 200".
+ This way asynchronous read/write operations are allowed.
+\layout Standard
+
+
+\protected_separator 
+
+\layout Standard
+
+The small error handling function simply does:
+\layout Quotation
+
+void handle_error()
+\layout Quotation
+
+{
+\layout Quotation
+
+
+\protected_separator 
+
+\protected_separator 
+char err[255];
+\layout Quotation
+
+
+\protected_separator 
+
+\protected_separator 
+lastErrorStr_MBR(err,sizeof(err));
+\layout Quotation
+
+
+\protected_separator 
+
+\protected_separator 
+printf("Code %i
+\backslash 
+n%s
+\backslash 
+n", lastError_MBR(), err);
+\layout Quotation
+
+
+\protected_separator 
+
+\protected_separator 
+exit(-1);
+\layout Quotation
+
+}
+\layout Standard
+
+At any time, one can use the get_* and set_* functions to modify internal
+ parameters of the synthesizer.
+\layout Standard
+
+
+\protected_separator 
+
+\layout Standard
+
+Important note about the vocal tract length capabilities: one can modify
+ the size of the speaker's throat with 
+\series bold 
+setFreq_MBR
+\series default 
+.
+ The lower this frequency, the deeper the voice.
+ This very simple method takes advantage of the playback sampling rate to
+ shift the formants up and down, just like when changing the speed of a
+ tape player.
+ Thus, to be effective, any call to 
+\series bold 
+setFreq_MBR
+\series default 
+ must be accompanied with a call to the audio hardware setting the requested
+ playback sample rate.
+ Otherwise the speed and pitch will sound odd.
+\layout Subsubsection
+
+Multi channel mode
+\layout Standard
+
+One can build a demo by running "
+\series bold 
+make demo2
+\series default 
+" under Unix, or simply build the library with "
+\series bold 
+make lib2
+\series default 
+".
+ The complete multi channel mode interface is given section 7.25.
+ 
+\layout Standard
+
+
+\protected_separator 
+
+\layout Standard
+
+It looks strangely close to the one channel mode, except that one passes
+ a pointer to a synthesizer structure for every function.
+ Another point is that it doesn't hide any more the parser's details to
+ the user.
+ Thus if one wants to use the default parser, one has to effectively build
+ it.
+ 
+\layout Standard
+
+
+\protected_separator 
+
+\layout Standard
+
+The following code build 3 independent default phoneme parsers: 
+\layout Quotation
+
+/* Input Fifo with a buffer of 100 chars */
+\layout Quotation
+
+fifo1= init_Fifo(100);
+\layout Quotation
+
+fifo2= init_Fifo(100);
+\layout Quotation
+
+fifo3= init_Fifo(100);
+\layout Quotation
+
+
+\protected_separator 
+
+\layout Quotation
+
+/* Input stream of the synthesizer */
+\layout Quotation
+
+input1= init_InputFifo(fifo1);
+\layout Quotation
+
+input2= init_InputFifo(fifo2);
+\layout Quotation
+
+input3= init_InputFifo(fifo3);
+\layout Quotation
+
+/* Plug the fifos on the default parsers */
+\layout Quotation
+
+parser1= init_ParserInput(input1,"_",120.0,";",1.0,1.0);
+\layout Quotation
+
+parser2= init_ParserInput(input2,"_",120.0,";",1.0,1.0);
+\layout Quotation
+
+parser3= init_ParserInput(input3,"_",120.0,";",1.0,1.0);
+\layout Standard
+
+To use one's own parser, see the next section.
+ Once this is done, as many databases as synthesis channels must be opened
+ (let's say 3 channels in this example).
+\layout Quotation
+
+Database* main_dba= init_DatabaseMBR2(argv[1],NULL,NULL); 
+\layout Quotation
+
+if (!main_dba)
+\layout Quotation
+
+
+\protected_separator 
+
+\protected_separator 
+
+\protected_separator 
+handle_error(True);
+\layout Standard
+
+Of course opening 3 or more times the same database would spoil a lot of
+ memory since many internal structures could be shared.
+ Instead of using 
+\series bold 
+init_DatabaseMBR2
+\series default 
+ one can clone an already opened database:
+\layout Quotation
+
+Database* clone_dba1= copyconstructor_DatabaseMBR2(main_dba);
+\layout Quotation
+
+Database* clone_dba2= copyconstructor_DatabaseMBR2(main_dba);
+\layout Quotation
+
+Database* clone_dba3= copyconstructor_DatabaseMBR2(main_dba);
+\layout Standard
+
+Cloned database just behave like regular Database, i.e.
+ their destructor must be called before leaving.
+ Once we have a Parser input and a Database, we can open a synthesis channel:
+\layout Quotation
+
+Mbrola* channel1= init_MBR2(clone_dba1,parser1);
+\layout Quotation
+
+Mbrola* channel2= init_MBR2(clone_dba2,parser2);
+\layout Quotation
+
+Mbrola* channel3= init_MBR2(clone_dba3,parser3);
+\layout Standard
+
+In this particular example, one can write phonemes in the parser, and read
+ samples from the synthesis engine with instructions such as:
+\layout Quotation
+
+write_Fifo(fifo1,"_ 51 
+\backslash 
+n b 62 
+\backslash 
+n o~ 100
+\backslash 
+n Z 120")
+\layout Quotation
+
+while ((i=readtype_MBR2(channel1, buffer, 16000, LIN16))==16000)
+\layout Quotation
+
+
+\protected_separator 
+
+\protected_separator 
+
+\protected_separator 
+fwrite(buffer,size,i,output);
+\layout Standard
+
+Of course the call to write_Fifo is completely dependent of the fact that
+ this example uses the default phoneme parser.
+ In this particular case, the polymorphic object Parser, which was passed
+ to the constructor of channel, reads its input data from Fifo1.
+\layout Subsubsection
+
+Designing and plugging your own parser
+\layout Standard
+
+The user can write his own implementation of a Parser, as long as it follows
+ the definition of Parser/parser.h.
+ The file parser_simple.c below gives an example of a parser that reads phonetic
+ inputs with the format: Phoneme Duration Pitch_At_0% Pitch_At_100%.
+\layout Standard
+
+
+\protected_separator 
+
+\layout Standard
+
+In practice this example does not take into account that the Engine synthesize
+ diphones.
+ As the word states, a diphone is made of two phonemes, thus one must know
+ both parts of the diphones to utter it.
+ Thus each phoneme file being used with parser_simple must end with two
+ silences: the first one reveal 1st half of the last phoneme, and the second
+ one reveal the second half (a complete example is provided in VisualC++/DLL_USE
+/mbrola/parser_simple.cpp).
+ Many people forget to include the second silence as the result sounds correct
+ without.
+ Though, the total length of the synthetic message won't agree with the
+ requested one.
+\layout Quotation
+
+/*
+\layout Quotation
+
+* FPMs-TCTS SOFTWARE LIBRARY
+\layout Quotation
+
+*
+\layout Quotation
+
+* File: parser_simple.c
+\layout Quotation
+
+* Purpose: parse a simple "pho file" (demonstration of the mbrola DLL)
+\layout Quotation
+
+* Instanciation of parser.h
+\layout Quotation
+
+*
+\layout Quotation
+
+* Author: Vincent Pagel
+\layout Quotation
+
+* Email : mbrola@tcts.fpms.ac.be
+\layout Quotation
+
+*
+\layout Quotation
+
+* Copyright (c) 1995-2018 Faculte Polytechnique de Mons (TCTS lab)
+\layout Quotation
+
+*
+\layout Quotation
+
+* 18/09/98 : Created
+\layout Quotation
+
+*/
+\layout Quotation
+
+
+\protected_separator 
+
+\layout Quotation
+
+#include <stdio.h>
+\layout Quotation
+
+#include "mbrola.h"
+\layout Quotation
+
+#include "parser_simple.h"
+\layout Quotation
+
+
+\protected_separator 
+
+\layout Quotation
+
+static void reset_ParserSimple(Parser* parse)
+\layout Quotation
+
+{
+\layout Quotation
+
+/* nothing to do */
+\layout Quotation
+
+fseek( (File*) parse->self,0,SEEK_SET);
+\layout Quotation
+
+}
+\layout Quotation
+
+
+\protected_separator 
+
+\layout Quotation
+
+static StatePhone nextphone_ParserSimple(Parser* parse, LPPHONE* ph)
+\layout Quotation
+
+{
+\layout Quotation
+
+
+\protected_separator 
+
+\protected_separator 
+char phoneme[255]; /* phoneme name */
+\layout Quotation
+
+
+\protected_separator 
+
+\protected_separator 
+float length; /* length in milliseconds */
+\layout Quotation
+
+
+\protected_separator 
+
+\protected_separator 
+float pitch0; /* pitch at 0% */
+\layout Quotation
+
+
+\protected_separator 
+
+\protected_separator 
+float pitch100; /* pitch at 100% */
+\layout Quotation
+
+
+\protected_separator 
+
+\layout Quotation
+
+
+\protected_separator 
+
+\protected_separator 
+if ( fscanf( (FILE*)parse->self," %s %f %f %f ",phoneme,&length,&pitch0,&pitch10
+0 ) ==4 )
+\layout Quotation
+
+
+\protected_separator 
+
+\protected_separator 
+{
+\layout Quotation
+
+
+\protected_separator 
+
+\protected_separator 
+
+\protected_separator 
+
+\protected_separator 
+
+\protected_separator 
+
+\protected_separator 
+
+\protected_separator 
+*ph= init_Phone(phoneme,length);
+\layout Quotation
+
+
+\protected_separator 
+
+\protected_separator 
+
+\protected_separator 
+
+\protected_separator 
+
+\protected_separator 
+
+\protected_separator 
+
+\protected_separator 
+
+\protected_separator 
+appendf0_Phone(*ph, 0.0 , pitch0);
+\layout Quotation
+
+
+\protected_separator 
+
+\protected_separator 
+
+\protected_separator 
+
+\protected_separator 
+
+\protected_separator 
+
+\protected_separator 
+
+\protected_separator 
+
+\protected_separator 
+appendf0_Phone(*ph, 100.0, pitch100);
+\layout Quotation
+
+
+\protected_separator 
+
+\protected_separator 
+
+\protected_separator 
+
+\protected_separator 
+
+\protected_separator 
+
+\protected_separator 
+
+\protected_separator 
+
+\protected_separator 
+return PHO_OK;
+\layout Quotation
+
+
+\protected_separator 
+
+\protected_separator 
+}
+\layout Quotation
+
+else
+\layout Quotation
+
+
+\protected_separator 
+
+\protected_separator 
+{
+\layout Quotation
+
+
+\protected_separator 
+
+\protected_separator 
+
+\protected_separator 
+
+\protected_separator 
+
+\protected_separator 
+
+\protected_separator 
+
+\protected_separator 
+
+\protected_separator 
+
+\protected_separator 
+return PHO_EOF;
+\layout Quotation
+
+
+\protected_separator 
+
+\protected_separator 
+}
+\layout Quotation
+
+}
+\layout Quotation
+
+
+\protected_separator 
+
+\layout Quotation
+
+static void close_ParserSimple(Parser* parse)
+\layout Quotation
+
+
+\protected_separator 
+
+\protected_separator 
+
+\protected_separator 
+
+\protected_separator 
+
+\protected_separator 
+
+\protected_separator 
+
+\protected_separator 
+
+\protected_separator 
+ /* Destructor */
+\layout Quotation
+
+{
+\layout Quotation
+
+
+\protected_separator 
+
+\protected_separator 
+fclose( (FILE*) parse->self);
+\layout Quotation
+
+
+\protected_separator 
+
+\protected_separator 
+free(parse);
+\layout Quotation
+
+}
+\layout Quotation
+
+
+\protected_separator 
+
+\layout Quotation
+
+Parser* init_ParserSimple(char* input_name)
+\layout Quotation
+
+/*
+\layout Quotation
+
+
+\protected_separator 
+
+\protected_separator 
+* Constructor of the parser.
+ Parse a text file of the form
+\layout Quotation
+
+
+\protected_separator 
+
+\protected_separator 
+* PHONEME LENGTH PITCH_AT_BEGINNING PITCH_AT_END
+\layout Quotation
+
+
+\protected_separator 
+
+\protected_separator 
+*/
+\layout Quotation
+
+{
+\layout Quotation
+
+
+\protected_separator 
+
+\protected_separator 
+FILE* input;
+\layout Quotation
+
+
+\protected_separator 
+
+\protected_separator 
+Parser* parse;
+\layout Quotation
+
+
+\protected_separator 
+
+\layout Quotation
+
+
+\protected_separator 
+
+\protected_separator 
+/* open the text file */
+\layout Quotation
+
+
+\protected_separator 
+
+\protected_separator 
+input=fopen(input_name,"rt");
+\layout Quotation
+
+
+\protected_separator 
+
+\layout Quotation
+
+
+\protected_separator 
+
+\protected_separator 
+if (!input)
+\layout Quotation
+
+
+\protected_separator 
+
+\protected_separator 
+
+\protected_separator 
+
+\protected_separator 
+
+\protected_separator 
+
+\protected_separator 
+
+\protected_separator 
+
+\protected_separator 
+ return NULL;
+\layout Quotation
+
+
+\protected_separator 
+
+\layout Quotation
+
+
+\protected_separator 
+
+\protected_separator 
+parse= (Parser*) MBR_alloc( sizeof( struct Parser) );
+\layout Quotation
+
+
+\protected_separator 
+
+\protected_separator 
+parse->reset_Parser= reset_ParserSimple;
+\layout Quotation
+
+
+\protected_separator 
+
+\protected_separator 
+parse->close_Parser= close_ParserSimple;
+\layout Quotation
+
+
+\protected_separator 
+
+\protected_separator 
+parse->nextphone_Parser= nextphone_ParserSimple; 
+\layout Quotation
+
+
+\protected_separator 
+
+\protected_separator 
+parse->self= (void*) input;
+\layout Quotation
+
+
+\protected_separator 
+
+\protected_separator 
+return(parse);
+\layout Quotation
+
+}
+\layout Subsection
+
+Mbrola architecture
+\layout Standard
+
+In following chapters the exported functions and variables of all the source
+ files in the project are described.
+ After the file descriptions, a symbol index is provided to allow fast localizat
+ion of any function, variable or define.
+\the_end

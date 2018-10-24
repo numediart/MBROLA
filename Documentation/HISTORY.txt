@@ -1,0 +1,537 @@
+/*
+* FPMs-TCTS SOFTWARE LIBRARY
+*
+* File:    HISTORY.txt
+* Purpose: History of the Mbrola Speech Synthesizer
+* Authors:  Mbrola Team
+* Email :  mbrola@tcts.fpms.ac.be
+*
+* Copyright (c) 1995-2018 Faculté Polytechnique de Mons (TCTS lab)
+* This program is free software: you can redistribute it and/or modify
+* it under the terms of the GNU Affero General Public License as published by
+* the Free Software Foundation, either version 3 of the License, or
+* (at your option) any later version.
+*
+* This program is distributed in the hope that it will be useful,
+* but WITHOUT ANY WARRANTY; without even the implied warranty of
+* MERCHANTABILITY or FITNESS FOR A PARTICULAR PURPOSE.  See the
+* GNU Affero General Public License for more details.
+*
+* You should have received a copy of the GNU Affero General Public License
+* along with this program.  If not, see <https://www.gnu.org/licenses/>.
+*
+* HISTORY:
+*
+* 15/06/95 : created
+*
+* 26/06/95 : modified and adapted to Sun by V. Pagel
+*
+* 08/08/95 : checked for PC/DOS and modified accordingly
+*            dummy chars in database struct; fopen("t or b"); prototypes
+*
+* 22/08/95 : correction of OLA : energy correction only applies to frame
+*
+* 05/09/95 : pagelization of the style ! thank you, Vince.
+*
+* 11/09/95 : fixed a bug in intermediate pitch interpolation (Curtime increment)
+*            fixed a bug in last sound flushing (put a silence)
+*            fixed a bug in Concat -> need the number of 1st ola frame
+*              for cur_diph
+*
+* 13/09/95 : No pitch modification on NV frames.
+*
+* 14/09/95 : Added ';' for comments in command file, and # for flushing
+*            fixed horrible bug with non weigthed smoothing window
+*
+* 18/09/95 : fixed bug in Concat : validity test for begin and end.
+*
+* 19/09/95 : length1 and length2 in samples instead of millisec
+*            Add time_crumbs mechanism to balance slow drifting in
+*            phoneme durations -> keeps total duration close to original
+*
+* 12/10/95 : Free copy and use for non commercial apps. V1.00
+*            Dummy instructions added for protection of rights.
+*            20 pitchpatternpoints, 1000 synthesis OLA frames per phoneme (10 sec)
+*            Max 250 successive phonemes with no prosodic info (25sec)
+*
+* 13/10/95 : 1.0a optimization in OLA ( previously wrote sample by sample)
+*
+* 16/10/95 : DEBUG defined; fixed stupid bug in Initialize.
+*
+* 18/10/95 : 1.0c now accepts database location as command line parameter.
+*
+* 24/10/95 : 1.01 One and only one data file per voice/language
+*
+* 06/11/95 : GetPitch if V (previously also if NV_TRA)
+*            A lot of new debug info (DEBUG2)
+*            Hamming weighting window (was triangle)
+*            Check next (original) diphone for concatenation length
+*            VREG VREG... VREG VTRA => VTRA smoothed, too
+*            F0 limits=f(database)
+*            Added cur_diph->d.RightPhone = PhoneTable[0]; after call to
+*                      FillCommandBuffer !
+*            Correction of diphone length=f(really synthesized data)
+*            Lenanal in MatchProsody : nb_frames*MBRPeriod (was nb_frames+1)
+*            Magic checking of database format
+*            1.02 : TimeRatio and FreqRatio
+*
+* 10/11/95 : 1.02a Last bug with Lenanal and nb_frames*MBRPeriod
+*            Replace RealLastSample with last_time_crumb to avoid
+*            sample counter overflow.
+*            Architecture panic test.
+*
+* 21/02/96 : 1.03a DEBUG3 added for compatibility with the BACON coded database
+*            Many output audio file formats added ( RIFFwav, au, aiff, raw )
+*            Now skips empty lines (caused bugs on PC when file ends with CR)
+*
+* 22/02/96 : 1.03b Get rid of little endian or big endian databases thanks
+*            to BIG_ENDIAN or LITTLE_ENDIAN -> we choose to keep the FR1-PC
+*            database to give a little advantage to powerless PCs !!!
+*
+* 27/02/96 : 1.03c Reintroduce changes made in lost branch 1.02b
+*            It concerns the "odd" variable to reverse one unvoiced frame out
+*            of 2 to avoid the perception of a 133Hz signal in unvoiced phones
+*
+*            Concat : limitframe cheks for real phoneme border within diphone
+*
+* 28/02/96 : 1.04a Ad hoc order 2 BACON DECODER included in a separate file
+*            -> load_diphone function... This required to read each diphone
+*            once, i.e. fusion of access (Concat & MBRola) through buffer
+*            which is now a field of Diphone_Synth
+*            LoadDiphone is now a pointer to Basic_LoadDiphone or to 
+*            Bacon_LoadDiphone depending on the Coding scheme
+*
+*            DEBUG3 is out for the moment !
+*
+* 29/02/96 : 1.04b THE BIG SPLITTING -> the whole thing in now spreaded in 
+*            many files to increase readability.
+*            Make thing ready for hash tables !!!!
+*
+* 01/03/96 : 1.04c Smart acces to the diphone reference ( hash tables ) 
+*            instead of sequential search -> we get an average 1.595506
+*            strncmp by diphone search !!!!! (still better than 600) 
+*            -> the Diphone base structure was modified to add linked list 
+*               mechanism of hash table, I used the old "int8 dummy[3]"
+*               space for this !
+*
+* 04/03/96 : 1.04d synth1 and synth2 become pointers cause PCs don't have 
+*            enough space in data segment ( 64Ko ).
+*            HBK = Horrible Bug Killing in Concat -> when the left diphone
+*            is _-_  last_frame is negative
+*            Bug in hash_table -> introduce EMPTY=-1 and NONE=255
+*            Can now use uppercase and lowercase symbols for phones -> correct
+*            a bug in LowerCase which did not add trailing 0
+*
+* 14/03/96 : 2.00a The name of the whole project is changed in MBROLA to 
+*            avoid confusion with CNET's Psola-td
+*
+* 18/03/96 : 2.00b string.h is now in common.h to compile on Linux, a bug with
+*            (* char) Magic which is not aligned on a 4* address
+*
+* 28/03/96 : 2.00b -> Cancel the 1.04d modif to read uppercase and lower
+*            case phones, as we now use SAMPA alphabet, and the case of
+*            the symbol is discriminant
+*
+* 13/05/96 : 2.00c Better coder in database_bacon.c
+*
+* 07/06/96 : 2.00d Panic Checking for _-_ diphone in the database
+*           Add a mechanism to change Time and frequency ratios in the .pho
+*           file ( comment line beginning with T=0.8 or F=1.2 )
+*           Filenames were shortened to 8 char for MSDOP :-\
+*           Another MSDOP checking for empty lines -> if we listen to the
+*           Borland C Scanf, an empty line has one char: the carriage return!
+*
+* 25/06/96 : 2.01a HBK with interp_length which caused core dumps or
+*           clics in the signal (negative frequency shift !) 
+*           FIRST_PITCH becomes First_Pitch which account for MBRPeriod of
+*           the diphone database.
+* 
+* 04/07/96 : 2.01b Eliminate some dumb smoothing attempt for unvoiced frames,
+*          in the ola routine. In Concat eliminate useless smoothw computed 
+*	    on unvoiced frames -> Faster and more secure
+*
+* 16/07/96 : 2.01c Complete repackaging of the tables constants -> more
+*           sensible values, and and tests to check we're not out of the 
+*           limits.
+*
+* 31/07/96 : 2.01d Introduce automatic detection of little endian with
+*          __i386__ , fflush with # symbol, sample rate is writen in the
+*          audio file header (except for AIFF for the moment due to 80bit
+*          IEEE representation)
+*
+* 12/09/96 : 2.01e Check for saturation when we make the conversion to 
+* 	    integers.
+*
+*          Correct a typo with smooth() and smoothw(), no related bug.
+*
+*          Get rid of the pitch limitation (No /2 or *2 limits)
+*          -> this implied a special case for extra low pitch (more than
+*          div 2 with 0 filling of the output. More rational memove as
+*          well as ola bufer sizes!!!
+*
+*          F0 and POS become float (more precisions for F0 since new limits
+*	    allow singing and that it requires a more precise pitch
+*
+* 18/09/96 : 2.02a Change the format of the database.... Skim a few bytes
+*          from place to place in the header -> 16 bytes become 8 byte in
+*          the diphone structure. V/UV decisions becomes a bitstream
+*
+* 26/09/96 : 2.02b Because the german database is huge (12Mo) and its pitch
+*          is high (200Hz), there's an overflow on pos_pm signed short
+*          A temporary fix before I imagine something better consist in
+*          declaring uint16 (unsigned int16) for pitch mark referencing
+*	
+* 05/12/96 : 2.02c Typechecking for unsigned int lead to a separated
+*          function readl_uint16 -> more compatibility with compilers
+*
+*          VolumeRatio is now a new parameter in the command line
+*
+*          Coding scheme compatible with 2.02b in database_bacon (split
+*          the old InitDatabase into 3 functions for modularity
+*
+* 12/12/96 : 2.02d
+*   Pack what concern phonemes in readpho.c
+*   Pack what concern mbrola synthesis itself in mbrola.c
+*   Synth.c contain a main program for standalone compilation
+*   Library.c contains Read/Write functions in a DLL like style
+*   
+*   Modify the behavior of NextDiphone so that it adds trailing silence 
+*   when EOF or when Flush. It implies there is no special case for last
+*   diphone synthesis. It is used in library.c, a Read/Write approach to
+*   mbrola synthesizer -> many variables of mbrola.c where defined global
+*   for the purpose of externaly control the process
+*		 
+* 29/01/97: 2.03a
+* Diphone names can be longer than 2 characters (it's now a Zstring). To
+* avoid a new diphone database format (the current one explicitely limits the
+* size to 2 chars) we introduce the RENAME command which allows to
+* dynamically rename a phoneme into another. This scheme may also be used to
+* transform a non SAMPA alphabet into mbrola compatible version.
+*
+* To do so we have parametrized the functions of the hash_table type, and
+* added a 'dirty' flag, as RENAMING implies "delete" and "add" -> of course
+* with coalescent hashing the performance would dramatically drop if we 
+* indivually modify the phonemes, thus after a renaming session, we 
+* completely compute the hash_table again.
+*
+* 02/02/97: 2.03b
+* database.c has been modified by Thierry Dutoit to allow diphone duplication
+* without changing the format of our database -> diphone duplications are 
+* indicated at the end of the Main Index (detected when the Pitchmark 
+* position reach the end of the pitchmark table). For example the diphone
+* a-ch can be easily declared as a-t.
+*
+* readpho.c modified to allow pitchpairs surrounded by ()s
+*
+* We try to include a standard VisualC++ make file directory
+*
+* 6/02/97 : 2.03c
+*
+* synth.c : since the order on the command line has been changed, many 
+* people unintentionally destroy their .pho files writing the wav on it.
+* -> we go back to the older format "mbrola dba file_in* file_out"
+*
+* diphone.h : maximum diphone size is raised from 8000 samples to 10000 
+*             because of the german database
+* readpho.c : %2s is removed since now phoneme names can be longer than 2
+*             chars
+*     a_line is too short to allow MAXNPITCHPATTERNPOINTS in it !
+*     Allocate 4 char instead of 3 for Silence and Flush (alastair Sinton)
+*     Tweaking with EOF and FLUSH in case of library compilation mode
+*
+* library.c : include defines for the Windows DLL
+*
+* hash_tab.c : after a renaming, must update cur_diph and prev_diph 
+*              reference in the hash_tab
+*
+* 20/02/97: 2.03d Put a clear difference between comment and commands in 
+*           pho files. Comment= ;  Command= ;;
+*
+* 26/03/97: 2.03e Sanity check when replacing diphones 
+*                  -> check the target of the replacement exist
+*
+* 29/05/97: 2.03f Pseudo C++ to benefit from the Catch/Throw mechanism in the
+*         DLL and LIBRARY version.
+*
+*         Changes the behavior of readpho -> we wait for a pitch point to
+*         treat the lines... It's a tradeoff: either we don't alow this, 
+*         then we can't warranty that asynchronious read/write will respect
+*         the right pitch curve, either we behave this way, and a pitch
+*         point is COMPULSORY before any sound breaks out.
+*     
+*         Use fake C++ lists -> the big jump to STL is planned for 2.04
+*
+*         Gives a politically correct memory freeing scheme (prepare for C++ 
+*         and satisfy PC users !).
+*
+* 02/07/97: 2.04a New approach to get the last diphone (supposedly _-_) of 
+*         the dba.
+*         
+*         Error.{cpp,h} become vp_error because of name conflict on Visual
+*         not such a clever thing to use "test" "error" "windows" names :-)
+*
+*         In Readpho.cpp correct a strange bug with PitchFactor !
+*
+*         No jump to STL lists for the moment (no time)
+*
+*		     Pitchmarks now use 32 bit, thanks to the database from French 
+*         Britany -> hack in the database header to keep compatibility with
+*         previous databases.
+*
+* 15/07/97: 2.04b A. Ruelle changes the windows DLL interface to Winapi
+*         calling standard and adds Last_MBR_Error2 for Visual Basic.
+*         Vincent Pagel: a bug with circular buffer and "unsigned int" in 
+*                        library.cpp
+*         readpho.cpp -> EOF/FLUSH management in the DLL/LIBRARY version 
+*         (eof means wait for new data to be available). In the standalone
+*         version EOF on a regular file means add a trailing _ and exit.
+*
+* 21/08/97: 2.04c in ReadDatabasePitchmark, unsigned int for Borland C++
+*
+*         database_bacon was not in accordance with database concerning 
+*         replacement diphones (changed in 2.04a)
+*
+* 07/10/97: 2.05a New database format :-) the limitation of 2 chars per
+*   phoneme is too hard to cope with -> 
+*         database_bacon.cpp, database.h and database.cpp changed
+* 
+*   reapho.cpp: Target frequency to get cartoon voices as proposed by
+*          Arthur Dirksen
+*
+*   library.cpp: Add GetVersion_MBR for the DLL to be aware of the
+*          release number of the synth, and getFreq_MBR for the client
+*          to change the sampling rate of the soundcard properly with
+*          voice characteristic modification
+*
+*   readpho.cpp: new sanity check -> verify that the target of the copy
+*          is not overriden. It unveils a bug in hash_search
+*
+*   hash_tab.cpp: hash_search stupidly supposes that the primary hit is
+*          never empty :-p
+* 
+*
+*   library.h: Alain Ruelle removes LastErrorStr2
+*
+* 20/10/1997 : 2.05b For my 27th birthday, add database information at
+*     the end of the dba in the form of Zstrings (phoneme set, copyright 
+*     informations) -> database.cpp
+*
+*   synth.cpp : switch -i to get dba information
+*
+*   library.h : Retrievable with getInfo_MBR
+*
+*   common.h  : freeNull -> bug ! The macro is not surrounded by {}
+*
+*   mbrola.cpp: incredible bug in the smoothing algorithm... Can't 
+*       understand how it escaped unoticed for 2 years :-0 Maxnconcat
+*       is limited to 6 frames (just the opposite in the previous one)
+*       And we check we don't explore frames out of scope with nb_begin
+*       and nb_end
+*
+* 05/11/97 2.05c : 
+*       make this version compatible with BACON coded databases :-)
+*
+* 01/12/97 2.05d :
+*       New -e flag and E=ON | OFF directive to ignore missing diphones
+*
+* 05/12/97 2.06a :
+*       Using a hamming window instead of a hanning window was such a bad
+*   idea for the american english database.
+*
+* 21/01/98 2.06b :
+*   Sort of database_display information in debug mode -> replace the 
+*   old dedicated program
+*   Integration of the directory VisualDll for the compilation of a DLL
+*   under Microsoft Visual C++ 5.0
+*
+*   Most of all a full documentation now included in the DOCUMENTATION
+*   directory, and more comments in the code
+*
+* 02/02/98 2.06c :
+*   readtype_MBR function to directly read audio data in LIN16, MULAW
+*   and other convenient formats. Internally we keep floats for the
+*   moment to represent the ola buffer.
+*
+* 25/02/98 3.00a :
+*   database_cebab.cpp : A new database type DIPHONE_CEBAB compressed
+*       for Internet users. 
+*   database.cpp: A lot of cleaning in the list of available dba formats
+*       only 2.05 or later are compatible
+*
+* 24/06/98 3.01a : alpha release. Mbrola has drifted toward object
+* oriented style (constructor, destructor and a "this" pointer for
+* each function). As a consequence one can instanciate as many
+* synthesis channel (Mbrola object) as he wishes with one or more
+* database. It uses polymorphism to implement the diversity of
+* connections with Diphone Databases (Database object), and with the
+* provider of Phonemes (Parser object). Polymorphism implies
+* indirections tables to find the right method. 
+* 
+* Main Objects:
+*
+* Parser -> phoneme provider     ( init, reset, close, nextphone )
+* Database -> a diphone database ( init, reset, close, getdiphone)
+* Mbrola -> it's a synthesizer engine that runs with Database and
+*           Parser 
+*
+* As usually 2 modes to use Mbrola: 
+*
+*     1) Standalone (an exe file that takes a .pho and produces a
+*  .wav, the main iteration takes place on input) 
+*
+*     2) Library or DLL version, where the main iteration takes place
+*  on audio output buffers, at the cost of a small system overhead
+*
+* The library has 2 mode: MULTICHANNEL, and MONOCHANNEL. The second
+* is here for the sake of compatibility with previous mbrola DLLs, it
+* instanciate a DLL able to build one Mbrola object with one
+* Database. The first category on the other hand is able to build as
+* many Mbrola, with as many Databases and Parser as you wish.
+*
+* Of course those modification imply a complete revamping of all the
+* sources. The main changes are in readpho.cpp that has been splitted
+* into a Fifo and Parser object ( see the Parser directory ). It's
+* heavily based on abstract types: parser.h. IMPORTANT : the
+* instanciation of parser.h can be user defined (as long as it returns
+* Phone objects).
+*  
+* 26/06/98 3.01b : the beta one. Database.cpp is now splitted into
+*  databaseBasic (raw), databaseBacon (commercial scheme),
+*  databaseCebab (WWW scheme), and quite important databaseOld which
+*  is a rebirth of formats older than 2.05 (too many users complained
+*  about compatibility loss in 3.00a)
+*
+*  From a user's point of view, there is a change in the behavior of
+*  FLUSH -> the size of the audio buffer is now precisely the one
+*  requested (no need to include a dummy "_ 0" phoneme. Corrected a
+*  bug on the limit of pitch point interpolations.
+*
+*  Added a constellation of get*Mbrola set*Mbrola to change
+*  parameters at runtime.
+*
+*  Modify init_Mbrola slightly (don't give the parser from the start,
+*  since it can be plugged and unplugged as one wish).
+*
+*  This version is purified !
+*
+*  01/08/98 3.01c : 
+*   All .cpp files become .c file, and compile with 'cc'
+* 
+*   Visual C++ DLL works again
+*   Visual C++ Standalone project
+*
+*   remove when possible #ifdef on BIG_ENDIAN ->
+*                introduce readl_int16buffer ( little_big.cpp )
+*   
+*	  move the 2 iterations ( LIBRARY and STANDALONE ) into mbrola.cpp
+*
+*   use of uint8 instead of int8 for unsigned operations
+*
+*   the vocal tract ratio is plugged again
+*
+*   Phoneme renaming and cloning mechanism
+*
+* 01/09/98 3.01d :
+*
+* make a clean package with all the 3.01c features. Demo1.c to 
+* show the use of the one_channel mode, and demo2.c for the 
+* multi-channel mode.
+*
+* 09/09/98 3.01e : The big deal
+*
+*  A new make file allowing checking and purifying -> the "check" target
+*  allows to compare a test set against previous standard output.
+*  The panacea is "make PURE=purify check" to verify that no memory leak
+*  was introduced.
+*
+*  Replacement for C++ Catch/Throw. Database returns error code, as well
+*  as the engine (no longjump because of multichannel mode -> would have
+*  urged us to include a [env] structure in all our objects or as a parameter
+*  to the different functions)... a return code is cheap compared to that.
+*
+*  Forget old limitations with appendf0_Phone, can as many pitch points as 
+*  you feel like the PitchPoint table is resized
+*
+*  (Nearly) forget old limitations with append_PhoneBuff, if there
+*  are too many phonemes without pitch, we force a default
+*  pitch. This is not really unkind as the limit is 250 phonemes.
+*
+*  Solidify the code of destructors for premature exit in Database*, 
+*  DiphoneSynthesis and Mbrola
+*
+*  Interface modified -> reset_MBR now returns True/False value 
+*		  (since everybody now returns error code, got to catch it)
+*
+*  Bug with fatal_message -> enlarge the buffer (too small for the largest 
+*  message)
+*  
+*  CODE IS PURIFIED (at last we have the license !). Memory leak corrected
+*  on cloning. Unallocted free memory corrected with close_MBR and reset_MBR
+*  by adding reset_DiphoneSynthesis
+*
+*  Hopefully OneChannel mode is ready for WWW distrib as a DLL
+*
+*  Provide DLL_USE for Visual C++
+*
+*  Write a "de la mort" documentation with Word97
+*
+*  05/10/98 3.01f : add initSized_Phone to avoid multiple realloc on each
+*  appendf0 (generally the number of pitch points is known from the start)
+* 
+*  20/10/98 3.01g : Mainly for people using Festival, give the possibility 
+*  to move the command line parameters into an initialization file compatible
+*  with .set files. Had to modify rename_list to allow the parsing of renaming
+*  script (loose compatibility with previous ;;RENAME command), and to allow
+*  initialization of Flush from the command line (init_PhoneBuffer).
+*
+*  Correctly implement flush_MBR for people using renaming.
+*
+*  10/06/99 3.01h:
+*   Wrong definition for signal handling
+*   Return value of Bacon getdiphone_DatabaseFunction
+*   Pb with Concat and 0ms phonemes on PC (division by 0)
+*   Laurent Hubaut detects bug with zero_padding (non decremented)
+*   Laurent Hubaut and Susanne Eismann detect bug with non zeroed ola_win
+*   Remove all "exit" statements in the library version, except in MBRMALLOC
+*   Default parser now add a 0ms silence before each silence to avoid spreading
+*      of small noises in front of EXTRA long silences.
+*
+* 29/03/00 3.02a: FUNCTIONAL TEST IS NOT THE SAME AS 3.01h DUE TO SMOOTHING
+* 
+* 1) New feature: diphone sizes and period size are not limited anymore
+* this will let you define new databases at 22050Hz and male voices at
+* 100Hz if you feel like to (see Engine/diphone.h)
+*
+* 2) Bug in smoothing: don't smooth anything with extra short frames (0ms)
+*    (Engine/mbrola.c)
+*
+* 3) Back in time with pitchmarks: they are kept compressed (2 bits / mark) even 
+* when downloaded in memory (stingy ROM usage)
+*
+* 4) Revolution in the Database directory due to arrival of ROM
+* databases. Those ones are simply memory dumps of a database at work,
+* once a Database* object is initialized, functionalities are exactly
+* the same as regular databases. Works for RAW, BACON and CEBAB
+*
+* To do this, had to remove many indirections in Hashtable, and add
+* rom_database.c + rom_handling.c source files.
+* 
+* Modified the standalone version to add -w and -W options:
+*     ./synth -W fr1 creates a fr1.rom image of the database.
+*
+*     for debugging purpose:
+*     ./synth -w fr1 test.pho test.wav 
+*     it download fr1.rom image and synthesize the test.
+* 
+* Added a ROMDATABASE_PURE mode: lets you work with Mbrola without FILE*
+*
+* 26/09/01 3.02b: small bug correction -> a strong limit on the number
+* of phonemes (256) prevents us from using diphones
+*
+* Ansi-ness of the code -> problem with the typecast on an lvalue with
+* the database(dba) operation	
+*
+* TODO:
+* May optimize FlushFile for Library mode to avoid 2 moves on samples at 
+* the price of a medium size audio buffer.
+*/

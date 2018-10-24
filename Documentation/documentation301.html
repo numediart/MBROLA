@@ -1,0 +1,2583 @@
+<HTML>
+<HEAD>
+<META HTTP-EQUIV="Content-Type" CONTENT="text/html; charset=windows-1252">
+<META NAME="Generator" CONTENT="Microsoft Word 97">
+<TITLE>MBROLA Speech Synth Documentation</TITLE>
+</HEAD>
+<BODY LINK="#0000ff">
+
+<FONT SIZE=3><P ALIGN="JUSTIFY"></P>
+</FONT><B><FONT FACE="Arial" SIZE=4><P>&nbsp;</P>
+<P>&nbsp;</P>
+<P>&nbsp;</P>
+</B></FONT><FONT SIZE=4><P ALIGN="JUSTIFY">&nbsp;</P><IMG SRC="Image1.gif" WIDTH=89 HEIGHT=144 ALIGN="LEFT" HSPACE=9>
+</FONT><FONT SIZE=3><P ALIGN="JUSTIFY">&nbsp;</P>
+</FONT><FONT FACE="Arial" SIZE=5><P>&nbsp;</P><DIR>
+<DIR>
+
+</FONT><B><FONT FACE="Arial" SIZE=7><P>MBROLA </P>
+</B></FONT><FONT FACE="Arial" SIZE=5><P>(<B>M</B>ulti<B>-B</B>and<B> R</B>esynthesis<B> O</B>ver<B>L</B>ap<B> A</B>dd)</P>
+</FONT><FONT SIZE=3><P ALIGN="JUSTIFY"></P></DIR>
+</DIR>
+
+</FONT><B><FONT FACE="Arial" SIZE=4><P ALIGN="RIGHT">System documentation</P>
+<P ALIGN="RIGHT">Edition 6.0 - Mbrola release 3.01g</P>
+<P ALIGN="RIGHT">October 20<SUP>st</SUP>, 1998</P>
+</FONT><FONT FACE="Arial" SIZE=7>
+</B></FONT><FONT FACE="Arial" SIZE=3><P>&nbsp;</P>
+<P>&nbsp;</P>
+</FONT><FONT FACE="Arial" SIZE=5><P>&nbsp;</P>
+<P>&nbsp;</P>
+<P>&nbsp;</P>
+<P>&nbsp;</P>
+<P>&nbsp;</P><DIR>
+<DIR>
+<DIR>
+<DIR>
+<DIR>
+
+</FONT><I><P ALIGN="JUSTIFY">&quot;It would be a considerable invention indeed, that of a machine able to mimic speech, with its sounds and articulations. I think it is not impossible.&quot;</P>
+</I><P ALIGN="JUSTIFY"></P></DIR>
+</DIR>
+</DIR>
+</DIR>
+
+<P ALIGN="JUSTIFY">&#9;&#9;&#9;&#9;&#9;&#9;&#9;&#9;Leonhard Euler (1761)</P>
+<FONT SIZE=3><P ALIGN="JUSTIFY"></P>
+<P ALIGN="JUSTIFY">&nbsp;</P>
+<P ALIGN="JUSTIFY">&nbsp;</P>
+<P ALIGN="JUSTIFY">&nbsp;</P>
+<P ALIGN="JUSTIFY">&nbsp;</P>
+<P ALIGN="JUSTIFY">&nbsp;</P>
+<P ALIGN="JUSTIFY">&nbsp;</P>
+<P ALIGN="JUSTIFY">&nbsp;</P>
+<P ALIGN="JUSTIFY">&nbsp;</P>
+<P ALIGN="JUSTIFY">&nbsp;</P></DIR>
+
+</FONT><B><FONT FACE="Arial" SIZE=4><P ALIGN="RIGHT">by Vincent Pagel and Thierry Dutoit</P>
+</B></FONT><FONT FACE="Arial" SIZE=5><P>&nbsp;</P>
+<B><P ALIGN="CENTER">MBROLA release 3.01g, table of Content</P>
+</B></FONT><P ALIGN="JUSTIFY">1.&#9;MBROLA Sources General condition of use&#9;<A HREF="#_Toc431812918">*</A>
+<P ALIGN="JUSTIFY">2.&#9;A brief description of MBROLA&#9;<A HREF="#_Toc431812919">*</A></P>
+<P ALIGN="JUSTIFY">3.&#9;Distribution&#9;<A HREF="#_Toc431812920">*</A></P>
+<P ALIGN="JUSTIFY">4.&#9;Installation and Tests&#9;<A HREF="#_Toc431812921">*</A></P><DIR>
+
+<P ALIGN="JUSTIFY">4.1&#9;On Unix&#9;<A HREF="#_Toc431812922">*</A></P>
+<P ALIGN="JUSTIFY">4.2&#9;On PCs/Dos&#9;<A HREF="#_Toc431812923">*</A></P>
+<P ALIGN="JUSTIFY">4.3&#9;On PC/Windows&#9;<A HREF="#_Toc431812924">*</A></P>
+<P ALIGN="JUSTIFY">4.3.1&#9;Black magic&#9;<A HREF="#_Toc431812925">*</A></P>
+<P ALIGN="JUSTIFY">4.4&#9;Using the standalone binary&#9;<A HREF="#_Toc431812926">*</A></P>
+<P ALIGN="JUSTIFY">4.4.1&#9;Changing the pitch&#9;<A HREF="#_Toc431812927">*</A></P>
+<P ALIGN="JUSTIFY">4.4.2&#9;Renaming and Cloning phonemes&#9;<A HREF="#_Toc431812928">*</A></P>
+<P ALIGN="JUSTIFY">4.5&#9;Machine dependant hints for best using Mbrola&#9;<A HREF="#_Toc431812929">*</A></P>
+<P ALIGN="JUSTIFY">4.5.1&#9;On MSDOS&#9;<A HREF="#_Toc431812930">*</A></P>
+<P ALIGN="JUSTIFY">4.5.2&#9;On modern Unix systems such as Solaris or HPUX or Linux&#9;<A HREF="#_Toc431812931">*</A></P>
+<P ALIGN="JUSTIFY">4.5.3&#9;On Sun4 ( old audio interface )&#9;<A HREF="#_Toc431812932">*</A></P>
+<P ALIGN="JUSTIFY">4.5.4&#9;On VAX or AXP workstations&#9;<A HREF="#_Toc431812933">*</A></P></DIR>
+
+<P ALIGN="JUSTIFY">5.&#9;Default Parser Manual&#9;<A HREF="#_Toc431812934">*</A></P><DIR>
+
+<P ALIGN="JUSTIFY">5.1&#9;Input file format&#9;<A HREF="#_Toc431812935">*</A></P>
+<P ALIGN="JUSTIFY">5.1.1&#9;Changing the Frequency Ratio or Time Ratio&#9;<A HREF="#_Toc431812936">*</A></P>
+<P ALIGN="JUSTIFY">5.1.2&#9;Flush the output stream&#9;<A HREF="#_Toc431812937">*</A></P>
+<P ALIGN="JUSTIFY">5.2&#9;Limitations of MBROLA&#9;<A HREF="#_Toc431812938">*</A></P></DIR>
+
+<P ALIGN="JUSTIFY">6.&#9;Programmer's Manual&#9;<A HREF="#_Toc431812939">*</A></P><DIR>
+
+<P ALIGN="JUSTIFY">6.1&#9;Philosophy and architecture&#9;<A HREF="#_Toc431812940">*</A></P>
+<P ALIGN="JUSTIFY">6.1.1&#9;Encapsulation of Object's attributes&#9;<A HREF="#_Toc431812941">*</A></P>
+<P ALIGN="JUSTIFY">6.1.2&#9;Inheritance and Polymorphism&#9;<A HREF="#_Toc431812942">*</A></P>
+<P ALIGN="JUSTIFY">Inheritance and cross-reference graph&#9;<A HREF="#_Toc431812943">*</A></P>
+<P ALIGN="JUSTIFY">6.2&#9;Application Programming Interface&#9;<A HREF="#_Toc431812944">*</A></P>
+<P ALIGN="JUSTIFY">6.2.1&#9;One channel mode&#9;<A HREF="#_Toc431812945">*</A></P>
+<P ALIGN="JUSTIFY">6.2.2&#9;Multi channel mode&#9;<A HREF="#_Toc431812946">*</A></P>
+<P ALIGN="JUSTIFY">6.2.3&#9;Designing and plugging your own parser&#9;<A HREF="#_Toc431812947">*</A></P></DIR>
+
+<P ALIGN="JUSTIFY">7.&#9;Mbrola architecture&#9;<A HREF="#_Toc431812948">*</A></P><DIR>
+
+<P ALIGN="JUSTIFY">7.1&#9;File: Misc/common.h&#9;<A HREF="#_Toc431812949">*</A></P>
+<P ALIGN="JUSTIFY">7.2&#9;File: Misc/incdll.h&#9;<A HREF="#_Toc431812950">*</A></P>
+<P ALIGN="JUSTIFY">7.3&#9;File: Misc/mbralloc.h&#9;<A HREF="#_Toc431812951">*</A></P>
+<P ALIGN="JUSTIFY">7.4&#9;File: Misc/vp_error.h&#9;<A HREF="#_Toc431812952">*</A></P>
+<P ALIGN="JUSTIFY">7.5&#9;File: Misc/audio.h&#9;<A HREF="#_Toc431812953">*</A></P>
+<P ALIGN="JUSTIFY">7.6&#9;File: Database/database.h&#9;<A HREF="#_Toc431812954">*</A></P>
+<P ALIGN="JUSTIFY">7.7&#9;File: Database/database_bacon.h&#9;<A HREF="#_Toc431812955">*</A></P>
+<P ALIGN="JUSTIFY">7.8&#9;File: Database/database_old.h&#9;<A HREF="#_Toc431812956">*</A></P>
+<P ALIGN="JUSTIFY">7.9&#9;File: Database/diphone_info.h&#9;<A HREF="#_Toc431812957">*</A></P>
+<P ALIGN="JUSTIFY">7.10&#9;File: Database/hash_tab.h&#9;<A HREF="#_Toc431812958">*</A></P>
+<P ALIGN="JUSTIFY">7.11&#9;File: Database/little_big.h&#9;<A HREF="#_Toc431812959">*</A></P>
+<P ALIGN="JUSTIFY">7.12&#9;File: Database/rename_list.h&#9;<A HREF="#_Toc431812960">*</A></P>
+<P ALIGN="JUSTIFY">7.13&#9;File: Engine/diphone.h&#9;<A HREF="#_Toc431812961">*</A></P>
+<P ALIGN="JUSTIFY">7.14&#9;File: Engine/mbrola.h&#9;<A HREF="#_Toc431812962">*</A></P>
+<P ALIGN="JUSTIFY">7.15&#9;File: Parser/fifo.h&#9;<A HREF="#_Toc431812963">*</A></P>
+<P ALIGN="JUSTIFY">7.16&#9;File: Parser/input.h&#9;<A HREF="#_Toc431812964">*</A></P>
+<P ALIGN="JUSTIFY">7.17&#9;File: Parser/input_fifo.h&#9;<A HREF="#_Toc431812965">*</A></P>
+<P ALIGN="JUSTIFY">7.18&#9;File: Parser/input_file.h&#9;<A HREF="#_Toc431812966">*</A></P>
+<P ALIGN="JUSTIFY">7.19&#9;File: Parser/parser.h&#9;<A HREF="#_Toc431812967">*</A></P>
+<P ALIGN="JUSTIFY">7.20&#9;File: Parser/parser_input.h&#9;<A HREF="#_Toc431812968">*</A></P>
+<P ALIGN="JUSTIFY">7.21&#9;File: Parser/phonbuff.h&#9;<A HREF="#_Toc431812969">*</A></P>
+<P ALIGN="JUSTIFY">7.22&#9;File: Parser/phone.h&#9;<A HREF="#_Toc431812970">*</A></P>
+<P ALIGN="JUSTIFY">7.23&#9;File: Standalone/synth.h&#9;<A HREF="#_Toc431812971">*</A></P>
+<P ALIGN="JUSTIFY">7.24&#9;File: LibOneChannel/onechannel.h&#9;<A HREF="#_Toc431812972">*</A></P>
+<P ALIGN="JUSTIFY">7.25&#9;File: LibMultiChannel/multichannel.h&#9;<A HREF="#_Toc431812973">*</A></P>
+<P ALIGN="JUSTIFY">7.26&#9;Index of symbols&#9;<A HREF="#_Toc431812974">*</A></P></DIR>
+
+<P ALIGN="JUSTIFY">8.&#9;Support&#9;<A HREF="#_Toc431812975">*</A></P>
+<P ALIGN="JUSTIFY"></P></P>
+<OL>
+
+<LI><A NAME="_Toc431812918"><B><FONT FACE="Arial" SIZE=5>MBROLA Sources General condition of use</A></LI>
+</B></FONT><P ALIGN="JUSTIFY">The source code of MBROLA may only be used to produce the object code sold by your company. It is confidential and should remain safely locked, as well as its documentation.</P>
+<LI><A NAME="_Toc431812919"><B><FONT FACE="Arial" SIZE=5>A brief description of MBROLA</A></LI></OL>
+
+</B></FONT><P ALIGN="JUSTIFY">MBROLA v3.01 is a speech synthesizer based on the concatenation of diphones. One synthesis channel takes a list of phonemes as input, together with prosodic information (duration of phonemes and a piecewise linear description of pitch), and produces speech samples on 16 bits (linear), at the sampling frequency of the diphone database. It is therefore <B>not</B> a Text-To-Speech synthesizer, since it does not accept raw text as input. </P>
+<P ALIGN="JUSTIFY"></P>
+<P ALIGN="JUSTIFY">It is distributed as a ZIP file whose name respect the format <B><I>"mbrXXXX.zip"</B></I> where XXXX represent the version number (e.g. <B><I>"mbr3.01e.zip"</B></I>).</P>
+<P ALIGN="JUSTIFY"></P>
+<P ALIGN="JUSTIFY">It may be compiled in 3 modes depending on which stream drives the process: </P>
+<P ALIGN="JUSTIFY"></P>
+
+<UL>
+<P ALIGN="JUSTIFY"><LI>Driven by the input phonetic file: it is compiled as a standalone program named <I>"<B>synth</B>"</I> which outputs audio in a file or a pipe. This mode is a good choice under Unix platforms for end-user applications. In the following we call this mode <B><I>"standalone mode"</B></I>.</LI></P></UL>
+
+<P ALIGN="JUSTIFY"></P>
+
+<UL>
+<P ALIGN="JUSTIFY"><LI>Driven by the audio output: compiled as a library, which outputs audio data into buffers of the size, requested by the main program. This allows you to easily include MBROLA inside your TTS application without temporary file mechanisms. In the following we call this mode <B><I>"library mode"</B></I>.</LI></P></UL>
+
+<P ALIGN="JUSTIFY"></P>
+
+<UL>
+<P ALIGN="JUSTIFY"><LI>Same as above, included in a DLL for Windows95-98/NT (which is of course the preferred mode for Windows platforms). In the following we call this mode <B><I>"DLL mode"</B></I>.</LI></P></UL>
+
+<P ALIGN="JUSTIFY"></P>
+<P ALIGN="JUSTIFY">While using <B><I>library</B></I> or <B><I>DLL</B></I> mode, we now differentiate <B>one channel</B> and <B>multi channel</B> mbrola. In the first mode, one <B><I>database</B></I> is associated to one and only one <B><I>synthesis</B> <B>channel</B></I>, which generally fits for end-user applications. In the second mode, one can run many <I>synthesis channel</I> instantiations with one or more <I>Database</I> instances and many <I>phonetic input streams</I>. This second solution is adapted to multi channel telecom TTS applications.</P>
+<P ALIGN="JUSTIFY"></P>
+<P ALIGN="JUSTIFY">In all those compilation modes MBROLA requires a language/voice database to run properly. For your internal use (i.e. non-commercial) you can test the voices made available on the MBROLA project homepage:</P>
+<B><I><P ALIGN="JUSTIFY"></P><DIR>
+<DIR>
+
+<P ALIGN="JUSTIFY"></B></I><A HREF="http://tcts.fpms.ac.be/synthesis"><B><I>http://tcts.fpms.ac.be/synthesis</B></I></A></P>
+<B><I><P ALIGN="JUSTIFY"></P></DIR>
+</DIR>
+
+</B></I><P ALIGN="JUSTIFY">Refer to your contract to check your rights for commercial exploitation of the different Diphone Databases.</P>
+<OL>
+
+<LI><A NAME="_Toc431812920"><B><FONT FACE="Arial" SIZE=5>Distribution</A></LI>
+</B></FONT><P ALIGN="JUSTIFY">Since release 3.01, Mbrola has been transformed into pure ANSI/C code, and object like programming with a strong encapsulation of data (strong because we have respected the fences we put!). One file in the distribution is generally equivalent to one object (pointer on <B><I>struct</B></I>). You can find an exhaustive description in the programmer's section 6.</P>
+<P ALIGN="JUSTIFY"></P>
+<P ALIGN="JUSTIFY">This distribution of MBROLA contains the following files: </P>
+<P ALIGN="JUSTIFY"></P>
+<B><P ALIGN="JUSTIFY">Makefile:</B> Unix makefile for Gnu Make (gmake command)</P>
+<B><P ALIGN="JUSTIFY"></P>
+<P ALIGN="JUSTIFY">DOCUMENTATION/Programmer/documentation301e.doc:</B> this document</P>
+<B><P ALIGN="JUSTIFY">DOCUMENTATION/Programmer/HISTORY.txt:</B> history of revisions</P>
+<B><P ALIGN="JUSTIFY">DOCUMENTATION/User/readme.txt:</B> standalone version manual</P>
+<B><P ALIGN="JUSTIFY"></P>
+<P ALIGN="JUSTIFY">Database: </B>handling of different database formats </P>
+<B><P ALIGN="JUSTIFY">Database/database.c</B>: functions to read diphones in the speech database</P>
+<B><P ALIGN="JUSTIFY">Database/database.h</P>
+<P ALIGN="JUSTIFY">Database/database_bacon.c<I>: </B></I>functions to read compressed diphone databases</P>
+<B><P ALIGN="JUSTIFY">Database/database_bacon.h</P>
+<P ALIGN="JUSTIFY">Database/database_old.c<I>: </B></I>functions to read diphone databases older than 2.06</P>
+<B><P ALIGN="JUSTIFY">Database/database_old.h</P>
+<P ALIGN="JUSTIFY">Database/diphone_info.c</B>: description of the diphone structures</P>
+<B><P ALIGN="JUSTIFY">Database/diphone_info.h</P>
+<P ALIGN="JUSTIFY">Database/hash_tab.c</B>: hash table of DiphoneInfo (access to the diphone database)</P>
+<B><P ALIGN="JUSTIFY">Database/hash_tab.h</P>
+<P ALIGN="JUSTIFY">Database/little_big.c:</B> handles the little and big endian numeric conversions</P>
+<B><P ALIGN="JUSTIFY">Database/little_big.h</P>
+<P ALIGN="JUSTIFY">Database/rename_list.c:</B> list of phoneme pairs (used for renaming and cloning)</P>
+<B><P ALIGN="JUSTIFY">Database/rename_list.h</P>
+<P ALIGN="JUSTIFY"></P>
+<P ALIGN="JUSTIFY">Parser:</B> functions to read phonemes in the input stream</P>
+<B><P ALIGN="JUSTIFY">Parser/fifo.c:</B> First In First Out with chars</P>
+<B><P ALIGN="JUSTIFY">Parser/fifo.h</P>
+<P ALIGN="JUSTIFY">Parser/input.h:</B> define abstract input stream </P>
+<B><P ALIGN="JUSTIFY">Parser/input_fifo.c:</B> instantiation of input.h with Fifo</P>
+<B><P ALIGN="JUSTIFY">Parser/input_fifo.h</P>
+<P ALIGN="JUSTIFY">Parser/input_file.c:</B> instantiation of input.h with File</P>
+<B><P ALIGN="JUSTIFY">Parser/input_file.h</P>
+<P ALIGN="JUSTIFY">Parser/parser.h:</B> define abstract phoneme parser</P>
+<B><P ALIGN="JUSTIFY">Parser/parser_input.c:</B> instantiation of parser.h with Input</P>
+<B><P ALIGN="JUSTIFY">Parser/parser_input.h</P>
+<P ALIGN="JUSTIFY">Parser/phonbuff.c:</B> handle a phoneme buffer for pitch interpolation</P>
+<B><P ALIGN="JUSTIFY">Parser/phonbuff.h</P>
+<P ALIGN="JUSTIFY">Parser/phone.c:</B> phoneme type</P>
+<B><P ALIGN="JUSTIFY">Parser/phone.h</P>
+<P ALIGN="JUSTIFY"></P>
+<P ALIGN="JUSTIFY">Engine:</B> Mbrola synthesis engine</P>
+<B><P ALIGN="JUSTIFY">Engine/diphone.c</B>: diphone with info for synthesis</P>
+<B><P ALIGN="JUSTIFY">Engine/diphone.h</P>
+<P ALIGN="JUSTIFY">Engine/mbrola.c</B>: mbrola algorithm (Ola, Smoothing...)</P>
+<B><P ALIGN="JUSTIFY">Engine/mbrola.h</P>
+<P ALIGN="JUSTIFY"></P>
+<P ALIGN="JUSTIFY">Misc:</B> Miscellaneous functions basically unrelated to synthesis </P>
+<B><P ALIGN="JUSTIFY">Misc/audio.c</B>: audio output and audio file header (au, wav, aiff, raw)</P>
+<B><P ALIGN="JUSTIFY">Misc/audio.h</P>
+<P ALIGN="JUSTIFY">Misc/common.c</B>: useful little functions (uppercase, swab...)</P>
+<B><P ALIGN="JUSTIFY">Misc/common.h</P>
+<P ALIGN="JUSTIFY">Misc/g711.c:</B> G711 audio coding (ALAW and MULAW)</P>
+<B><P ALIGN="JUSTIFY">Misc/g711.h</P>
+<P ALIGN="JUSTIFY">Misc/incdll.h<I>:</B></I> external definitions used outside of the Mbrola package</P>
+<B><P ALIGN="JUSTIFY">Misc/mbralloc.c:</B> memory allocators are here and ONLY here</P>
+<B><P ALIGN="JUSTIFY">Misc/mbralloc.h</P>
+<P ALIGN="JUSTIFY">Misc/vp_error.c:</B> deals with fatal error and warnings</P>
+<B><P ALIGN="JUSTIFY">Misc/vp_error.h</B>: macros for debugging purposes</P>
+<B><P ALIGN="JUSTIFY"></P>
+<P ALIGN="JUSTIFY">Standalone:</B> Standalone compilation front-end</P>
+<B><P ALIGN="JUSTIFY">Standalone/Posix</P>
+<P ALIGN="JUSTIFY">Standalone/Posix/getopt.c</B>: provided for non-POSIX Unixes</P>
+<B><P ALIGN="JUSTIFY">Standalone/Posix/getopt.h</P>
+<P ALIGN="JUSTIFY">Standalone/synth.c</B>: front-end for the compilation in the <B><I>standalone mode</B></I>. Main()</P>
+<B><P ALIGN="JUSTIFY">Standalone/synth.h</P>
+<P ALIGN="JUSTIFY"></P>
+<P ALIGN="JUSTIFY">LibOneChannel</B>: library providing one MBROLA synthesis channel</P>
+<B><P ALIGN="JUSTIFY">LibOneChannel/demo1.c</B>: small demonstration program running with the library<B> LibOneChannel/demo1b.c: </B>small demo showing error handling with the library</P>
+<B><P ALIGN="JUSTIFY">LibOneChannel/onechannel.c</B>: library providing one mbrola channel at a time</P>
+<B><P ALIGN="JUSTIFY">LibOneChannel/onechannel.h</P>
+<P ALIGN="JUSTIFY">LibOneChannel/lib1.c</B>: wrapper file to build the library lib1.c (mono channel)</P>
+<B><P ALIGN="JUSTIFY"></P>
+<P ALIGN="JUSTIFY">LibMultiChannel:</B> library for multi MBROLA synthesis channel for telecom</P>
+<B><P ALIGN="JUSTIFY">LibMultiChannel/multichannel.c</B>: many synthesis channel from one dba</P>
+<B><P ALIGN="JUSTIFY">LibMultiChannel/multichannel.h</P>
+<P ALIGN="JUSTIFY">LibMultiChannel/demo2.c:</B> demo using lib2</P>
+<B><P ALIGN="JUSTIFY">LibMultiChannel/lib2.c:</B> wrapper file to build the library lib2.c (multi channel)</P>
+<B><P ALIGN="JUSTIFY"></P>
+<P ALIGN="JUSTIFY">VisualC++: </B>compilation projects for Microsoft Visual C++</P>
+<B><P ALIGN="JUSTIFY">VisualC++/DLL: </B>Visual C++ project to build the DLL</P>
+<B><P ALIGN="JUSTIFY">VisualC++/DLL_USE: </B>sample program using the DLL</P>
+<B><P ALIGN="JUSTIFY">VisualC++/Standalone: </B>Visual C++ project to build a standalone binary</P>
+<B><P ALIGN="JUSTIFY"></P>
+<P ALIGN="JUSTIFY">Bin: </B>directory containing the output of the compilation with Make under Unix architectures.<B>&#9;</P>
+</B><LI><A NAME="_Toc431812921"><B><FONT FACE="Arial" SIZE=5>Installation and Tests</A></LI>
+<OL>
+
+<P ALIGN="JUSTIFY"><LI><A NAME="_Toc431812922"></FONT><FONT FACE="Arial" SIZE=4>On Unix</A></LI></P></OL>
+</OL>
+
+</B></FONT><P ALIGN="JUSTIFY">You must first unzip the distribution file <B><I>mbrXXXX.zip</B></I> where XXXX stand for the version number:</P><DIR>
+<DIR>
+
+<B><I><P ALIGN="JUSTIFY">unzip mbrXXXX.zip</P>
+</B></I><P ALIGN="JUSTIFY"></P></DIR>
+</DIR>
+
+<P ALIGN="JUSTIFY">Mbrola can be compiled with the <B><I>'gmake'</B></I> (gnu make) command on the following platforms:</P><DIR>
+<DIR>
+<DIR>
+<DIR>
+<DIR>
+<DIR>
+
+<P ALIGN="JUSTIFY">SUN Sparc 5/S5R4 (Solaris2.4)</P>
+<P ALIGN="JUSTIFY">HPUX9.0 and HPUX10.0 </P>
+<P ALIGN="JUSTIFY">VAX/VMS V6.2 (V5.5-2 won't work)</P>
+<P ALIGN="JUSTIFY">DECALPHA(AXP)/VMS 6.2</P>
+<P ALIGN="JUSTIFY">AlphaStation 200 4/233</P>
+<P ALIGN="JUSTIFY">AlphaStation 200 4/166</P>
+<P ALIGN="JUSTIFY">IBM RS6000 Aix 4.12</P>
+<P ALIGN="JUSTIFY">PC/LINUX 1.2.11</P>
+<P ALIGN="JUSTIFY">PCPentium120/Solaris2.4</P>
+<P ALIGN="JUSTIFY">OS/2</P>
+<P ALIGN="JUSTIFY">BeBox</P>
+<P ALIGN="JUSTIFY">QNX OS</P>
+<P ALIGN="JUSTIFY"></P></DIR>
+</DIR>
+</DIR>
+</DIR>
+</DIR>
+</DIR>
+
+<P ALIGN="JUSTIFY">Though, as Mbrola is written in standard ANSI/C, we also support POSIX compliant UNIX Platforms. Please send acknowledgment when Mbrola works on a machine/system not listed here.</P>
+<P ALIGN="JUSTIFY"></P>
+<P ALIGN="JUSTIFY">Before you compile anything you must define some symbols depending on the architecture you're working&nbsp;with:</P>
+<P ALIGN="JUSTIFY"></P>
+
+<UL>
+<B><I><P ALIGN="JUSTIFY"><LI>LITTLE_ENDIAN</B></I> <FONT FACE="Symbol">&#174;</FONT>
+ 80x86 based platforms</LI></P>
+<B><I><P ALIGN="JUSTIFY"><LI>BIG_ENDIAN</B></I> <FONT FACE="Symbol">&#174;</FONT>
+ motorola or HP based platforms </LI></P>
+<B><I><P ALIGN="JUSTIFY"><LI>VMS</I> <FONT FACE="Symbol">&#174;</FONT>
+</B> VAX/VMS stations</LI></P>
+<B><I><P ALIGN="JUSTIFY"><LI>DOS</B></I> <FONT FACE="Symbol">&#174;</FONT>
+ PC80x86 with Dos or Windows</LI></P>
+<B><I><P ALIGN="JUSTIFY"><LI>SUN4</B></I> <FONT FACE="Symbol">&#174;</FONT>
+ old Sun4 stations (not Posix compliant)</LI></P>
+<B><I><P ALIGN="JUSTIFY"><LI>DEBUG <FONT FACE="Symbol">&#174;</FONT>
+</B></I> Huge debugging flag</LI></P>
+<B><P ALIGN="JUSTIFY"><LI>DEBUG_HASH</B> <FONT FACE="Symbol">&#174;</FONT>
+ Runs the database and print info about the hash table management (used to tune the memory management of the database)</LI></P></UL>
+
+<P ALIGN="JUSTIFY"></P>
+<P ALIGN="JUSTIFY">According to the compilation mode you wish, you can comment or uncomment following lines of Makefile : </P>
+<I><P ALIGN="JUSTIFY">#CFLAGS += -DDEBUG</P>
+<P ALIGN="JUSTIFY">#CFLAGS += -DDEBUG_HASH</P>
+<P ALIGN="JUSTIFY">#CFLAGS += -DLITTLE_ENDIAN</P>
+<P ALIGN="JUSTIFY">CFLAGS += -DBIG_ENDIAN</P>
+</I><P ALIGN="JUSTIFY"></P>
+<P ALIGN="JUSTIFY">You can add any definitions to the <B><I>CFLAGS</B></I> (compilation flags) variable of the Makefile, as in the following example:</P>
+<P ALIGN="JUSTIFY"></P>
+<P ALIGN="JUSTIFY">optimized compilation on a Sun Station&nbsp;:</P><DIR>
+<DIR>
+
+<B><I><P ALIGN="JUSTIFY">CFLAGS= -Wall -DBIG_ENDIAN -O6</P>
+<P ALIGN="JUSTIFY"></P></DIR>
+</DIR>
+
+</B></I><P ALIGN="JUSTIFY">debug mode on a VAX/VMS&nbsp;:</P><DIR>
+<DIR>
+
+<B><I><P ALIGN="JUSTIFY">CFLAGS= -Wall -DLITTLE_ENDIAN -DVMS -g -DDEBUG</P>
+<P ALIGN="JUSTIFY"></P></DIR>
+</DIR>
+
+</B></I><P ALIGN="JUSTIFY">By default the compiler is set with <B><I>CC = gcc</B></I>&nbsp;; though on many platforms <B><I>cc</B></I> may also work. As the hardware manufacturer generally provides<B> cc,</B> it is preferred when possible since the object code performance can be higher by an order of magnitude.</P>
+<P ALIGN="JUSTIFY"> </P>
+<P ALIGN="JUSTIFY">You can type&nbsp;:</P>
+
+<UL>
+<B><I><P ALIGN="JUSTIFY"><LI>"make"</B></I> or <B><I>"make all"</B></I> to generate the <B><I>'synth'</I> </B>binary (<B><I>standalone mode</B></I>).</LI></P>
+<B><I><P ALIGN="JUSTIFY"><LI>"make clean"</B></I> removes the entire object files and binaries.</LI></P>
+<B><I><P ALIGN="JUSTIFY"><LI>"make lib1"</B></I> compiles lib1.c in the <B><I>library mode </B>(one channel synth)</LI></P>
+<B><P ALIGN="JUSTIFY"><LI>"make demo1" </B>builds a demo exemplifying the use of  lib1</LI></P>
+<B><P ALIGN="JUSTIFY"><LI>"make lib2"</B></I> compiles lib1.c in the <B><I>library mode </B>(multi channel synth)</LI></P>
+<B><P ALIGN="JUSTIFY"><LI>"make demo2" </B></I>builds a demo exemplifying the use of lib2</LI></P>
+<B><I><P ALIGN="JUSTIFY"><LI>"make tags" </B></I>to build Emacs popular tags (helps finding your way through the code with ESC-. ). SUN Workshop uses an internal btags program for that purpose.</LI></P></UL>
+
+<P ALIGN="JUSTIFY"></P>
+<P ALIGN="JUSTIFY">The intermediate object code goes into a <B>Bin</B> directory that is created on the occasion.</P>
+<OL>
+<OL>
+
+<P ALIGN="JUSTIFY"><LI><A NAME="_Toc431812923"><B><FONT FACE="Arial" SIZE=4>On PCs/Dos</A></LI></P>
+</B></FONT><P ALIGN="JUSTIFY">On PC/Dos platforms, use <B><I>"pkunzip synthXXXX.zip</B>"</I> to restore the files (don't forget to restore the embedded paths in the archive).</P>
+<P ALIGN="JUSTIFY"></P>
+<P ALIGN="JUSTIFY">Mbrola can be compiled with <B><I>Microsoft Visual C++ </B></I>(4&nbsp;.0 or higher), or <B><I>Borland C++</B></I> (4&nbsp;.5 or higher), on the following platforms:</P>
+<P ALIGN="JUSTIFY">PC486/DOS6 (but other PC/DOS should do, too)</P>
+<P ALIGN="JUSTIFY">PC486/Windows 3.1</P>
+<P ALIGN="JUSTIFY">PC486/Windows 95 </P>
+<P ALIGN="JUSTIFY">PC-Pentium/Windows 98</P>
+<P ALIGN="JUSTIFY">PC-Pentium/Windows NT</P>
+<P ALIGN="JUSTIFY"></P>
+<P ALIGN="JUSTIFY">Always check that in your project the following preprocessor directives are defined: LITTLE_ENDIAN and DOS. A project to build such a release with Visual C++ is provided under VisualC++/Standalone.</P>
+<P ALIGN="JUSTIFY"><LI><A NAME="_Toc431812924"><B><FONT FACE="Arial" SIZE=4>On PC/Windows</A></LI></P>
+</B></FONT><P ALIGN="JUSTIFY">First proceed like for the PC/DOS platforms. Once <B><I>synthXXXX</B></I> is installed you can start building a DLL in the VisualC++\DLL directory. <B>MbrolaDll.dsw</B> is a Microsoft VisualC++ 5.0 project file to build a DLL. In any project you make to build a DLL with Mbrola don't forget to define the DLL, LITTLE_ENDIAN, DOS preprocessor definitions.</P>
+<P ALIGN="JUSTIFY"></P>
+<P ALIGN="JUSTIFY">The Mbrola source files and a wrapper DLL interface is included in the project, it should compile smoothly. In case you have to build a new project from scratch remember that you should include only file from either <I>LibOneChannel/</I> or <I>LibMultiChannel</I>/. Never include files from <I>Standalone</I>/, as this directory is only relevant for a standalone mode (see section above for an exe binary).</P>
+<P ALIGN="JUSTIFY"></P>
+<P ALIGN="JUSTIFY">Several compilation modes are available, the <B><I>"Win32 Bacon Static"</B></I> is a good one to start with (Bacon compression scheme is included, DLL are statically linked).</P>
+<P ALIGN="JUSTIFY"></P>
+<P ALIGN="JUSTIFY">In the directory VisualC++/DLL_USE , little sample programs are given that use the Mbrola DLL.</P>
+<OL>
+
+<P ALIGN="JUSTIFY"><LI><A NAME="_Toc431812925"><B><FONT FACE="Arial">Black magic</A></LI></P></OL>
+
+</B></FONT><P ALIGN="JUSTIFY">There is a strange bug in Visual C++, when you compile the project you sometime get:</P>
+<P ALIGN="JUSTIFY"></P>
+<B><I><P ALIGN="JUSTIFY">Linking...</P>
+<P ALIGN="JUSTIFY">nafxcw.lib(dllmodul.cbj) : error LNK2005: _DllMain@12 already defined in LIBCMT.lib(dllmain.cbj)</P>
+<P ALIGN="JUSTIFY">nafxcw.lib(afxmem.cbj) : error LNK2005: "void * __cdecl operator new(unsigned int)" (??2@YAPAXI@Z) already defined in LIBCMT.lib(new.cbj)</P>
+<P ALIGN="JUSTIFY">nafxcw.lib(afxmem.cbj) : error LNK2005: "void __cdecl operator delete(void *)" (??3@YAXPAX@Z) already defined in LIBCMT.lib(delete.cbj)</P>
+<P ALIGN="JUSTIFY">nafxcw.lib(dllmodul.cbj) : warning LNK4006: _DllMain@12 already defined in LIBCMT.lib(dllmain.cbj); second definition ignored</P>
+<P ALIGN="JUSTIFY">nafxcw.lib(afxmem.cbj) : warning LNK4006: "void * __cdecl operator new(unsigned int)" (??2@YAPAXI@Z) already defined in LIBCMT.lib(new.cbj); second definition ignored</P>
+<P ALIGN="JUSTIFY">nafxcw.lib(afxmem.cbj) : warning LNK4006: "void __cdecl operator delete(void *)" (??3@YAXPAX@Z) already defined in LIBCMT.lib(delete.cbj); second definition ignored</P>
+<P ALIGN="JUSTIFY">   Creating library MbrolaDl/Mbrola.lib and object MbrolaDl/Mbrola.exp</P>
+<P ALIGN="JUSTIFY">Output\Release_Static\Mbrola.dll : fatal error LNK1169: one or more multiply defined symbols found</P>
+<P ALIGN="JUSTIFY">Error executing link.exe.</P>
+<P ALIGN="JUSTIFY"></P>
+<P ALIGN="JUSTIFY">Mbrola.dll - 4 error(s), 7 warning(s)</P>
+</B></I><P ALIGN="JUSTIFY"></P>
+<P ALIGN="JUSTIFY">Solution: remove one file from the project and include it again in the list of source files, and build the project again. The problem vanishes.</P>
+<P ALIGN="JUSTIFY"><LI><A NAME="_Toc431812926"><B><FONT FACE="Arial" SIZE=4>Using the standalone binary</A></LI></P>
+</B></FONT><P ALIGN="JUSTIFY">You are now ready to test the program. First try: <B><I>"synth"</B></I> to get an information screen about the copyright. Then, for a help screen on how to use the standalone version of the software, try :</P>
+<B><I><P ALIGN="JUSTIFY">synth -h </P>
+<P ALIGN="JUSTIFY"></P>
+</B></I><P ALIGN="JUSTIFY">You get a help screen like the following:</P>
+<B><I><P ALIGN="JUSTIFY"></P>
+<P ALIGN="JUSTIFY">&gt; USAGE: ./synth [COMMAND LINE OPTIONS] database pho_file+ output_file</P>
+<P ALIGN="JUSTIFY">&gt;</P>
+<P ALIGN="JUSTIFY">&gt;A - instead of pho_file or output_file means stdin or stdout</P>
+<P ALIGN="JUSTIFY">&gt;Extension of output_file ( raw, au, wav, aiff ) tells the wanted audio format</P>
+<P ALIGN="JUSTIFY">&gt;</P>
+<P ALIGN="JUSTIFY">&gt; Options can be any of the following:</P>
+<P ALIGN="JUSTIFY">&gt; -i = display the database information if any</P>
+<P ALIGN="JUSTIFY">&gt; -e = IGNORE fatal errors on unkown diphone</P>
+<P ALIGN="JUSTIFY">&gt; -c CC = set COMMENT char (escape sequence in pho files)</P>
+<P ALIGN="JUSTIFY">&gt; -F FC = set FLUSH command name</P>
+<P ALIGN="JUSTIFY">&gt; -v VR = VOLUME ratio, float ratio applied to ouput samples</P>
+<P ALIGN="JUSTIFY">&gt; -f FR = FREQ ratio, float ratio applied to pitch points</P>
+<P ALIGN="JUSTIFY">&gt; -t TR = TIME ratio, float ratio applied to phone durations</P>
+<P ALIGN="JUSTIFY">&gt; -l VF = VOICE freq, target freq for voice quality</P>
+<P ALIGN="JUSTIFY">&gt; -R RL = Phoneme RENAME list of the form a A b B ...</P>
+<P ALIGN="JUSTIFY">&gt; -C CL = Phoneme CLONE list of the form a A b B ...</P>
+<P ALIGN="JUSTIFY">&gt; </P>
+<P ALIGN="JUSTIFY">&gt; -I IF = Initialization file containing one command per line</P>
+<P ALIGN="JUSTIFY">&gt; CLONE, RENAME, VOICE, TIME, FREQ, VOLUME, FLUSH, </P>
+<P ALIGN="JUSTIFY">&gt; COMMENT, and IGNORE are available</P>
+<P ALIGN="JUSTIFY"></P>
+</B></I><P ALIGN="JUSTIFY">Now in order to go further, you need to get a version of an MBROLA language/voice database from the MBROLA project homepage. Let us assume you have copied the FR1 database and referred to the accompanying fr1.txt file for its installation.</P>
+<P ALIGN="JUSTIFY"></P>
+<P ALIGN="JUSTIFY">Then try: </P>
+<B><I><P ALIGN="JUSTIFY">synth fr1/fr1 fr1/TEST/bonjour.pho bonjour.wav</P>
+</B></I><P ALIGN="JUSTIFY"></P>
+<P ALIGN="JUSTIFY">it uses the format:</P>
+<P ALIGN="JUSTIFY"></P>
+<B><I><P ALIGN="JUSTIFY">synth diphone_database command_file1 command_file2 ... output_file</P>
+</B></I><P ALIGN="JUSTIFY"></P>
+<P ALIGN="JUSTIFY">and creates a sound file for the word 'bonjour' (Hello! in French)</P>
+<P ALIGN="JUSTIFY"></P>
+<P ALIGN="JUSTIFY">Basically the output file is composed of signed integer numbers on 16 bits, corresponding to samples at the sampling frequency of the MBROLA voice/language database (16 kHz for the diphone database supplied by the authors of MBROLA : Fr1). MBROLA can produce different audio file formats: <B>.au</B>, <B>.wav</B>, <B>.aiff</B>, <B>.aif</B>, and <B>.raw</B> files depending on the ouput_file extension. If the extension is not recognized, the format is RAW (no header). We recommend .wav for Windows, and .au for Unix platforms.</P>
+<P ALIGN="JUSTIFY"></P>
+<P ALIGN="JUSTIFY">To display information about the phoneme set used by the database, type:</P>
+<B><I><P ALIGN="JUSTIFY">&#9;&#9; synth -i fr1/fr1</P>
+</B></I><P ALIGN="JUSTIFY"></P>
+<P ALIGN="JUSTIFY">It displays the phonetic alphabet as well as copyright information about the database.</P>
+<P ALIGN="JUSTIFY"></P>
+<P ALIGN="JUSTIFY">Option <B><I>-e</B></I> makes Mbrola ignore wrong or missing diphone sequences (replaced by silence) which can be quite useful when debugging your TTS. Equivalent to "IGNORE" directive in the initialization file (N.B replace the obsolete ;;E=OFF , unsupported in .pho file).</P>
+<P ALIGN="JUSTIFY">&nbsp;</P>
+<OL>
+
+<P ALIGN="JUSTIFY"><LI><A NAME="_Toc431812927"><B><FONT FACE="Arial">Changing the pitch</A></LI></P>
+</B></FONT><P ALIGN="JUSTIFY">Optional parameters let you shorten or lengthen synthetic speech and transpose it by providing optional time and frequency ratios:</P>
+<P ALIGN="JUSTIFY"></P>
+<B><I><P ALIGN="JUSTIFY">synth -t 1.2 -f 0.8 -v 0.7 fr1/fr1 TEST/bonjour.pho bonjour.wav</P>
+</B></I><P ALIGN="JUSTIFY"></P>
+<P ALIGN="JUSTIFY">or its equivalent in the initialization file:</P>
+<P ALIGN="JUSTIFY"></P>
+<B><I><P ALIGN="JUSTIFY">TIME 1.2</P>
+<P ALIGN="JUSTIFY">FREQ 0.8</P>
+</B></I><P ALIGN="JUSTIFY"></P>
+<P ALIGN="JUSTIFY">for instance, will result in a RIFF Wav file bonjour.wav 1.2 times longer than the previous one (slower rate), and containing speech in which all fundamental frequency values have been multiplied by 0.8 (sounds lower). You can also set the values of these coefficients directly in a .pho file by adding special escape sequence like :</P>
+<P ALIGN="JUSTIFY"></P>
+<B><I><P ALIGN="JUSTIFY">;; F=0.8</P>
+<P ALIGN="JUSTIFY">;; T=1.2</P>
+</B></I><P ALIGN="JUSTIFY"></P>
+<P ALIGN="JUSTIFY">You can change the voice characteristics with the -l parameter. If the sampling rate of your database is 16000, indicating <B><I>-l 18000</B></I> allows you to shorten the vocal tract by a ratio 16/18 (children voice, or women voice depending on the voice you're working on). With <B><I>-l 10000</B></I>,you can lengthen the vocal tract by a ratio 18/10 (namely the voice of a Troll). The same command in an initialization file becomes "VOICE 10000".</P>
+<P ALIGN="JUSTIFY"></P>
+<P ALIGN="JUSTIFY">Option "<B><I>-v</B></I>" gives a VolumeRatio that multiplies each output sample. In  the example below, each sample  is multiplied by 0.7 (the loudness goes down). Warning: setting  VolumeRatio too high  generates saturation.</P>
+<P ALIGN="JUSTIFY"></P>
+<B><P ALIGN="JUSTIFY">synth -v 0.7 fr1/fr1 TEST/bonjour.pho bonjour.wav</P>
+</B><P ALIGN="JUSTIFY"></P>
+<P ALIGN="JUSTIFY">or add the line "<B>VOLUME 0.7</B>" in an initialization file</P>
+<B><P ALIGN="JUSTIFY"></P>
+</B><P ALIGN="JUSTIFY">The -c option lets you specify which symbol will be used as an escape sequence for comments and commands in .pho files. The default value is the semi-colon ';', but you may want to change this if your phonetic alphabet use this symbol, like in:</P>
+<P ALIGN="JUSTIFY"></P>
+<B><I><P ALIGN="JUSTIFY">synth -c ! fr1/fr1 TEST/test1.pho test2.pho test.wav</P>
+</B></I><P ALIGN="JUSTIFY"></P>
+<P ALIGN="JUSTIFY">equivalent to "<B>COMMENT !</B>" in an initialization file</P>
+<P ALIGN="JUSTIFY"></P>
+<P ALIGN="JUSTIFY">The -F option lets you specify which symbol will be used to Flush the audio output. The default value is #, you may want to change the symbol like in:</P>
+<P ALIGN="JUSTIFY"></P>
+<B><I><P ALIGN="JUSTIFY">mbrola -F FLUSH_COMMAND fr1/fr1 test.pho test.wav</P>
+</B></I><P ALIGN="JUSTIFY"></P>
+<P ALIGN="JUSTIFY">equivalent to "<B>FLUSH  FLUSH_COMMAND</B>" in the initialization file.</P>
+<B><FONT FACE="Arial"><P ALIGN="JUSTIFY"><LI>Using Pipes</LI></P>
+</B></FONT><P ALIGN="JUSTIFY">A - instead of command_file or output_file means stdin or stdout. On multitasking machines, it is easy to run the synthesizer in real time to obtain audio output from the audio device, by using pipes.</P>
+<P ALIGN="JUSTIFY"><LI><A NAME="_Toc431812928"><B><FONT FACE="Arial">Renaming and Cloning phonemes</A></LI></P></OL>
+
+</B></FONT><P ALIGN="JUSTIFY">It may happen that the language-processing module connected to MBROLA doesn't use the same phonemic alphabet as the voice used. The Renaming and  Cloning mechanisms   help you  to   quickly solve  such  problems (without adding extra  CPU  load). The  only  limitation about phoneme names is that they can't contain blank characters.</P>
+<P ALIGN="JUSTIFY"></P>
+<P ALIGN="JUSTIFY">If, for instance, phoneme <B>a </B>in the mbrola voice  you use  is called <B>my_a </B>in your alphabet,  and phoneme <B>b</B> is  called <B>my_b</B>, then the following command solves the problem:</P>
+<P ALIGN="JUSTIFY"></P>
+<B><I><P ALIGN="JUSTIFY">synth -R "a my_a   b my_b" fr1/fr1 test.pho test.wav</P>
+</B></I><P ALIGN="JUSTIFY"></P>
+<P ALIGN="JUSTIFY">You can give as  many renaming pairs as  you want. Circular definition is  not a problem. E.g. <B>"a b b c"</B> will rename  original [<B>a]</B> into [<B>b</B>] and original [<B>b]</B> into [<B>c]</B> independently ([<B>a]</B> won't be renamed to [<B>c]</B>).</P>
+<P ALIGN="JUSTIFY"></P>
+<P ALIGN="JUSTIFY">LIMITATION: you can't rename a phoneme into another that already exists.</P>
+<P ALIGN="JUSTIFY"></P>
+<P ALIGN="JUSTIFY">The cloning mechanism does exactly the same thing, though the old phoneme still exists after renaming. This is useful if you have 2 allophones in your alphabet, but the Mbrola voice only provides one.</P>
+<P ALIGN="JUSTIFY"></P>
+<P ALIGN="JUSTIFY">Imagine for instance, that you make the distinction between the voiced [r] and its unvoiced counterpart [r0] and that you are using a syllabic version [r=]. If as a first approximation using [r] for both is OK, then you may use an Mbrola voice that only provides one version of [r] by running:</P>
+<P ALIGN="JUSTIFY"></P>
+<B><I><P ALIGN="JUSTIFY">synth -C "r r0  r r=" fr1/fr1 test.pho test.wav</P>
+</B></I><P ALIGN="JUSTIFY"></P>
+<P ALIGN="JUSTIFY">which tells the synthesizer that [r0] and [r=] should be both synthesized as [r]. You can write a long cloning list of phoneme pairs to fit your needs. </P>
+<P ALIGN="JUSTIFY"></P>
+<P ALIGN="JUSTIFY">Renaming and cloning eats CPU since the complete diphone hash table has to be rebuilt, but once the renaming or cloning has occurred there is absolutely NO RELATED PERFORMANCE DROP.  So using this feature is more efficient than a pre-processor is, though a simple phoneme mapping cannot always solve incompatibilities.</P>
+<P ALIGN="JUSTIFY"></P>
+<P ALIGN="JUSTIFY">Before renaming anything as #<B>,</B> check section 5.1.2</P>
+<P ALIGN="JUSTIFY"></P>
+<P ALIGN="JUSTIFY">When one has long cloning and renaming lists, you can conveniently write them into an initialization file according to the following format:</P>
+<P ALIGN="JUSTIFY"></P>
+<B><I><P ALIGN="JUSTIFY">RENAME a my_a</P>
+<P ALIGN="JUSTIFY">RENAME b my_b</P>
+<P ALIGN="JUSTIFY">CLONE r r0</P>
+<P ALIGN="JUSTIFY">CLONE r r=</P>
+</B></I><P ALIGN="JUSTIFY"></P>
+<P ALIGN="JUSTIFY">The obsolete ";; RENAME a my_a" can't be used in .pho file anymore, but is correctly parsed in initialization files. Note to EN1 and MRPA users: the consequence of the change above is that you must change the previous call format "mbrola en1 en1mrpa..."  into "mbrola -I en1mrpa en1 ...".</P>
+<P ALIGN="JUSTIFY">&nbsp;</P>
+<P ALIGN="JUSTIFY"><LI><A NAME="_Toc431812929"><B><FONT FACE="Arial" SIZE=4>Machine dependant hints for best using Mbrola</A></LI></P>
+<OL>
+
+<P ALIGN="JUSTIFY"><LI><A NAME="_Toc431812930"></FONT><FONT FACE="Arial">On MSDOS</A></LI></P>
+</B></FONT><P ALIGN="JUSTIFY">With the standalone version, generating wav files is easier:</P>
+<B><I><P ALIGN="JUSTIFY">synth fr1/fr1 TEST/bonjour.pho bonjour.wav</P>
+</B></I><P ALIGN="JUSTIFY"></P>
+<P ALIGN="JUSTIFY">Then you can play the RIFF Wav file with your favorite DOS or Windows sound utility. On OS/2 pipes may be used just like below.</P>
+<P ALIGN="JUSTIFY"><LI><A NAME="_Toc431812931"><B><FONT FACE="Arial">On modern Unix systems such as Solaris or HPUX or Linux</A></LI></P>
+</B></FONT><P ALIGN="JUSTIFY">Type:</P>
+<B><I><P ALIGN="JUSTIFY">synth fr1 bonjour.pho -.au | audioplay</P>
+</B></I><P ALIGN="JUSTIFY"></P>
+<P ALIGN="JUSTIFY">where audioplay is your audio file player (* the name vary with the platform, e.g. splayer for HPUX *).</P>
+<P ALIGN="JUSTIFY"></P>
+<P ALIGN="JUSTIFY">If your audioplayer has problems with sun .AU files, try with .wav or .raw. Never use .wav format when you pipe the output (mbrola can't rewind the file to write the audio size in the header). Wav format was not developed for Unix (on the contrary Au format let you specify in the header "we're on a pipe, read until end of file"). </P>
+<P ALIGN="JUSTIFY"></P>
+<P ALIGN="JUSTIFY">NOTE FOR LINUX: you can use the GPL rawplay program provided at</P>
+<P ALIGN="JUSTIFY">      ftp://tcts.fpms.ac.be/pub/mbrola/pclinux/</P>
+<P ALIGN="JUSTIFY">&nbsp;</P>
+<P ALIGN="JUSTIFY"><LI><A NAME="_Toc431812932"><B><FONT FACE="Arial">On Sun4 ( old audio interface )</A></LI></P>
+</B></FONT><P ALIGN="JUSTIFY">Those machines are now quite old and only provide a mulaw 8Khz output. A hack is:</P>
+<B><I><P ALIGN="JUSTIFY">synth fr1 input.pho - | sox -t raw -sw -r 16000 - -t raw -Ub -r 8000 - &gt; /dev/audio</P>
+</B></I><P ALIGN="JUSTIFY"></P>
+<P ALIGN="JUSTIFY">Provided you have the public domain sox utility developed by Ircam, you should hear 'bonjour' without the need to create intermediate files. Note that we strongly recommend that you DON'T use SOX, since its resampling method (linear interpolation) will permanently damage the sound.</P>
+<P ALIGN="JUSTIFY"> </P>
+<P ALIGN="JUSTIFY">Other solution: The UTILITY.ZIP file available from the MBROLA homepage provides RAW2SUN that does this conversion.</P>
+<P ALIGN="JUSTIFY"><LI><A NAME="_Toc431812933"><B><FONT FACE="Arial">On VAX or AXP workstations</A></LI></P></OL>
+</OL>
+</OL>
+
+</B></FONT><P ALIGN="JUSTIFY">To make it easier for users to find MBROLA, you should add the following command to your system startup procedure: </P>
+<P ALIGN="JUSTIFY"></P><DIR>
+<DIR>
+
+<B><I><P ALIGN="JUSTIFY"> $ DEFINE/SYSTEM/EXEC MBROLA_DIR disk:[dir]</P>
+</B></I><P ALIGN="JUSTIFY"></P></DIR>
+</DIR>
+
+<P ALIGN="JUSTIFY">where "disk:[dir]" is the name of the directory you created for the MBROLA_DIR files. You could also add the following command to your system login command procedure: </P>
+<P ALIGN="JUSTIFY"></P><DIR>
+<DIR>
+
+<B><I><P ALIGN="JUSTIFY">$ MBROLA :== $MBROLA_DIR:MBROLA.EXE</P>
+<P ALIGN="JUSTIFY">$ RAW2SUN :== $MBROLA_DIR:RAW2SUN.EXE</P>
+</B></I><P ALIGN="JUSTIFY"></P></DIR>
+</DIR>
+
+<P ALIGN="JUSTIFY">to use the decsound device:</P>
+<P ALIGN="JUSTIFY"></P><DIR>
+<DIR>
+
+<B><I><P ALIGN="JUSTIFY">$ MCR DECSOUND - volume 40 -play sound.au </P>
+</B></I><P ALIGN="JUSTIFY"></P></DIR>
+</DIR>
+
+<P ALIGN="JUSTIFY">See also the MBR_OLA.COM batch file in the UTILITY.ZIP file available from the MBROLA Homepage if you cannot play 16 bits sound files on your machine. </P>
+<OL>
+
+<LI><A NAME="_Toc431812934"><B><FONT FACE="Arial" SIZE=5>Default Parser Manual</A></LI>
+</B></FONT><P ALIGN="JUSTIFY">The default parser is the parser that was provided before release 3.01. Implicitly it means that you can replace it with your own one, thanks to the setParser_MBR function. Basically the work of the parser is to return to Mbrola a phoneme with a length, and its pitch points.</P>
+<P ALIGN="JUSTIFY"></P>
+<P ALIGN="JUSTIFY">We provide a default parser that allows you to give optional pitch points, the intonation curve being linearly interpolated between those points.</P>
+<OL>
+
+<P ALIGN="JUSTIFY"><LI><A NAME="_Toc431812935"><B><FONT FACE="Arial" SIZE=4>Input file format</A></LI></P>
+</B></FONT><P ALIGN="JUSTIFY">Example of a command line&nbsp;:</P>
+<B><I><P ALIGN="JUSTIFY">synth fr1/fr1 bonjour.pho bonjour.wav </P>
+</B></I><P ALIGN="JUSTIFY">For example the phonetic input file bonjour.pho simply contains : </P>
+<P ALIGN="JUSTIFY"></P>
+<B><I><FONT SIZE=2><P ALIGN="JUSTIFY">; Bonjour</P>
+<P ALIGN="JUSTIFY">_ 51 25 114</P>
+<P ALIGN="JUSTIFY">b 62 </P>
+<P ALIGN="JUSTIFY">o~ 127 48 170.42 </P>
+<P ALIGN="JUSTIFY">Z 110 53.5 116 </P>
+<P ALIGN="JUSTIFY">u 211 </P>
+<P ALIGN="JUSTIFY">R 150 50 91 </P>
+<P ALIGN="JUSTIFY">_ 91</P>
+</B></I></FONT><P ALIGN="JUSTIFY"></P>
+<P ALIGN="JUSTIFY">This shows the format of the input data required by MBROLA. Each line contains a phoneme name, a duration (in ms), and a series (possibly none) of pitch pattern points composed of two float numbers each: the position of the pitch pattern point within the phoneme (in % of its total duration), and the pitch value (in Hz) at this position.</P>
+<P ALIGN="JUSTIFY"></P>
+<P ALIGN="JUSTIFY">Hence, the second line of bonjour.pho : </P>
+<B><I><P ALIGN="JUSTIFY"> _ 51 25 114 </P>
+</B></I><P ALIGN="JUSTIFY">tells the synthesizer to produce a silence of <B><I>51</B></I> <B><I>ms</B></I>, and to put a pitch pattern point of <B><I>114</B></I> <B><I>Hz</B></I> at <B><I>25%</B></I> of <B><I>51 ms</B></I>. Pitch pattern points define a piecewise linear pitch curve. Notice that the pitch pattern they define is continuous, since the program automatically drops pitch information when synthesizing unvoiced phones.</P>
+<P ALIGN="JUSTIFY"></P>
+<P ALIGN="JUSTIFY">Blank characters or tabs separate the data on each line. Comments can optionally be introduced in command files, starting with a semi-colon ';'. This default can be overrun with the -c option of the command line.</P>
+<P ALIGN="JUSTIFY"></P>
+<P ALIGN="JUSTIFY">Another special escape sequence ';;' allow the user to introduce commands in the middle of .pho files as described below. This escape sequence is also affected by the -c option.</P>
+<OL>
+
+<P ALIGN="JUSTIFY"><LI><A NAME="_Toc431812936"><B><FONT FACE="Arial">Changing the Frequency Ratio or Time Ratio</A></LI></P>
+</B></FONT><P ALIGN="JUSTIFY">A command escape sequence containing a line like "T=x.x" modifies the time ratio to x.x, the same result is obtained on the fundamental frequency by replacing T with F, like in:</P>
+<B><I><P ALIGN="JUSTIFY">;; T = 1.2</P>
+<P ALIGN="JUSTIFY">;;F=0.8</P>
+<P ALIGN="JUSTIFY"><LI><A NAME="_Ref431120090"><A NAME="_Toc431812937"></I><FONT FACE="Arial">Flush the output stream</A></A></LI></P></OL>
+
+</B></FONT><P ALIGN="JUSTIFY">Note, finally, that the synthesizer outputs chunks of synthetic speech determined as sections of the piecewise linear pitch curve. Phones inside a section of this curve are synthesized in one go. The last one of each chunk, however, cannot be properly synthesized while the next phone is not known (since the program uses diphones as base speech units). When using mbrola with pipes, this may be a problem. Imagine, for instance, that mbrola is used to create a pipe-based speaking clock on a HP:</P>
+<B><I><P ALIGN="JUSTIFY">speaking_clock | mbrola fr1 - -.au | splayer</P>
+</B></I><P ALIGN="JUSTIFY"></P>
+<P ALIGN="JUSTIFY">which tells the time, say, every 30 seconds. The last phone of each time announcement will only be synthesized when the next announcement starts. To bypass this problem, mbrola accepts a special command phone, which flushes the synthesis buffer : "#"</P>
+<P ALIGN="JUSTIFY"></P>
+<P ALIGN="JUSTIFY">This default character can be replaced by another symbol thanks to the command:</P>
+<B><I><P ALIGN="JUSTIFY">;; FLUSH new_flush_symbol</P>
+</B></I><P ALIGN="JUSTIFY"></P>
+<P ALIGN="JUSTIFY">Another important issue with piping under  UNIX, is the possibility to prematurely end the audio output, if  for example the user presses the stop button   of  your application. Since release 3.01, Mbrola handles signals.</P>
+<P ALIGN="JUSTIFY"></P>
+<P ALIGN="JUSTIFY">If in the  previous example the user wants  to  interrupt the speaking clock message, the application just needs to send the USR1 signal. You can send such a signal from the console with:</P>
+<P ALIGN="JUSTIFY"></P>
+<B><I><P ALIGN="JUSTIFY">kill -16 mbrola_process_number</P>
+</B></I><P ALIGN="JUSTIFY"></P>
+<P ALIGN="JUSTIFY">Once mbrola catches  the signal,  it reads its  input stream  until it gets EOF or a FLUSH command (hence, surrounding sections with flush is a good habit).</P>
+<P ALIGN="JUSTIFY"><LI><A NAME="_Toc431812938"><B><FONT FACE="Arial" SIZE=4>Limitations of MBROLA</A></LI></P></OL>
+
+</B></FONT><P ALIGN="JUSTIFY">There is no more limitation on the number of pitch points one can assign to a phoneme, or on the number of phonemes without pitch points. There is no more limitation on extra low  pitch (sometime used to produce vocal fry).</P>
+<P ALIGN="JUSTIFY"></P>
+<P ALIGN="JUSTIFY">Phonemes can be synthesized with a maximum duration that depends on the fundamental frequency with which they are produced. The higher the frequency, the lower the duration. For a frequency of 133 Hz, the maximum duration is 7.5 sec. For a frequency of 66.5 Hz, is 5 sec. For a frequency of 266 Hz, is 3.75 sec.</P>
+<B><FONT FACE="Arial" SIZE=5><LI></LI>
+<LI><A NAME="_Ref431120310"><A NAME="_Toc431812939">Programmer's Manual</A></A></LI>
+</B></FONT><P ALIGN="JUSTIFY">First, we describe in this section the object oriented philosophy used since release 3.01.</P>
+<P ALIGN="JUSTIFY">&nbsp;</P>
+<OL>
+
+<P ALIGN="JUSTIFY"><LI><A NAME="_Toc431812940"><B><FONT FACE="Arial" SIZE=4>Philosophy and architecture</A></LI></P></OL>
+</OL>
+
+</B></FONT><P ALIGN="JUSTIFY">Actually nothing (or nearly nothing) prevents us to program in standard C/ANSI with an object like convention which authorize: </P>
+
+<UL>
+<P ALIGN="JUSTIFY"><LI>"weak" encapsulation</LI></P>
+<P ALIGN="JUSTIFY"><LI>Inheritance</LI></P></UL>
+
+
+<UL>
+<P ALIGN="JUSTIFY"><LI>Polymorphism</LI></P></UL>
+
+<P ALIGN="JUSTIFY">&nbsp;</P>
+<OL>
+<OL>
+<OL>
+
+<P ALIGN="JUSTIFY"><LI><A NAME="_Toc431812941"><B><FONT FACE="Arial">Encapsulation of Object's attributes</A></LI></P>
+</B></FONT><P ALIGN="JUSTIFY">Let's exemplify the programming conventions with the char Fifo found in Parser/fifo.h. First we define a structure describing a Fifo.</P>
+<P ALIGN="JUSTIFY"></P>
+<B><I><P ALIGN="JUSTIFY">typedef struct </P>
+<P ALIGN="JUSTIFY">{</P>
+<P ALIGN="JUSTIFY">  char* charbuff;&#9;&#9; /* circular buffer for phonetic input */</P>
+<P ALIGN="JUSTIFY">  int buffer_pos;&#9;&#9;&#9; /* Current position */</P>
+<P ALIGN="JUSTIFY">  int buffer_end;&#9;&#9;&#9; /* Last available phoneme */</P>
+<P ALIGN="JUSTIFY">  int buffer_size;&#9;&#9; /* number of chars in Phobuffer */</P>
+<P ALIGN="JUSTIFY">} Fifo;</P>
+</B></I><P ALIGN="JUSTIFY"></P>
+<P ALIGN="JUSTIFY">To make distinction between public and private data, the convention is to never directly access the features of a Fifo out of its fifo.c implementation file. To reach this goal we exclusively access members through function-like macros.</P>
+<P ALIGN="JUSTIFY"></P>
+<B><I><P ALIGN="JUSTIFY">#define charbuff(ff) ff-&gt;charbuff</P>
+<P ALIGN="JUSTIFY">#define buffer_pos(ff) ff-&gt;buffer_pos</P>
+<P ALIGN="JUSTIFY">#define buffer_end(ff) ff-&gt;buffer_end</P>
+<P ALIGN="JUSTIFY">#define buffer_size(ff) ff-&gt;buffer_size</P>
+</B></I><P ALIGN="JUSTIFY"></P>
+<P ALIGN="JUSTIFY">It allows the following: </P>
+<P ALIGN="JUSTIFY"></P>
+<B><I><P ALIGN="JUSTIFY">Fifo* my_fifo; </P>
+<P ALIGN="JUSTIFY">�..</P>
+<P ALIGN="JUSTIFY">int length= buffer_size(my_fifo);</P>
+</B></I><P ALIGN="JUSTIFY"></P>
+<P ALIGN="JUSTIFY">The programmer should not cheat to discover whether buffer_size is a function or a macro, thus encapsulating the data and making them independent of the Fifo's real implementation (modulo a complete recompiling). C is not C++ and your compiler won't be able to carry out strong type checking just as with inline functions, that's the reason why attributes don't respect the full convention below (according to our conventions we should have use the name buffer_size_Fifo() ).</P>
+<P ALIGN="JUSTIFY"></P>
+<P ALIGN="JUSTIFY">The methods always respect the format: functionname_ObjectName just like below and take a pointer on the object as a first argument. Methods beginning with <B>init</B> are always constructor, and those beginning with <B>close</B> are destructors:</P>
+<P ALIGN="JUSTIFY"></P>
+<B><I><P ALIGN="JUSTIFY">Fifo* init_Fifo(int size);</P>
+<P ALIGN="JUSTIFY">/*</P>
+<P ALIGN="JUSTIFY"> * Constructor with size of the buffer</P>
+<P ALIGN="JUSTIFY"> */</P>
+<P ALIGN="JUSTIFY"></P>
+<P ALIGN="JUSTIFY">void  close_Fifo(Fifo* ff); </P>
+<P ALIGN="JUSTIFY">/*</P>
+<P ALIGN="JUSTIFY"> * Release the memory</P>
+<P ALIGN="JUSTIFY"> */</P>
+<P ALIGN="JUSTIFY"></P>
+<P ALIGN="JUSTIFY">void reset_Fifo(Fifo* ff);</P>
+<P ALIGN="JUSTIFY">/*</P>
+<P ALIGN="JUSTIFY"> * Forget previously entered data in the circular buffer</P>
+<P ALIGN="JUSTIFY"> */</P>
+<P ALIGN="JUSTIFY"></P>
+<P ALIGN="JUSTIFY">int write_Fifo(Fifo* ff, char *buffer_in);</P>
+<P ALIGN="JUSTIFY">/*</P>
+<P ALIGN="JUSTIFY"> * Write a string of phoneme in the input buffer</P>
+<P ALIGN="JUSTIFY"> * Return the number of chars actually written</P>
+<P ALIGN="JUSTIFY"> */</P>
+<P ALIGN="JUSTIFY"></P>
+<P ALIGN="JUSTIFY">int readline_Fifo(Fifo* ff, char *line, int size);</P>
+<P ALIGN="JUSTIFY">/* </P>
+<P ALIGN="JUSTIFY"> * Read a line from the input stream in a circular buffer</P>
+<P ALIGN="JUSTIFY"> * Return 0 if there's nothing to read</P>
+<P ALIGN="JUSTIFY"> */</P>
+<P ALIGN="JUSTIFY"><LI><A NAME="_Toc431812942"></I><FONT FACE="Arial">Inheritance and Polymorphism</A></LI></P>
+</B></FONT><P ALIGN="JUSTIFY">Inheritance alone can always be simulated through the <B>is_a_client_of</B> relation, the most interesting case being polymorphism. Polymorphism is interesting for multiple format database handling, and live input parser definition inside of the synthesizer.</P>
+<P ALIGN="JUSTIFY"></P>
+<P ALIGN="JUSTIFY">The abstract type below specifies an <B>Input</B> object providing the methods <B><I>close</B></I>, <B><I>reset</B></I> and <B><I>readline</B></I> .</P>
+<P ALIGN="JUSTIFY"></P>
+<B><I><P ALIGN="JUSTIFY">typedef struct Input Input;</P>
+<P ALIGN="JUSTIFY"></P>
+<P ALIGN="JUSTIFY">typedef int (*readline_InputFunction)(Input* in, char *line, int size);</P>
+<P ALIGN="JUSTIFY">typedef void (*close_InputFunction)(Input* in);</P>
+<P ALIGN="JUSTIFY">typedef void (*reset_InputFunction)(Input* in);</P>
+<P ALIGN="JUSTIFY"></P>
+<P ALIGN="JUSTIFY">struct Input</P>
+<P ALIGN="JUSTIFY">{</P>
+<P ALIGN="JUSTIFY">  void* self;</P>
+<P ALIGN="JUSTIFY">  readline_InputFunction readline_Input;</P>
+<P ALIGN="JUSTIFY">  close_InputFunction close_Input;</P>
+<P ALIGN="JUSTIFY">  close_InputFunction reset_Input;</P>
+<P ALIGN="JUSTIFY">};</P>
+</B></I><P ALIGN="JUSTIFY"></P>
+<P ALIGN="JUSTIFY">This type can be derived into <B>Input_File</B> (the input stream is a file) or <B>Input_Fifo</B> (the input stream comes from a Fifo as described above). The part of the object corresponding to the features overloaded on the basic <B>Input</B> type is stored in the <B>self</B> part.</P>
+<P ALIGN="JUSTIFY"></P>
+<B><I><P ALIGN="JUSTIFY">#include "input.h"</P>
+<P ALIGN="JUSTIFY">#include "fifo.h"</P>
+<P ALIGN="JUSTIFY"></P>
+<P ALIGN="JUSTIFY">static int readline_InputFifo(Input* in, char *line, int size)</P>
+<P ALIGN="JUSTIFY">{  return( readline_Fifo((Fifo*) in-&gt;self,line,size) ); }</P>
+<P ALIGN="JUSTIFY">  </P>
+<P ALIGN="JUSTIFY">static void reset_InputFifo(Input* in)</P>
+<P ALIGN="JUSTIFY">{ reset_Fifo((Fifo*) in-&gt;self); }</P>
+<P ALIGN="JUSTIFY"></P>
+<P ALIGN="JUSTIFY">static void close_InputFifo(Input* in)</P>
+<P ALIGN="JUSTIFY">{ MBR_free(in); }</P>
+<P ALIGN="JUSTIFY"> </P>
+<P ALIGN="JUSTIFY">Input* init_InputFifo(Fifo* my_fifo)</P>
+<P ALIGN="JUSTIFY">{</P>
+<P ALIGN="JUSTIFY">  Input* self= (Input*) MBR_malloc( sizeof(Input) );</P>
+<P ALIGN="JUSTIFY"></P>
+<P ALIGN="JUSTIFY">  self-&gt;self= (void*) my_fifo;</P>
+<P ALIGN="JUSTIFY">  self-&gt;readline_Input= readline_InputFifo;</P>
+<P ALIGN="JUSTIFY">  self-&gt;close_Input= close_InputFifo;</P>
+<P ALIGN="JUSTIFY">  self-&gt;reset_Input= reset_InputFifo;</P>
+<P ALIGN="JUSTIFY"></P>
+<P ALIGN="JUSTIFY">  return self;</P>
+<P ALIGN="JUSTIFY">}</P>
+</I><P ALIGN="JUSTIFY">&nbsp;</P>
+<FONT FACE="Arial"><P ALIGN="JUSTIFY"><LI></LI></P>
+<P ALIGN="JUSTIFY"><LI><A NAME="_Toc431812943">Inheritance and cross-reference graph</A></LI></P></OL>
+</OL>
+</OL>
+
+</B></FONT><P ALIGN="JUSTIFY">The <B><I>Database</B></I>, <B><I>Input</B></I> and <B><I>Parser</B></I> objects contain deferred (=virtual) methods and thus allow polymorphism.</P>
+<P ALIGN="JUSTIFY">&nbsp;</P>
+<OL>
+<OL>
+
+<P ALIGN="JUSTIFY"><LI><A NAME="_Toc431812944"><B><FONT FACE="Arial" SIZE=4>Application Programming Interface</A></LI></P>
+</B></FONT><P ALIGN="JUSTIFY">The explanations given in the previous section are particularly useful to the user who wants to design ad-hoc parsers. Though one can keep on working with the default parser.</P>
+<OL>
+
+<P ALIGN="JUSTIFY"><LI><A NAME="_Toc431812945"><B><FONT FACE="Arial">One channel mode</A></LI></P>
+</B></FONT><P ALIGN="JUSTIFY">You can build a demo by running <B><I>"make demo1"</B></I> under Unix, or simply build the library with <B><I>"make lib1"</B></I>. With Windows and Visual C++ the DLL project builds an equivalent of <B><I>lib1</B>,</I> and numerous examples are provided in the DLL_USE directory. The complete <B>one channel</B> mode interface is given section 7.24. Let's exemplify the use below:</P>
+<P ALIGN="JUSTIFY"></P>
+<P ALIGN="JUSTIFY">First, initialize the engine with a diphone database. All the functions in the API return an error code. A negative value means there was a flaw during the process, in case of error, an explicit error message can be obtained from lastErrorStr_MBR().</P>
+<P ALIGN="JUSTIFY"></P>
+<B><I><P ALIGN="JUSTIFY">err_code= init_MBR("h:/mbrola/database/fr1" );</P>
+<P ALIGN="JUSTIFY">if (err_code&lt;0) </P>
+<P ALIGN="JUSTIFY">     handle_error();</P>
+</B></I><P ALIGN="JUSTIFY"></P>
+<P ALIGN="JUSTIFY">If the default parser is plugged, one can use the regular syntax in write_MBR to send phonemes to the engine:</P>
+<P ALIGN="JUSTIFY"></P>
+<B><I><P ALIGN="JUSTIFY">if (    ( write_MBR("_ 51 \n b 62  \n") &lt; 0)                 ||</P>
+<P ALIGN="JUSTIFY">        ( write_MBR("o~ 127  50 170 \n Z 110\n") &lt;0) ||</P>
+<P ALIGN="JUSTIFY">        ( WriteSpeechFile(output)&lt;0)              ||</P>
+<P ALIGN="JUSTIFY">        ( write_MBR("u 211 100 200\n R 150 \n_ 9\n#\n") &lt; 0) ||</P>
+<P ALIGN="JUSTIFY">        ( WriteSpeechFile(output)&lt;0)  )</P>
+<P ALIGN="JUSTIFY">handle_error();</P>
+<P ALIGN="JUSTIFY"></P>
+<P ALIGN="JUSTIFY">close_MBR();</P>
+<P ALIGN="JUSTIFY">   </P>
+</B></I><P ALIGN="JUSTIFY"></P>
+<P ALIGN="JUSTIFY">Each time one calls <B><I>init_MBR</B></I>(), one should call a pending <B><I>close_MBR</B></I>() to release allocated memory. Once <B><I>close_MBR</B></I>() is called, one can call <B><I>init_MBR</B></I>() for a brand new database. If one wish to work with the same database but forget previously entered phonemes, then use <B><I>reset_MBR</B></I>().</P>
+<P ALIGN="JUSTIFY"></P>
+<P ALIGN="JUSTIFY">Let's describe how WriteSpeechFile works:</P>
+<P ALIGN="JUSTIFY"> </P>
+<B><I><P ALIGN="JUSTIFY">int WriteSpeechFile(FILE *output)</P>
+<P ALIGN="JUSTIFY">{</P>
+<P ALIGN="JUSTIFY">   int i;</P>
+<P ALIGN="JUSTIFY"></P>
+<P ALIGN="JUSTIFY">   while ( (i=readtype_MBR(buffer, 16000, LIN16)) == 16000)</P>
+<P ALIGN="JUSTIFY">                   fwrite(buffer, 2, i, output);</P>
+<P ALIGN="JUSTIFY">   if (i&gt;0)</P>
+<P ALIGN="JUSTIFY">          {     /* write last chunk */</P>
+<P ALIGN="JUSTIFY">                 fwrite(buffer,size,i,output);</P>
+<P ALIGN="JUSTIFY">                 return 0;</P>
+<P ALIGN="JUSTIFY">          }</P>
+<P ALIGN="JUSTIFY">   else</P>
+<P ALIGN="JUSTIFY">     return i; /* return an error code */</P>
+<P ALIGN="JUSTIFY">}</P>
+</B></I><P ALIGN="JUSTIFY">It reads sample buffers from the engine until it can't get any more ( <B><I>readtype_MBR</B></I> returns 0), or an error occurs. <B><I>Readtype</B></I> can return 0 for two reasons: either a flush has been encountered, either we don't have enough data in the default parser, as it needs a look ahead to interpolate pitch values. This is the case after<B><I> write_MBR("o~ 127  50 170 \n Z 110\n")</B></I>, synthesis on the /<B><I>Z</B></I>/ can't be carried out until we get the pitch point on<B><I> "u 211 100 200"</B></I>. This way asynchronous read/write operations are allowed.</P>
+<P ALIGN="JUSTIFY"></P>
+<P ALIGN="JUSTIFY">The small error handling function simply does:</P>
+<B><I><P ALIGN="JUSTIFY">void handle_error()</P>
+<P ALIGN="JUSTIFY">{</P>
+<P ALIGN="JUSTIFY">  char err[255];</P>
+<P ALIGN="JUSTIFY">  </P>
+<P ALIGN="JUSTIFY">  lastErrorStr_MBR(err,sizeof(err));</P>
+<P ALIGN="JUSTIFY">  </P>
+<P ALIGN="JUSTIFY">  printf("Code %i\n%s\n", lastError_MBR(), err);</P>
+<P ALIGN="JUSTIFY">  exit(-1);</P>
+<P ALIGN="JUSTIFY">}</P>
+</B></I><P ALIGN="JUSTIFY">At any time, one can use the get_* and set_* functions to modify internal parameters of the synthesizer.</P>
+<P ALIGN="JUSTIFY"></P>
+<B><P ALIGN="JUSTIFY">Important note about the vocal tract length capabilities</B>: one can modify the size of the speaker's throat with setFreq_MBR. The lower this frequency, the deeper the voice. This very simple method takes advantage of the playback sampling rate to shift the formants up and down, just like when changing the speed of a tape player. Thus, to be effective, any call to setFreq_MBR must be accompanied with a call to the audio hardware setting the requested playback sample rate. Otherwise the speed and pitch will sound odd.</P>
+<P ALIGN="JUSTIFY"><LI><A NAME="_Toc431812946"><B><FONT FACE="Arial">Multi channel mode</A></LI></P>
+</B></FONT><P ALIGN="JUSTIFY">One can build a demo by running "make demo2" under Unix, or simply build the library with <B><I>"make lib2"</B></I>. The complete <B>multi channel</B> mode interface is given section 7.25. </P>
+<P ALIGN="JUSTIFY"></P>
+<P ALIGN="JUSTIFY">It looks strangely close to the one channel mode, except that one passes a pointer to a synthesizer structure for every function. Another point is that it doesn't hide any more the parser's details to the user. Thus if one wants to use the default parser, one has to effectively build it. </P>
+<P ALIGN="JUSTIFY"></P>
+<P ALIGN="JUSTIFY">The following code build 3 independent default phoneme parsers: </P>
+<P ALIGN="JUSTIFY"></P>
+<B><I><P ALIGN="JUSTIFY">/* Input Fifo with a buffer of 100 chars */</P>
+<P ALIGN="JUSTIFY">  fifo1= init_Fifo(100);</P>
+<P ALIGN="JUSTIFY">  fifo2= init_Fifo(100);</P>
+<P ALIGN="JUSTIFY">  fifo3= init_Fifo(100);</P>
+<P ALIGN="JUSTIFY"></P>
+<P ALIGN="JUSTIFY">  /* Input stream of the synthesizer */</P>
+<P ALIGN="JUSTIFY">  input1= init_InputFifo(fifo1);</P>
+<P ALIGN="JUSTIFY">  input2= init_InputFifo(fifo2);</P>
+<P ALIGN="JUSTIFY">  input3= init_InputFifo(fifo3);</P>
+<P ALIGN="JUSTIFY">  </P>
+<P ALIGN="JUSTIFY">  /* Plug the fifos on the default parsers */</P>
+<P ALIGN="JUSTIFY">  parser1= init_ParserInput(input1,"_",120.0,";",1.0,1.0);</P>
+<P ALIGN="JUSTIFY">  parser2= init_ParserInput(input2,"_",120.0,";",1.0,1.0);</P>
+<P ALIGN="JUSTIFY">  parser3= init_ParserInput(input3,"_",120.0,";",1.0,1.0);</P>
+</B></I><P ALIGN="JUSTIFY">  </P>
+<P ALIGN="JUSTIFY">To use one's own parser, see the next section. Once this is done, as many databases as synthesis channels must be opened (let's say 3 channels in this example).</P>
+<P ALIGN="JUSTIFY"></P>
+<B><I><P ALIGN="JUSTIFY">Database* main_dba= init_DatabaseMBR2(argv[1],NULL,NULL); </P>
+<P ALIGN="JUSTIFY">if (!main_dba)</P>
+<P ALIGN="JUSTIFY">   handle_error(True);</P>
+</B></I><P ALIGN="JUSTIFY"></P>
+<P ALIGN="JUSTIFY">Of course opening 3 or more times the same database would spoil a lot of memory since many internal structures could be shared. Instead of using init_DatabaseMBR2 one can clone an already opened database:</P>
+<B><I><P ALIGN="JUSTIFY">Database* clone_dba1= copyconstructor_DatabaseMBR2(main_dba);</P>
+<P ALIGN="JUSTIFY">Database* clone_dba2= copyconstructor_DatabaseMBR2(main_dba);</P>
+<P ALIGN="JUSTIFY">Database* clone_dba3= copyconstructor_DatabaseMBR2(main_dba);</P>
+</B></I><P ALIGN="JUSTIFY"></P>
+<P ALIGN="JUSTIFY">Cloned database just behave like regular Database, i.e. their destructor must be called before leaving. Once we have a Parser input and a Database, we can open a synthesis channel:</P>
+<B><I><P ALIGN="JUSTIFY">Mbrola* channel1= init_MBR2(clone_dba1,parser1);</P>
+<P ALIGN="JUSTIFY">Mbrola* channel2= init_MBR2(clone_dba2,parser2);</P>
+<P ALIGN="JUSTIFY">Mbrola* channel3= init_MBR2(clone_dba3,parser3);</P>
+<P ALIGN="JUSTIFY"></P>
+</B></I><P ALIGN="JUSTIFY">In this particular example, one can write phonemes in the parser, and read samples from the synthesis engine with instructions such as:</P>
+<B><I><P ALIGN="JUSTIFY">write_Fifo(fifo1,"_ 51 \n b 62  \n o~ 100\n Z 120")</P>
+<P ALIGN="JUSTIFY">while ((i=readtype_MBR2(channel1, buffer, 16000, LIN16))==16000)</P>
+<P ALIGN="JUSTIFY">          fwrite(buffer,size,i,output);</P>
+<P ALIGN="JUSTIFY"></P>
+</B></I><P ALIGN="JUSTIFY">Of course the call to <B>write_Fifo</B> is completely dependent of the fact that this example uses the default phoneme parser. In this particular case, the polymorphic object <B>Parser</B>, which was passed to the constructor of <B>channel</B>, reads its input data from <B>Fifo1</B>.</P>
+<P ALIGN="JUSTIFY"><LI><A NAME="_Toc431812947"><B><FONT FACE="Arial">Designing and plugging your own parser</A></LI></P></OL>
+</OL>
+</OL>
+
+</B></FONT><P ALIGN="JUSTIFY">The user can write his own implementation of a Parser, as long as it follows the definition of <B>Parser/parser.h</B>. The file <B>parser_simple.c</B> below gives an example of a parser that reads phonetic inputs with the format: Phoneme Duration Pitch_At_0% Pitch_At_100%.</P>
+<P ALIGN="JUSTIFY"></P>
+<P ALIGN="JUSTIFY">In practice this example does not take into account that the Engine synthesize diphones. As the word states, a diphone is made of two phonemes, thus one must know both parts of the diphones to utter it. Thus each phoneme file being used with parser<B>_simple</B> must end with two silences: the first one reveal 1st half of the last phoneme, and the second one reveal the second half (a complete example is provided in <I>VisualC++/DLL_USE/mbrola/parser_simple.cpp</I>). Many people forget to include the second silence as the result sounds correct without. Though, the total length of the synthetic message won't agree with the requested one.</P>
+<P ALIGN="JUSTIFY"></P><DIR>
+<DIR>
+
+<B><I><P ALIGN="JUSTIFY">/*</P>
+<P ALIGN="JUSTIFY"> * FPMs-TCTS SOFTWARE LIBRARY</P>
+<P ALIGN="JUSTIFY"> *</P>
+<P ALIGN="JUSTIFY"> * File:    parser_simple.c</P>
+<P ALIGN="JUSTIFY"> * Purpose: parse a simple "pho file" (demonstration of the mbrola DLL)</P>
+<P ALIGN="JUSTIFY"> *          Instanciation of parser.h</P>
+<P ALIGN="JUSTIFY"> *</P>
+<P ALIGN="JUSTIFY"> * Author:  Vincent Pagel</P>
+<P ALIGN="JUSTIFY"> * Email :  mbrola@tcts.fpms.ac.be</P>
+<P ALIGN="JUSTIFY"> *</P>
+<P ALIGN="JUSTIFY"> * Copyright (c) 1995-2018 Faculte Polytechnique de Mons (TCTS lab)</P>
+<P ALIGN="JUSTIFY"> *</P>
+<P ALIGN="JUSTIFY"> * 18/09/98 : Created</P>
+<P ALIGN="JUSTIFY"> */</P>
+<P ALIGN="JUSTIFY">#include &lt;stdio.h&gt;</P>
+<P ALIGN="JUSTIFY">#include "mbrola.h"</P>
+<P ALIGN="JUSTIFY">#include "parser_simple.h"</P>
+<P ALIGN="JUSTIFY"></P>
+<P ALIGN="JUSTIFY">static void reset_ParserSimple(Parser* parse)</P>
+<P ALIGN="JUSTIFY">{</P>
+<P ALIGN="JUSTIFY">  /* nothing to do */</P>
+<P ALIGN="JUSTIFY">  fseek( (File*) parse-&gt;self,0,SEEK_SET);</P>
+<P ALIGN="JUSTIFY">}</P>
+<P ALIGN="JUSTIFY"></P>
+<P ALIGN="JUSTIFY">static StatePhone nextphone_ParserSimple(Parser* parse, LPPHONE* ph)</P>
+<P ALIGN="JUSTIFY">{</P>
+<P ALIGN="JUSTIFY">  char phoneme[255]; /* phoneme name */</P>
+<P ALIGN="JUSTIFY">  float length;    /* length in milliseconds */</P>
+<P ALIGN="JUSTIFY">  float pitch0;    /* pitch at 0%   */</P>
+<P ALIGN="JUSTIFY">  float pitch100;  /* pitch at 100% */</P>
+<P ALIGN="JUSTIFY">  </P>
+<P ALIGN="JUSTIFY">  if ( fscanf( (FILE*)parse-&gt;self," %s %f %f %f ",phoneme,&amp;length,&amp;pitch0,&amp;pitch100 ) ==4 )</P>
+<P ALIGN="JUSTIFY">      {</P>
+<P ALIGN="JUSTIFY">*ph= init_Phone(phoneme,length);</P>
+<P ALIGN="JUSTIFY">&#9;appendf0_Phone(*ph, 0.0  , pitch0);</P>
+<P ALIGN="JUSTIFY">&#9;appendf0_Phone(*ph, 100.0, pitch100);</P>
+<P ALIGN="JUSTIFY">&#9;return PHO_OK;</P>
+<P ALIGN="JUSTIFY">      }</P>
+<P ALIGN="JUSTIFY">  else&#9;</P>
+<P ALIGN="JUSTIFY">      {</P>
+<P ALIGN="JUSTIFY">        return PHO_EOF;</P>
+<P ALIGN="JUSTIFY">      }</P>
+<P ALIGN="JUSTIFY">}</P>
+<P ALIGN="JUSTIFY"></P>
+<P ALIGN="JUSTIFY">static void close_ParserSimple(Parser* parse)</P>
+<P ALIGN="JUSTIFY">&#9;  /* Destructor */</P>
+<P ALIGN="JUSTIFY">{</P>
+<P ALIGN="JUSTIFY">  fclose( (FILE*) parse-&gt;self);</P>
+<P ALIGN="JUSTIFY">  free(parse);</P>
+<P ALIGN="JUSTIFY">}</P>
+<P ALIGN="JUSTIFY"></P>
+<P ALIGN="JUSTIFY">Parser* init_ParserSimple(char* input_name)</P>
+<P ALIGN="JUSTIFY">/*</P>
+<P ALIGN="JUSTIFY"> * Constructor of the parser. Parse a text file of the form</P>
+<P ALIGN="JUSTIFY"> *    PHONEME LENGTH PITCH_AT_BEGINNING PITCH_AT_END</P>
+<P ALIGN="JUSTIFY"> */</P>
+<P ALIGN="JUSTIFY">{</P>
+<P ALIGN="JUSTIFY">   FILE* input;</P>
+<P ALIGN="JUSTIFY">  Parser* parse;</P>
+<P ALIGN="JUSTIFY"> </P>
+<P ALIGN="JUSTIFY">  /* open the text file */</P>
+<P ALIGN="JUSTIFY">  input=fopen(input_name,"rt");</P>
+<P ALIGN="JUSTIFY">  if (!input)</P>
+<P ALIGN="JUSTIFY">&#9; return NULL;</P>
+<P ALIGN="JUSTIFY"></P>
+<P ALIGN="JUSTIFY">  parse= (Parser*) MBR_alloc( sizeof( struct Parser) );</P>
+<P ALIGN="JUSTIFY">  parse-&gt;reset_Parser= reset_ParserSimple;</P>
+<P ALIGN="JUSTIFY">  parse-&gt;close_Parser= close_ParserSimple;</P>
+<P ALIGN="JUSTIFY">  parse-&gt;nextphone_Parser= nextphone_ParserSimple; </P>
+<P ALIGN="JUSTIFY">  parse-&gt;self= (void*) input;</P>
+<P ALIGN="JUSTIFY">  return(parse);</P>
+<P ALIGN="JUSTIFY">}</P>
+</B></I><P ALIGN="JUSTIFY"></P>
+<P ALIGN="JUSTIFY">&nbsp;</P>
+<P ALIGN="JUSTIFY">&nbsp;</P></DIR>
+</DIR>
+
+<OL>
+
+<B><FONT FACE="Arial" SIZE=5><LI></LI>
+<LI><A NAME="_Toc431812948">Mbrola architecture</A></LI>
+</B></FONT><P ALIGN="JUSTIFY">In following chapters the exported functions and variables of all the source files in the project are described. After the file descriptions, a symbol index is provided to allow fast localization of any function, variable or define.</P>
+<OL>
+
+<P ALIGN="JUSTIFY"><LI><A NAME="_Toc431812949"><B><FONT FACE="Arial" SIZE=4>File: Misc/common.h</A></LI></P>
+</B></FONT><FONT FACE="Courier New" SIZE=2><P>/*</P>
+<P> * Purpose: common utilities and defines</P>
+<P> * Author:  Vincent Pagel</P>
+<P> */</P>
+
+<P>/******************</P>
+<P> * Definitions    *</P>
+<P> ******************/</P>
+
+<P>/* Release number (automatically changed by "make version") */</P>
+<P>#define SYNTH_VERSION "3.01e2"</P>
+<P>#define WWW_ADDRESS "http://tcts.fpms.ac.be/synthesis"</P>
+
+<P>/* General trace       */</P>
+<P>/*&#9;#define DEBUG           */</P>
+
+<P>/* Trace of the hash table -&gt; this debug make the program stop and</P>
+<P> * and print the access statistics in the hash table (may help to</P>
+<P> * check and tune access time on new databases)</P>
+<P> */</P>
+<P>/* #define DEBUG_HASH      */</P>
+
+<P>/*</P>
+<P> * True and False should be used instead of integer values</P>
+<P> */</P>
+<P>/* Argh ! Depends on the compiler! Comment it if yours is not C/ANSI */</P>
+<P>#define bool int</P>
+<P>#define False 0</P>
+<P>#define True 1</P>
+
+<P>/*</P>
+<P> * ARCHITECTURE DEPENDENT !!!</P>
+<P> * These definitions should be imposed so that int8, int16 and int32</P>
+<P> * always refer to 8, 16 and 32 bits integer</P>
+<P> */</P>
+
+<P>#define uint8  unsigned char</P>
+<P>#define int8   char</P>
+<P>#define int16  short</P>
+<P>#define uint16 unsigned short</P>
+<P>#define int32  long</P>
+<P ALIGN="JUSTIFY"><LI><A NAME="_Toc431812950"></FONT><B><FONT FACE="Arial" SIZE=4>File: Misc/incdll.h</A></LI></P>
+</B></FONT><FONT FACE="Courier New" SIZE=2><P>/*</P>
+<P> * Purpose: symbols needed outside of the mbrola sources</P>
+<P> *          namely to compile the wrapper DLL</P>
+<P> * Author:  Vincent Pagel</P>
+<P> */</P>
+
+<P>&nbsp;</P>
+<P>/* </P>
+<P> * Type of samples we can output with read_MBR</P>
+<P> */</P>
+
+<P>typedef enum {</P>
+<P>  LIN16=0,     /* same as intern computation format: 16 bits linear  */</P>
+<P>  LIN8,        /* unsigned linear 8 bits, worse than telephone        */</P>
+<P>  ULAW,        /* MU law -&gt; 8bits, telephone. Roughly equ. to 12bits */</P>
+<P>  ALAW         /* A law  -&gt; 8bits, equivallent to mulaw              */</P>
+<P>} AudioType;</P>
+</FONT><P ALIGN="JUSTIFY">&nbsp;</P>
+<P ALIGN="JUSTIFY"><LI><A NAME="_Toc431812951"><B><FONT FACE="Arial" SIZE=4>File: Misc/mbralloc.h</A></LI></P>
+</B></FONT><FONT FACE="Courier New" SIZE=2><P>/*</P>
+<P> * Purpose: memory allocation and freeing</P>
+<P> * Author:  Vincent Pagel and Alain Ruelle</P>
+<P> */</P>
+
+<P>#define MBR_free(X)&#9;&#9;{free(X);X=NULL;}</P>
+<P>/* free a memory block and set the pointer to NULL */ </P>
+
+<P>#define MBR_realloc(X,Y)&#9;&#9;realloc(X,Y)</P>
+<P>/* dummy reallocation for the moment */ </P>
+
+<P>void *MBR_malloc(size_t size);</P>
+<P>  /*</P>
+<P>&#9;* Check there's enough memory for the pointer</P>
+<P>&#9;*/</P>
+
+<P>char *MBR_strdup( const char *str);</P>
+<P>/* standard strdup would use standard malloc */</P>
+<P ALIGN="JUSTIFY"><LI><A NAME="_Toc431812952"></FONT><B><FONT FACE="Arial" SIZE=4>File: Misc/vp_error.h</A></LI></P>
+</B></FONT><FONT FACE="Courier New" SIZE=2><P>/*</P>
+<P> * Purpose: Errors management with debugging messages</P>
+<P> * Authors: V. Pagel and A. Ruelle</P>
+<P> */</P>
+
+<P> /*</P>
+<P>  * For the DLL and LIBRARY mode, Error codes returned</P>
+<P>  */</P>
+<P> #define ERROR_MEMORYOUT&#9;&#9;&#9;&#9;&#9;-1</P>
+<P> #define ERROR_UNKNOWNCOMMAND&#9;&#9;&#9;-2</P>
+<P> #define ERROR_SYNTAXERROR&#9;&#9;&#9;&#9;-3</P>
+<P> #define ERROR_COMMANDLINE          -4</P>
+<P> #define ERROR_OUTFILE              -5</P>
+<P> #define ERROR_RENAMING             -6</P>
+<P> </P>
+<P> #define ERROR_PRGWRONGVERSION&#9;&#9;-10</P>
+<P> </P>
+<P> #define ERROR_TOOMANYPITCH&#9;&#9;&#9;-20</P>
+<P> #define ERROR_TOOMANYPHOWOPITCH&#9;&#9;-21</P>
+<P> #define ERROR_PITCHTOOHIGH&#9;&#9;&#9;-22</P>
+<P> </P>
+<P> #define ERROR_PHOLENGTH&#9;&#9;&#9;&#9;-30</P>
+<P> #define ERROR_PHOREADING&#9;&#9;&#9;&#9;-31</P>
+<P> </P>
+<P> #define ERROR_DBNOTFOUND&#9;&#9;&#9;&#9;-40</P>
+<P> #define ERROR_DBWRONGVERSION&#9;&#9;&#9;-41</P>
+<P> #define ERROR_DBWRONGARCHITECTURE&#9;-42</P>
+<P> #define ERROR_DBNOSILENCE&#9;&#9;&#9;&#9;-43</P>
+<P> #define ERROR_INFOSTRING           -44</P>
+<P> </P>
+<P> #define ERROR_BINNUMBERFORMAT&#9;&#9;&#9;-60</P>
+<P> #define ERROR_PERIODTOOLONG&#9;&#9;&#9;&#9;-61</P>
+<P> #define ERROR_SMOOTHING&#9;&#9;&#9;&#9;&#9;-62</P>
+<P> #define ERROR_UNKNOWNSEGMENT&#9;&#9;&#9;-63</P>
+<P> #define ERROR_CANTDUPLICATESEGMENT&#9;&#9;-64</P>
+
+<P> #define ERROR_BOOK&#9;&#9;-70</P>
+<P> #define ERROR_CODE&#9;&#9;-71</P>
+
+<P> #define WARNING_UPGRADE -80</P>
+<P> #define WARNING_SATURATION -81</P>
+
+<P>/* buffer cumulating error messages when in lib or dll mode */</P>
+<P>extern char errbuffer[]; </P>
+<P>extern int lasterr_code;&#9;&#9;&#9;  /* Code of the last error */</P>
+
+<P>void fatal_message(const int code, const char *format, /* args */ ...);</P>
+<P>/*</P>
+<P> * Uses the format of a printf function</P>
+<P> * throw an exception when in library mode, or abort the program</P>
+<P> */</P>
+
+<P>void warning_message(const int code, const char *format, /* args */ ...);</P>
+<P>/*</P>
+<P> * Uses the format of a printf function</P>
+<P> * Just print a warning in the error buffer</P>
+<P> */</P>
+
+<P>#ifdef DEBUG</P>
+<P>void debug_message(char const *format, /* args */ ...);</P>
+
+<P>/* What's below is kind of ugly. When we're in C++ it can be replaced </P>
+<P> *&#9;by an inline debug_message function</P>
+<P> *</P>
+<P> * unavoidable if I don't want code to be generated in the release</P>
+<P> */</P>
+<P>#define debug_message1(A)  debug_message(A) </P>
+<P>#define debug_message2(A,B)  debug_message(A,B) </P>
+<P>#define debug_message3(A,B,C)  debug_message(A,B,C) </P>
+<P>#define debug_message4(A,B,C,D)  debug_message(A,B,C,D) </P>
+<P>#define debug_message5(A,B,C,D,E) debug_message(A,B,C,D,E)</P>
+<P>#define debug_message6(A,B,C,D,E,F) debug_message(A,B,C,D,E,F)</P>
+<P>#define debug_message7(A,B,C,D,E,F,G) debug_message(A,B,C,D,E,F,G)</P>
+<P>#define debug_message8(A,B,C,D,E,F,G,H) debug_message(A,B,C,D,E,F,G,H)</P>
+
+<P>#else</P>
+<P>/* don't generate anything */</P>
+<P>#define debug_message1(A) </P>
+<P>#define debug_message2(A,B) </P>
+<P>#define debug_message3(A,B,C)</P>
+<P>#define debug_message4(A,B,C,D) </P>
+<P>#define debug_message5(A,B,C,D,E) </P>
+<P>#define debug_message6(A,B,C,D,E,F) </P>
+<P>#define debug_message7(A,B,C,D,E,F,G) </P>
+<P>#define debug_message8(A,B,C,D,E,F,G,H) </P>
+
+<P>#endif</P>
+</FONT><B><FONT FACE="Arial" SIZE=4><P ALIGN="JUSTIFY"><LI></LI></P>
+<P ALIGN="JUSTIFY"><LI><A NAME="_Toc431812953">File: Misc/audio.h</A></LI></P>
+</B></FONT><FONT FACE="Courier New" SIZE=2><P>/*</P>
+<P> * Purpose: audio files</P>
+<P> * Author:  Vincent Pagel</P>
+<P> */</P>
+
+<P>/*</P>
+<P> * Audio file format</P>
+<P> */</P>
+<P>typedef enum {</P>
+<P>  RAW_FORMAT=0,     /* same as intern computation format: 16 bits linear  */</P>
+<P>  WAV_FORMAT ,</P>
+<P>  AU_FORMAT  , </P>
+<P>  AIF_FORMAT ,</P>
+<P>  AIFF_FORMAT </P>
+<P>} WaveType;</P>
+
+<P>int write_int16s(int16 *buffer,int count,FILE *file);</P>
+<P>/* Write a buffer of int16 */</P>
+
+<P>void write_header(WaveType file_format, int32 audio_length, uint16 samp_rate, FILE *output_file);</P>
+<P>/* Write the header corresponding to the output audio format */</P>
+
+<P>WaveType find_file_format(char *name);</P>
+<P>/* Find the file format corresponding to the name's extension  </P>
+<P> * raw=none wav=RIFF au=Sun Audio aif or aiff=Macintosh</P>
+<P> */</P>
+
+<P>/* </P>
+<P> * Sample type conversion routines for read_MBR</P>
+<P> */</P>
+<B><P>#ifdef LIBRARY</P>
+</B>
+<P>void* zero_convert(void* buffer_out, int nb_move, AudioType sample_type);</P>
+<P>/*</P>
+<P> * Output zeros in a buffer according to the sample_type</P>
+<P> * Return the next position after the end of the buffer</P>
+<P> *</P>
+<P> * Returning NULL means fatal error</P>
+<P> */</P>
+
+<P>void* move_convert(void* buffer_out,int16* buffer_in,int nb_move, AudioType sample_type);</P>
+<P> /* </P>
+<P>  * Move audio samples and convert them at the same time </P>
+<P>  * Return the shifted pointer in buffer_out</P>
+<P>  *</P>
+<P>  * linear 16bits to linear16 :-) simply move </P>
+<P>  * linear 16bits to linear8 </P>
+<P>  * linear 16bits to mulaw </P>
+<P>  * linear 16bits to alaw </P>
+<P>  *</P>
+<P>  * Returning NULL means fatal error</P>
+<P>  */</P>
+
+<B><P>#endif</P>
+<P ALIGN="JUSTIFY"><LI><A NAME="_Toc431812954"></FONT><FONT FACE="Arial" SIZE=4>File: Database/database.h</A></LI></P>
+</B></FONT><FONT FACE="Courier New" SIZE=2><P>/*</P>
+<P> * Purpose: diphone database management</P>
+<P> * Author:  Vincent Pagel</P>
+<P> */</P>
+
+<P>#define DIPHONE_RAW 1&#9;&#9;&#9;  /* The diphone wave database is raw */</P>
+
+<P>#define INFO_ESCAPE 0xFF     /* Escape code in database informations (prevents from displaying) */</P>
+<P>#define MAX_INFO 10          /* information strings at the end of the dba */</P>
+
+<P>/*</P>
+<P> * Frame types in the MBR analysed database</P>
+<P> */</P>
+<P>typedef uint8 FrameType;</P>
+
+<P>#define VOICING_MASK 2 /* Voiced/Unvoiced mask  */</P>
+<P>#define TRANSIT_MASK 1 /* Stationary/Transitory mask */</P>
+<P>#define NV_REG 0          /* unvoiced stable state */</P>
+<P>#define NV_TRA TRANSIT_MASK    /* unvoiced transient    */</P>
+<P>#define V_REG VOICING_MASK    /* voiced stable state   */</P>
+<P>#define V_TRA (VOICING_MASK | TRANSIT_MASK)  /* voiced transient      */</P>
+
+<P>/*</P>
+<P> * Main type</P>
+<P> */</P>
+<P>typedef struct Database Database;</P>
+
+<P>typedef bool (*getdiphone_DatabaseFunction)(Database* dba, DiphoneSynthesis *diph);</P>
+<P>typedef void (*close_DatabaseFunction)(Database* dba);</P>
+<P>typedef Database* (*init_DatabaseFunction)(Database* dba);</P>
+
+<P>struct Database</P>
+<P>{</P>
+<P>  void* self;&#9;&#9;&#9;/* Polymorphic depends on Coding */</P>
+
+<P>  char *dbaname;             /* name of the diphone file */</P>
+<P>  FILE *database;            /* diphone wave file              */</P>
+<P>  int16 nb_diphone;          /* Number of  diphones in the database */</P>
+<P>  long RawOffset;            /* Offset for raw samples in database  */</P>
+<P>  uint8   Coding;&#9;&#9;  /* Type of coding DIPHONE_RAW, or BACON */</P>
+<P>  int16  Freq;&#9;&#9;&#9;  /* Sampling frequency of the database */</P>
+<P>  uint8   MBRPeriod;&#9;&#9;&#9;  /* Period of the MBR analysis */</P>
+<P>  int32 SizeMrk;&#9;&#9;&#9;&#9;  /* Size of the pitchmark part */</P>
+<P>  int32 SizeRaw;&#9;&#9;&#9;&#9;  /* Size of the wave part      */</P>
+<P>  int32 Magic[2];&#9;&#9;&#9;&#9;  /* Magic header of the database */</P>
+<P>  char Version[6];&#9;&#9;&#9;  /* Version of the database    */</P>
+<P>  char* sil_phon;&#9;&#9;&#9;&#9;  /* Silence symbol in the database */</P>
+
+<P>  char *DbaInfo[MAX_INFO];&#9;  /* information strings */</P>
+<P>  uint8 nb_dbaInfo;           /* number of available info strings */</P>
+
+<P>  FrameType *pmrk;           /* The whole pitch marks database   */</P>
+<P>  HashTab *diphone_table;    /* Diphone index table */</P>
+
+<P>  /* Virtual function for diphone wave loading&#9;*/</P>
+<P>  getdiphone_DatabaseFunction getdiphone_Database;</P>
+
+<P>  /* Virtual function to release the memory */</P>
+<P>  close_DatabaseFunction close_Database;</P>
+<P>};</P>
+
+<P>/* Convenient macros */</P>
+<P>#define dbaname(PDatabase) PDatabase-&gt;dbaname</P>
+<P>#define database(PDatabase) PDatabase-&gt;database</P>
+<P>#define nb_diphone(PDatabase) PDatabase-&gt;nb_diphone</P>
+<P>#define RawOffset(PDatabase) PDatabase-&gt;RawOffset</P>
+<P>#define Coding(PDatabase) PDatabase-&gt;Coding</P>
+<P>#define Freq(PDatabase) PDatabase-&gt;Freq</P>
+<P>#define MBRPeriod(PDatabase) PDatabase-&gt;MBRPeriod</P>
+<P>#define SizeMrk(PDatabase) PDatabase-&gt;SizeMrk</P>
+<P>#define SizeRaw(PDatabase) PDatabase-&gt;SizeRaw</P>
+<P>#define Magic(PDatabase) PDatabase-&gt;Magic</P>
+<P>#define Version(PDatabase) PDatabase-&gt;Version</P>
+<P>#define sil_phon(PDatabase) PDatabase-&gt;sil_phon</P>
+
+<P>#define DbaInfo(PDatabase) PDatabase-&gt;DbaInfo</P>
+<P>#define nb_dbaInfo(PDatabase) PDatabase-&gt;nb_dbaInfo</P>
+
+<P>#define pmrk(PDatabase) PDatabase-&gt;pmrk</P>
+<P>#define diphone_table(PDatabase) PDatabase-&gt;diphone_table</P>
+
+<P>/* convenience: pmrk may be compressed in the future */</P>
+<P>#define pmrkval(PDatabase,X) (PDatabase-&gt;pmrk[X])</P>
+
+<P>&nbsp;</P>
+<P>/*</P>
+<P> * Three parts of the Database header</P>
+<P> */</P>
+
+<P>bool ReadDatabaseHeader(Database* dba);</P>
+<P>/*  Reads the diphone database header , and initialize variables  */</P>
+
+<P>bool ReadDatabaseIndex(Database* dba);</P>
+<P>/* </P>
+<P> * Read the index table of diphones, and put them in the hash table</P>
+<P> */</P>
+
+<P>bool ReadDatabasePitchMark(Database* dba);</P>
+<P>/* Load pitch markers (Voiced/Unvoiced, Transitory/Stationnary) */</P>
+
+<P>bool ReadDatabaseInfo(Database* dba);</P>
+<P>/*</P>
+<P> * Extract textual information from the database if any</P>
+<P> */</P>
+
+<P>int getDatabaseInfo(Database* dba, char* msg, int size, int index);</P>
+<P>/*</P>
+<P> * Retrieve the ith info message, NULL means get the size</P>
+<P> */ </P>
+
+<P>void init_real_frame(Database* dba, DiphoneSynthesis *diph);</P>
+<P>/*</P>
+<P> * Make the link between logical and physical frames -&gt; used by loadiphs</P>
+<P> */</P>
+
+<P>/*</P>
+<P> * Initialisation and loading of Diphones -&gt; depend on database Coding</P>
+<P> * Returning NULL means fail (check LastError)</P>
+<P> */</P>
+<P>Database* init_DatabaseBasic(Database* dba);</P>
+<P>/* </P>
+<P> * Basic version, read raw waves = Check there's no coding </P>
+<P> * Returning NULL means error</P>
+<P> */</P>
+
+<P>void close_DatabaseBasic(Database* dba);</P>
+<P>/* Release the memory allocated for the in-house BACON decoder */</P>
+
+<P>bool getdiphone_DatabaseBasic(Database* dba, DiphoneSynthesis *ds);</P>
+<P>/* </P>
+<P> * Basic loading of the diphone specified by diph. Stores the samples </P>
+<P> * Return False in case of error</P>
+<P> */</P>
+
+<P>Database* init_Database(char* dbaname);</P>
+<P>/* Generic initialization, calls the appropriate constructor </P>
+<P> * Returning NULL means fail (check LastError)</P>
+<P> */</P>
+
+<P>Database* init_rename_Database(char* dbaname,RenameList* rename,RenameList* clone);</P>
+<P>/* </P>
+<P> * A variant of init_Database allowing phoneme renaming on the fly </P>
+<P> * Returning NULL means fail (check LastError)</P>
+<P> *</P>
+<P> * rename and clone can be NULL to indicate there's nothing to change</P>
+<P> *</P>
+<P> * Renaming is a ONCE consuming operation (the database is changed</P>
+<P> * at loading) -&gt; it involves a complete reconstruction of the hash table</P>
+<P> * but nothing else at run-time</P>
+<P> */</P>
+
+<B><P>#ifdef MULTICHANNEL_MODE</P>
+</B>
+<P>Database* copyconstructor_Database(Database* dba);</P>
+<P>/* Creates a copy of a diphone database so that many synthesis engine </P>
+<P> * can use the same database at the same time (duplicate the file handler)</P>
+<P> *</P>
+<P> * Returning NULL means fail (check LastError)</P>
+<P> *</P>
+<P> * Highly recommended with multichannel mbrola, unless you can guaranty</P>
+<P> * mutually exclusive access to the getdiphone function</P>
+<P> */</P>
+<B><P>#endif</P>
+</B></FONT><P ALIGN="JUSTIFY"> </P>
+<B><FONT FACE="Arial" SIZE=4><P ALIGN="JUSTIFY"><LI></LI></P>
+<P ALIGN="JUSTIFY"><LI><A NAME="_Toc431812955">File: Database/database_bacon.h</A></LI></P>
+</B></FONT><FONT FACE="Courier New" SIZE=2><P>/*</P>
+<P> * Purpose: Decode BACON coded diphone databases</P>
+<P> * </P>
+<P> * Authors:  Nicolas Pierret, Olivier Van der Vrecken, Vincent Pagel</P>
+<P> */</P>
+
+<P>#define DIPHONE_BACON 2&#9;  /* BACON order 2 coding */</P>
+
+<P>typedef struct</P>
+<P>{</P>
+<P>  float *P_COCO;        /* Reconstructed excitation of AR filter */</P>
+<P>  int16 P_FRAME_SIZE;   /* Size of P_COCO */</P>
+<P>  </P>
+<P>  float  *P_Codebook;   /* Codebook of stochastic excitation vectors */</P>
+<P>  int16  P_SUBFRAME_SIZE;  /* Size of stochastic vectors in P_Codebook        */</P>
+<P>  </P>
+<P>  int16  P_CODEBOOK_SIZE;  /* Number of bits for index of Shape in P_Codebook */</P>
+<P>  int16  P_CODEBOOK_SIZE_LOG; /* LOG2 of P_CODEBOOK_SIZE */</P>
+<P>  </P>
+<P>  float  *P_Lar[2];     /* Table of coefs for AR filter order 2 */</P>
+<P>  int16  P_AIVQ_SIZE;   /* Number of quantized AR coefficients  */</P>
+<P>  </P>
+<P>  float  *P_GAIN_PITCH; /* Table of quantized gains for pitch excitation    */</P>
+<P>  int16  P_NBR_GAIN_PITCH; /* Size of P_GAIN_PITCH */</P>
+<P>  </P>
+<P>  float  *P_GAIN_STOCH;    /* Table of quantized gains for stochastic excitation */</P>
+<P>  int16  P_NBR_GAIN_STOCH; /* Size of P_GAIN_STOCH */</P>
+
+<P>} DatabaseBacon;</P>
+
+<P>#define P_COCO(db) (db-&gt;P_COCO)</P>
+<P>#define P_FRAME_SIZE(db) (db-&gt;P_FRAME_SIZE)</P>
+<P>#define P_Codebook(db) (db-&gt;P_Codebook)</P>
+<P>#define P_SUBFRAME_SIZE(db) (db-&gt;P_SUBFRAME_SIZE)</P>
+<P>#define P_CODEBOOK_SIZE(db) (db-&gt;P_CODEBOOK_SIZE)</P>
+<P>#define P_CODEBOOK_SIZE_LOG(db) (db-&gt;P_CODEBOOK_SIZE_LOG)</P>
+<P>#define P_Lar(db) (db-&gt;P_Lar)</P>
+<P>#define P_AIVQ_SIZE(db) (db-&gt;P_AIVQ_SIZE)</P>
+<P>#define P_GAIN_PITCH(db) (db-&gt;P_GAIN_PITCH)</P>
+<P>#define P_NBR_GAIN_PITCH(db) (db-&gt;P_NBR_GAIN_PITCH)</P>
+<P>#define P_GAIN_STOCH(db) (db-&gt;P_GAIN_STOCH)</P>
+<P>#define P_NBR_GAIN_STOCH(db) (db-&gt;P_NBR_GAIN_STOCH)</P>
+
+<P>Database* init_DatabaseBacon(Database* dba);</P>
+<P>/*</P>
+<P> * Initializes the in-house BACON order 2 decoder</P>
+<P> */</P>
+</FONT><B><FONT FACE="Arial" SIZE=4><P ALIGN="JUSTIFY"><LI></LI></P>
+<P ALIGN="JUSTIFY"><LI><A NAME="_Toc431812956">File: Database/database_old.h</A></LI></P>
+</B></FONT><FONT FACE="Courier New" SIZE=2><P>/* </P>
+<P> * Purpose: Decode raw formats before 2.05 release, here for</P>
+<P> * compatibility purpose</P>
+<P> * Use pretty much RAW functions</P>
+<P> * Author: Vincent Pagel</P>
+<P> */</P>
+
+<P>Database* init_DatabaseOld(Database* dba);</P>
+<P>/*</P>
+<P> * Initializes the old ones!</P>
+<P> */</P>
+<P ALIGN="JUSTIFY"><LI><A NAME="_Toc431812957"></FONT><B><FONT FACE="Arial" SIZE=4>File: Database/diphone_info.h</A></LI></P>
+</B></FONT><FONT FACE="Courier New" SIZE=2><P>/* </P>
+<P> * Purpose: diphone descriptor</P>
+<P> * Authors:  Vincent Pagel &amp; Alain Ruelle</P>
+<P> */</P>
+<P>/*</P>
+<P> * Structure of the diphone database (as stored in memory)</P>
+<P> */</P>
+<P>typedef struct</P>
+<P>{</P>
+<P>  char *left,*right;&#9;      /* Name of the diphone     */</P>
+<P>  int32 pos_wave;&#9;&#9;      /* position in SPEECH_FILE */</P>
+<P>  int16 halfseg;&#9;&#9;/* position of center of diphone */</P>
+<P>  int32 pos_pm;&#9;&#9;      /* index in PITCHMARK_FILE */</P>
+<P>  uint8 nb_frame;    &#9;&#9;/* Number of pitch markers */</P>
+<P>} DiphoneInfo;</P>
+
+<P>/* Convenience macros */</P>
+<P>#define left(diphoneinfo) diphoneinfo-&gt;left</P>
+<P>#define right(diphoneinfo) diphoneinfo-&gt;right</P>
+<P>#define pos_wave(diphoneinfo) diphoneinfo-&gt;pos_wave</P>
+<P>#define halfseg(diphoneinfo) diphoneinfo-&gt;halfseg</P>
+<P>#define pos_pm(diphoneinfo) diphoneinfo-&gt;pos_pm</P>
+<P>#define nb_frame(diphoneinfo) diphoneinfo-&gt;nb_frame</P>
+
+<P>DiphoneInfo* init_DiphoneInfo(char* left, char* right);</P>
+<P>/* Allocate memory */</P>
+
+<P>DiphoneInfo* initclone_DiphoneInfo(DiphoneInfo* src, char* left, char* right);</P>
+<P>/* Allocate memory, and copy parameters from di, except the left-right name*/</P>
+
+<P>void close_DiphoneInfo(DiphoneInfo *di);</P>
+<P>/* Release the memory of the phoneme names */</P>
+
+<P>bool equalkey_DiphoneInfo(const DiphoneInfo* di1, const char*left, const char*right);</P>
+<P>/*</P>
+<P> * True if the keys for hashing are equal</P>
+<P> */</P>
+
+<P>int32 hash_DiphoneInfo(const char* left, const char* right);</P>
+<P>/* </P>
+<P> * Hashing function for searching the diphone name in diphone_table</P>
+<P> */</P>
+<P>&nbsp;</P>
+<P ALIGN="JUSTIFY"><LI><A NAME="_Toc431812958"></FONT><B><FONT FACE="Arial" SIZE=4>File: Database/hash_tab.h</A></LI></P>
+</B></FONT><FONT FACE="Courier New" SIZE=2><P>/*</P>
+<P> * Purpose: coalescent hashing table</P>
+<P> * Author:  Vincent Pagel</P>
+<P> */</P>
+
+<P>/* Return when the index is not find in the hash table */</P>
+<P>#define NONE -1</P>
+
+<P>/* Used to mark a hash cell as empty */</P>
+<P>#define EMPTY 255</P>
+
+<P>/* Wrapper structure */</P>
+<P>typedef struct</P>
+<P>{</P>
+<P>  DiphoneInfo* content;        /* Hashing information */</P>
+<P>  uint8 hit;&#9;&#9;&#9;   /* survey value for number of collisions */</P>
+<P>  int16 next_one;&#9;   /* link to the next database cell */</P>
+<P>} HashInfo;</P>
+
+<P>/* The whole diphone database          */</P>
+<P>typedef struct</P>
+<P>{</P>
+<P>  HashInfo *hash_tab; /* Hashing information */</P>
+<P>  int16 nb_item;&#9;       /* Number of elements in hash_tab */</P>
+<P>  int16 first_free;&#9;  /* First position free from the end of the table */</P>
+<B><P>#ifdef DEBUG_HASH</P>
+</B><P>  int16 tot_nb_coup;</P>
+<P>  int16 tot_coup;</P>
+<B><P>#endif</P>
+</B><P>} HashTab;</P>
+
+<P>/* Convenient macros */</P>
+<P>#define nb_item(Tab) Tab-&gt;nb_item</P>
+<P>#define first_free(Tab) Tab-&gt;first_free</P>
+<P>#define next_one(Tab,Index) Tab-&gt;hash_tab[Index].next_one</P>
+<P>#define hit(Tab,Index) Tab-&gt;hash_tab[Index].hit</P>
+<P>#define content(Tab,Index) Tab-&gt;hash_tab[Index].content</P>
+
+<P>HashTab *init_HashTab(int16 nb_item);</P>
+<P>/* Initialize a void hash_table */</P>
+
+<P>void close_HashTab(HashTab *hash_tab);</P>
+<P>/* Empty and release the hash_table */</P>
+
+<P>int16 searchdiph_HashTab(const HashTab *hash_tab, DiphoneInfo* one_cell);</P>
+<P>/* </P>
+<P> * Return the reference number of a diphone in the diphone database</P>
+<P> * Hash table search -&gt; return NONE=-1 if the value is not present</P>
+<P> */</P>
+
+<P>int16 search_HashTab(const HashTab *hash_tab,const char* left, const char* right);</P>
+<P>/* </P>
+<P> * Return the reference number of a diphone in the diphone database</P>
+<P> * Hash table search -&gt; return NONE=-1 if the value is not present</P>
+<P> */</P>
+
+<P>void add_HashTab(HashTab *hash_tab, DiphoneInfo* one_cell);</P>
+<P>/* Add a new reference in the diphone table  */</P>
+
+<P>void diphone_rename_HashTab(HashTab *hash_tab,RenameList* rename);</P>
+<P>/*</P>
+<P> * Rename all occurences of diphones containing the phoneme X to phone Y</P>
+<P> * in the hash table according to rename which contains X-Y pairs</P>
+<P> * </P>
+<P> * WARNING 1:  it costs some CPU and memory moves ....</P>
+<P> *</P>
+<P> * WARNING 2: This operation fundamentaly change the rank of elements</P>
+<P> * in the hash table, so</P>
+<P> *</P>
+<P> *      FORGET ALL YOUR POINTER TO ELEMENTS OF THE TABLE</P>
+<P> */</P>
+
+<P>void diphone_clone_HashTab(HashTab *hash_tab, RenameList* clone);</P>
+<P>/* Make a copy of all occurences of diphones containing the phoneme </P>
+<P> * X to phoneme Y according to the clone list which contains X-Y pairs</P>
+<P> *</P>
+<P> * The clone list contains only ONE occurence of each phoneme</P>
+<P> */</P>
+
+<B><P>#ifdef DEBUG_HASH</P>
+</B><P>void tuning_HashTab(HashTab *hash_tab);</P>
+<P>/* Function for debug and tuning purpose  */</P>
+
+<B><P>#endif</P>
+<P ALIGN="JUSTIFY"><LI><A NAME="_Toc431812959"></FONT><FONT FACE="Arial" SIZE=4>File: Database/little_big.h</A></LI></P>
+</B></FONT><FONT FACE="Courier New" SIZE=2><P>/*</P>
+<P> * Purpose: IO little_endian aware</P>
+<P> * Author:  Vincent Pagel</P>
+<P> */</P>
+
+<P>/* </P>
+<P> * Check that architecture is defined and define reading and writing operations</P>
+<P> * depending on it ( deals with byte swapping)</P>
+<P> */</P>
+<B><P>#ifdef LITTLE_ENDIAN</P>
+</B><P> #define MAGIC_HEADER 0x4f52424d </P>
+<P> #define readl_int32(X,Y) read_int32(X,Y)</P>
+<P> #define readl_int16(X,Y) read_int16(X,Y)</P>
+<P> #define readl_int16buffer(X,Y,Z) read_int16buffer(X,Y,Z)</P>
+<P> #define readl_uint16(X,Y) read_uint16(X,Y)</P>
+<P> #define readb_int32(X,Y) read_int32_swapped(X,Y)</P>
+<P> #define readb_int16(X,Y) read_int16_swapped(X,Y)</P>
+<P> #define readb_uint16(X,Y) read_uint16_swapped(X,Y)</P>
+<P> #define writel_int32(X,Y) write_int32(X,Y)</P>
+<P> #define writel_int16(X,Y) write_int16(X,Y)</P>
+<P> #define writeb_int32(X,Y) write_int32_swapped(X,Y)</P>
+<P> #define writeb_int16(X,Y) write_int16_swapped(X,Y)</P>
+<B><P>#else</P>
+<P>#ifdef BIG_ENDIAN</P>
+</B><P> #define MAGIC_HEADER 0x4d42524f</P>
+<P> #define readl_int32(X,Y) read_int32_swapped(X,Y)</P>
+<P> #define readl_int16(X,Y) read_int16_swapped(X,Y)</P>
+<P> #define readl_int16buffer(X,Y,Z) read_int16buffer_swapped(X,Y,Z)</P>
+<P> #define readl_uint16(X,Y) read_uint16_swapped(X,Y)</P>
+<P> #define readb_int32(X,Y) read_int32(X,Y)</P>
+<P> #define readb_int16(X,Y) read_int16(X,Y)</P>
+<P> #define readb_uint16(X,Y) read_uint16(X,Y)</P>
+<P> #define writel_int32(X,Y) write_int32_swapped(X,Y)</P>
+<P> #define writel_int16(X,Y) write_int16_swapped(X,Y)</P>
+<P> #define writeb_int32(X,Y) write_int32(X,Y)</P>
+<P> #define writeb_int16(X,Y) write_int16(X,Y)</P>
+<B><P>#else</P>
+<P>#error</B> You should define BIG_ENDIAN (sun,hp,next..) or LITTLE_ENDIAN (pc,vax)</P>
+<B><P>#endif</P>
+<P>#endif</P>
+</B>
+<P>/* </P>
+<P> * Read and write operations with/without byte swapping</P>
+<P> */</P>
+<P>void write_int16(int16 value, FILE *output_file);</P>
+<P>void write_int32(int32 value, FILE *output_file);</P>
+<P>void write_int16_swapped(int16 value, FILE *output_file);</P>
+<P>void write_int32_swapped(int32 value, FILE *output_file);</P>
+
+<P>void read_int16(int16 *value, FILE *output_file);</P>
+<P>size_t read_int16buffer(int16 *ptr, size_t nitems, FILE *stream);</P>
+<P>void read_uint16(uint16 *value, FILE *output_file);</P>
+<P>void read_int32(int32 *value, FILE *output_file);</P>
+<P>void read_int16_swapped(int16 *value, FILE *output_file);</P>
+<P>size_t read_int16buffer_swapped(int16 *ptr, size_t nitems, FILE *stream);</P>
+<P>void read_uint16_swapped(uint16 *value, FILE *output_file);</P>
+<P>void read_int32_swapped(int32 *value, FILE *output_file);</P>
+</FONT><B><FONT FACE="Arial" SIZE=4><P ALIGN="JUSTIFY"><LI></LI></P>
+<P ALIGN="JUSTIFY"><LI><A NAME="_Toc431812960">File: Database/rename_list.h</A></LI></P>
+</B></FONT><FONT FACE="Courier New" SIZE=2><P>/*</P>
+<P> * Purpose: list of phoneme renamings</P>
+<P> * Author:  Vincent Pagel</P>
+<P> */</P>
+
+<P>typedef struct</P>
+<P>{</P>
+<P>  int nb_elem;</P>
+<P>  int nb_available;</P>
+<P>  char** rename_list;</P>
+<P>} RenameList;</P>
+
+<P>#define nb_elem(rl) (rl-&gt;nb_elem)</P>
+<P>#define nb_available(rl) (rl-&gt;nb_available)</P>
+<P>#define rename_list(rl) (rl-&gt;rename_list)</P>
+
+<P>RenameList* init_RenameList();</P>
+<P>/* Basic constructor, initialize to empty list */</P>
+
+<P>bool parse_RenameList(RenameList* my_rl, char* rename_string, bool multi);</P>
+<P>/* </P>
+<P> * Parsing the renaming pairs from a string </P>
+<P> * Returning False means wrong initializer (check LastErr)</P>
+<P> *</P>
+<P> * multi= True means multiset. If False, introducing a renaming pair</P>
+<P> * with the same key is an error (returns False)</P>
+<P> */</P>
+
+<P>void close_RenameList(RenameList* rl);</P>
+<P>/* Release the memory */</P>
+
+<P>bool append_RenameList(RenameList* rl, char* old_name, char* new_name, bool multi);</P>
+<P>/* Add a new renaming pair to the list </P>
+<P> * If multi is True, it's a multiset</P>
+<P> *</P>
+<P> * Return False if the key was allready present (if it's not multiset)</P>
+<P> */</P>
+
+<P>char* find_RenameList(RenameList* rl, char* str);</P>
+<P>/* finds the translation of 'str'. Null if not found */</P>
+
+<P>int size_RenameList(RenameList* rl);</P>
+<P>/* return the size of the renaming list */</P>
+</FONT><B><FONT FACE="Arial" SIZE=4><P ALIGN="JUSTIFY"><LI></LI></P>
+<P ALIGN="JUSTIFY"><LI><A NAME="_Toc431812961">File: Engine/diphone.h</A></LI></P>
+</B></FONT><FONT FACE="Courier New" SIZE=2><P>/*</P>
+<P> * Purpose: Phone and diphone objects</P>
+<P> * Authors: Vincent Pagel</P>
+<P> */</P>
+
+<P>/*</P>
+<P> * PITCH MARKED DIPHONE DATABASE, CONSTANTS</P>
+<P> */</P>
+<P>#define MAX_MBR_PERIOD      200     /* MBR period (samples) -&gt; base of 80Hz */</P>
+<P>#define MAX_LENGTH      10000       /* Longest diphone length in samples */</P>
+<P>#define NBRE_PM_MAX&#9;2000           /* Max nbr of frames in a synth. segment*/</P>
+
+<P>/*</P>
+<P> * STRUCTURES representing diphone sequences to synthesize</P>
+<P> */</P>
+
+<P>/* A Diphone is made of 2 phonemes */</P>
+<P>typedef struct</P>
+<P>{</P>
+<P>  int   Length1; /* Length of first half-phoneme in samples */</P>
+<P>  int   Length2; /* Length of second half-phoneme in samples */</P>
+<P>  Phone *LeftPhone; /* First phoneme  */</P>
+<P>  Phone *RightPhone;/* Second phoneme */</P>
+<P>} Diphone;</P>
+
+<P>/* </P>
+<P> * A DiphoneSynthesis is a Diphone equiped with information necessary to </P>
+<P> * synthesize it</P>
+<P> */</P>
+<P>typedef struct</P>
+<P>{</P>
+<P>  Diphone d;&#9;&#9;&#9;/* The diphone to synthesize */</P>
+<P>  DiphoneInfo* Descriptor;&#9; /* Descriptor in the diphone database      */</P>
+<P>  int nb_pm;&#9;&#9;&#9;/* Number of pitch markers to synthesize */</P>
+<P>  int smoothw[2*MAX_MBR_PERIOD];  /* Difference vector between 2 ola frames*/</P>
+<P>  bool smooth;&#9;&#9;&#9;&#9;&#9;&#9;  /* True if Smoothw has a value */</P>
+<P>  int16 buffer[MAX_LENGTH];     /* longest diphone */</P>
+<P>  uint8 real_frame[NBRE_PM_MAX]; /*  for skiping V - NV transition */</P>
+<P>  uint8 physical_frame_type[NBRE_PM_MAX]; /*  to get the nature of a given frame */</P>
+<P>  uint8 tot_frame;    /* physical number of frames of the diphone */</P>
+<P>} DiphoneSynthesis;</P>
+
+<P>/*</P>
+<P> * Convenient macros to access Diphone_synth structures</P>
+<P> */</P>
+<P>#define Descriptor(X) X-&gt;Descriptor</P>
+<P>#define Length1(X) X-&gt;d.Length1</P>
+<P>#define Length2(X) X-&gt;d.Length2</P>
+<P>#define LeftPhone(X) (X-&gt;d.LeftPhone)</P>
+<P>#define RightPhone(X) (X-&gt;d.RightPhone)</P>
+
+<P>#define nb_pm(X) X-&gt;nb_pm</P>
+<P>#define smoothw(X) X-&gt;smoothw</P>
+<P>#define smooth(X) X-&gt;smooth</P>
+<P>#define buffer(X) X-&gt;buffer</P>
+<P>#define real_frame(X) X-&gt;real_frame</P>
+<P>#define physical_frame_type(X) X-&gt;physical_frame_type</P>
+<P>#define tot_frame(X) X-&gt;tot_frame</P>
+
+<P>DiphoneSynthesis* init_DiphoneSynthesis();</P>
+<P>/* Alloc memory. Embedded Diphone */</P>
+
+<P>void reset_DiphoneSynthesis(DiphoneSynthesis* ds);</P>
+<P>/*</P>
+<P> * Forget the diphone in progress</P>
+<P> */</P>
+
+<P>void close_DiphoneSynthesis(DiphoneSynthesis* ds);</P>
+<P>/* Release memory and phone */</P>
+
+<P>int GetPitchPeriod(DiphoneSynthesis *dp, int cur_sample,int Freq);</P>
+<P>/*</P>
+<P> * Returns the pitch period (in samples) at position cur_sample </P>
+<P> * of dp by linear interpolation between pitch pattern points.</P>
+<P> */</P>
+<P>&nbsp;</P>
+</FONT><B><FONT FACE="Arial" SIZE=4><P ALIGN="JUSTIFY"><LI></LI></P>
+<P ALIGN="JUSTIFY"><LI><A NAME="_Toc431812962">File: Engine/mbrola.h</A></LI></P>
+</B></FONT><FONT FACE="Courier New" SIZE=2><P>/*</P>
+<P> * Purpose: Diphone-based MBROLA speech synthesizer.</P>
+<P> * Author:  Vincent Pagel</P>
+<P> */</P>
+
+<P>typedef struct </P>
+<P>{</P>
+<P>  Database* diph_dba;   /* A synth engine is linked to a database */</P>
+<P>  Parser* parser;       /* Phonemic command stream */</P>
+<P>    </P>
+<P>     /*</P>
+<P>&#9;* prev_diph points to the previous diphone synthesis structure</P>
+<P>&#9;* and cur_diph points to the current one. The reason is that to</P>
+<P>&#9;* synthesize the previous diphone we need information on the next</P>
+<P>&#9;* one. While progressing to the next diphone, prev_diph memory is</P>
+<P>&#9;* resetted the pointers are swapped between cur and prev diphones</P>
+<P>&#9;*/</P>
+<P>  DiphoneSynthesis *prev_diph, *cur_diph;</P>
+
+<P>  /* Last_time_crumb balances slow time drifting in match_proso. time_crumb is</P>
+<P>&#9;* the difference in samples between the length really synthesized and </P>
+<P>&#9;* theoretical one </P>
+<P>&#9;*/</P>
+<P>  int last_time_crumb;&#9;</P>
+<P>  </P>
+<P>  float FirstPitch;     /* default first F0 Value (fetched in the database) */</P>
+<P>  int32 audio_length;  /* File size, used for file formats other than RAW */</P>
+
+<P>  int frame_number[NBRE_PM_MAX]; /* for match_prosody */</P>
+<P>  int frame_pos[NBRE_PM_MAX];    /* frame position for match_prosody */</P>
+
+<P>  int nb_begin;</P>
+<P>  int nb_end; /* number of voiced frames at the begin and end the segment */</P>
+
+<P>  bool saturation;&#9;&#9;&#9;         /* Saturation in ola_integer */</P>
+<P>  float ola_win[2*MAX_MBR_PERIOD];     /* OLA buffer                  */</P>
+<P>  int16 ola_integer[2*MAX_MBR_PERIOD]; /* OLA buffer for file output  */</P>
+
+<P>  float weight[2*MAX_MBR_PERIOD];    /* Hanning weighting window */</P>
+<P>  float volume_ratio;&#9;&#9;&#9;       /* 1.0 is default */</P>
+<P>  </P>
+<P>  /* </P>
+<P>&#9;* The following variables are part of the structure for library mode</P>
+<P>&#9;* but could be local for standalone mode</P>
+<P>&#9;*/</P>
+<P>  bool odd; /* flip-flop for reversing 1 out of 2 unvoiced OLA frame */</P>
+<P>  int frame_counter;    /* frame being OLAdded  */</P>
+<P>  int buffer_shift;&#9;&#9;/* Shift between 2 Ola = available for output */</P>
+<P>  int zero_padding;&#9;   /* 0's between 2 Ola = available for output */</P>
+<P>  </P>
+<P>  bool smoothing;&#9;      /* True if the smoothing algorithm is on */</P>
+<P>  bool no_error;        /* True to ignore missing diphones */</P>
+
+<P>  uint16 VoiceFreq;&#9;&#9;   /* Freq of the audio output (vocal tract length) */</P>
+<P>  float  VoiceRatio;    /* Freq ratio of the audio output */</P>
+
+<B><P>#ifdef LIBRARY</P>
+</B><P>  bool first_call;&#9;/* True if it's the first call to Read_MBR */</P>
+<P>  int eaten;&#9;     /* Samples allready consumed in ola_integer */</P>
+<B><P>#endif</P>
+</B>
+<P>} Mbrola;</P>
+
+<P>/* Convenience macros */</P>
+<P>#define diph_dba(mb)  mb-&gt;diph_dba</P>
+<P>#define parser(mb)  mb-&gt;parser</P>
+<P>#define prev_diph(mb)  mb-&gt;prev_diph</P>
+<P>#define cur_diph(mb)  mb-&gt;cur_diph</P>
+<P>#define last_time_crumb(mb)  mb-&gt;last_time_crumb</P>
+<P>#define FirstPitch(mb)  mb-&gt;FirstPitch</P>
+<P>#define audio_length(mb)  mb-&gt;audio_length</P>
+<P>#define frame_number(mb)  mb-&gt;frame_number</P>
+<P>#define frame_pos(mb)  mb-&gt;frame_pos</P>
+<P>#define nb_begin(mb)  mb-&gt;nb_begin</P>
+<P>#define nb_end(mb)  mb-&gt;nb_end</P>
+<P>#define saturation(mb)  mb-&gt;saturation</P>
+<P>#define ola_win(mb)  mb-&gt;ola_win</P>
+<P>#define ola_integer(mb)  mb-&gt;ola_integer</P>
+<P>#define weight(mb)  mb-&gt;weight</P>
+<P>#define volume_ratio(mb)  mb-&gt;volume_ratio</P>
+<P>#define odd(mb)  mb-&gt;odd</P>
+<P>#define frame_counter(mb)  mb-&gt;frame_counter</P>
+<P>#define buffer_shift(mb)  mb-&gt;buffer_shift</P>
+<P>#define zero_padding(mb)  mb-&gt;zero_padding</P>
+<P>#define smoothing(mb)  mb-&gt;smoothing</P>
+<P>#define no_error(mb)  mb-&gt;no_error</P>
+<P>#define VoiceRatio(pt) (pt-&gt;VoiceRatio)</P>
+<P>#define VoiceFreq(pt) (pt-&gt;VoiceFreq)</P>
+<P>#define first_call(pt) (pt-&gt;first_call)</P>
+<P>#define eaten(pt) (pt-&gt;eaten)</P>
+
+<P>void set_voicefreq_Mbrola(Mbrola* mb, uint16 OutFreq);</P>
+<P>/* Change the Output Freq and VoiceRatio to change the vocal tract   */</P>
+
+<P>uint16 get_voicefreq_Mbrola(Mbrola* mb);</P>
+<P>/* Get output Frequency */</P>
+
+<P>void set_smoothing_Mbrola(Mbrola* mb, bool smoothing);</P>
+<P>/* Spectral smoothing or not */</P>
+
+<P>bool get_smoothing_Mbrola(Mbrola* mb);</P>
+<P>/* Spectral smoothing or not */</P>
+
+<P>void set_no_error_Mbrola(Mbrola* mb, bool no_error);</P>
+<P>/* Tolerance to missing diphones */</P>
+
+<P>bool get_no_error_Mbrola(Mbrola* mb);</P>
+<P>/* Spectral smoothing or not */</P>
+
+<P>void set_volume_ratio_Mbrola(Mbrola* mb, float volume_ratio);</P>
+<P>/* Overall volume */</P>
+
+<P>float get_volume_ratio_Mbrola(Mbrola* mb);</P>
+<P>/* Overall volume */</P>
+
+<P>void set_parser_Mbrola(Mbrola* mb, Parser* parser);</P>
+<P>/* drop the current parser for a new one */</P>
+
+<P>Mbrola* init_Mbrola(Database* dba);</P>
+<P>/* </P>
+<P> * Connect the database to the synthesis engine, then initialize internal </P>
+<P> * variables. Connect the phonemic command stream later with set_parser_Mbrola</P>
+<P> */</P>
+
+<P>void close_Mbrola(Mbrola* mb);</P>
+<P>/* close related features and free the memory ! */</P>
+
+<P>bool reset_Mbrola(Mbrola* mb);</P>
+<P>/* </P>
+<P> * Gives initial values to current_diphone (not synthesized anyway)</P>
+<P> * -&gt; it will give a first value for prev_diph when we make the first</P>
+<P> *    NextDiphone call so that cur_diph= _-FirstPhon with lenght1=0</P>
+<P> *    and prev_diph= _-_ with length2=0</P>
+<P> *</P>
+<P> * return False in case of error</P>
+<P> */</P>
+
+<P>StatePhone NextDiphone(Mbrola* mb);</P>
+<P>/*</P>
+<P> * Reads a phone from the phonetic command buffer and prepares the next</P>
+<P> * diphone to synthesize ( prev_diph )</P>
+<P> * Return value may be: PHO_EOF, PHO_FLUSH, PHO_OK, PHO_ERROR</P>
+<P> */</P>
+
+<P>bool MatchProsody(Mbrola* mb);</P>
+<P>/*</P>
+<P> * Selects Duplication or Elimination for each analysis OLA frames of</P>
+<P> * the diphone we must synthesize (prev_diph). Selected frames must fit</P>
+<P> * with wanted pitch pattern and phonemes duration of prev_diph</P>
+<P> *</P>
+<P> * Return False in case of error</P>
+<P> */</P>
+
+<P>void Concat(Mbrola* mb);</P>
+<P>/*</P>
+<P> * This is a unique feature of MBROLA.</P>
+<P> * Smoothes diphones around their concatenation point by making the left</P>
+<P> * part fade into the right one and conversely. This is possible because</P>
+<P> * MBROLA frames have the same length everywhere.</P>
+<P> *</P>
+<P> * output : nb_begin, nb_end -&gt; number of stable voiced frames to be used</P>
+<P> * for interpolation at the end of Leftphone(prev_diph) and the beginning</P>
+<P> * of RightPhone(prev_diph).</P>
+<P> */</P>
+
+<P>void OverLapAdd(Mbrola* mb, int frame);</P>
+<P>/*</P>
+<P> *  OLA routine</P>
+<P> */</P>
+
+<B><P>#ifdef LIBRARY</P>
+</B>
+<P>/* LIBRARY mode: synthesis driven by the output */</P>
+
+<P>int readtype_Mbrola(Mbrola* mb, void *buffer_out, int nb_wanted, AudioType sample_type);</P>
+<P>/*</P>
+<P> * Reads nb_wanted samples in an audio buffer</P>
+<P> * Returns the effective number of samples read</P>
+<P> */</P>
+
+<B><P>#else</P>
+</B>
+<P>/* STANDALONE MODE: Synthesis driven by the input */</P>
+
+<P>StatePhone Synthesis(Mbrola* mb);</P>
+<P>/*</P>
+<P> * Main loop: performs MBROLA synthesis of all diphones</P>
+<P> * Returns a value indicating the reasons of the break</P>
+<P> * (a flush request, a end of file, end of phone sequence)</P>
+<P> */</P>
+
+<B><P>#endif</P>
+</B><P>&nbsp;</P>
+</FONT><B><FONT FACE="Arial" SIZE=4><P ALIGN="JUSTIFY"><LI></LI></P>
+<P ALIGN="JUSTIFY"><LI><A NAME="_Toc431812963">File: Parser/fifo.h</A></LI></P>
+</B></FONT><FONT FACE="Courier New" SIZE=2><P>/*</P>
+<P> * Purpose: a char fifo</P>
+<P> *</P>
+<P> * Author:  Vincent Pagel</P>
+<P> */</P>
+
+<P>/* Size of the standard phonetic input buffer */</P>
+<P>#define FIFO_SIZE 8192</P>
+
+<P>#define LINE_FEED 0x0a</P>
+
+<P>typedef struct </P>
+<P>{</P>
+<P>  char* charbuff;&#9;&#9; /* circular buffer for phonetic input */</P>
+<P>  int buffer_pos;&#9;&#9;&#9; /* Current position */</P>
+<P>  int buffer_end;&#9;&#9;&#9; /* Last available phoneme */</P>
+<P>  int buffer_size;&#9;&#9; /* number of chars in Phobuffer */</P>
+<P>} Fifo;</P>
+
+<P>#define charbuff(ff) ff-&gt;charbuff</P>
+<P>#define buffer_pos(ff) ff-&gt;buffer_pos</P>
+<P>#define buffer_end(ff) ff-&gt;buffer_end</P>
+<P>#define buffer_size(ff) ff-&gt;buffer_size</P>
+
+<P>int readline_Fifo(Fifo* ff, char *line, int size);</P>
+<P>/* </P>
+<P> * Read a line from the input stream in a circular buffer</P>
+<P> * Return 0 if there's nothing to read</P>
+<P> */</P>
+
+<P>int write_Fifo(Fifo* ff, char *buffer_in);</P>
+<P>/*</P>
+<P> * Write a string of phoneme in the input buffer</P>
+<P> * Return the number of chars actually written</P>
+<P> */</P>
+
+<P>void reset_Fifo(Fifo* ff);</P>
+<P>/*</P>
+<P> * Forget previously entered data in the circular buffer</P>
+<P> */</P>
+
+<P>void  close_Fifo(Fifo* ff); </P>
+<P>/*</P>
+<P> * Release the memory</P>
+<P> */</P>
+
+<P>Fifo* init_Fifo(int size);</P>
+<P>/*</P>
+<P> * Constructor with size of the buffer</P>
+<P> */</P>
+</FONT><B><FONT FACE="Arial" SIZE=4><P ALIGN="JUSTIFY"><LI></LI></P>
+<P ALIGN="JUSTIFY"><LI><A NAME="_Toc431812964">File: Parser/input.h</A></LI></P>
+</B></FONT><FONT FACE="Courier New" SIZE=2><P>/*</P>
+<P> * Purpose: polymorphic type for input stream</P>
+<P> * Author:  Vincent Pagel</P>
+<P> */</P>
+
+<P>typedef struct Input Input;</P>
+
+<P>typedef int (*readline_InputFunction)(Input* in, char *line, int size);</P>
+<P>typedef void (*close_InputFunction)(Input* in);</P>
+<P>typedef void (*reset_InputFunction)(Input* in);</P>
+
+<P>struct Input</P>
+<P>{</P>
+<P>  void* self;</P>
+<P>  readline_InputFunction readline_Input;</P>
+<P>  close_InputFunction close_Input;</P>
+<P>  close_InputFunction reset_Input;</P>
+<P>};</P>
+<P ALIGN="JUSTIFY"><LI><A NAME="_Toc431812965"></FONT><B><FONT FACE="Arial" SIZE=4>File: Parser/input_fifo.h</A></LI></P>
+</B></FONT><FONT FACE="Courier New" SIZE=2><P>/*</P>
+<P> * Purpose: input stream from  a fifo (instanciation of input.h)</P>
+<P> * Author:  Vincent Pagel</P>
+<P> */</P>
+
+<P>Input* init_InputFifo(Fifo* my_fifo);</P>
+<P>&nbsp;</P>
+<P ALIGN="JUSTIFY"><LI><A NAME="_Toc431812966"></FONT><B><FONT FACE="Arial" SIZE=4>File: Parser/input_file.h</A></LI></P>
+</B></FONT><FONT FACE="Courier New" SIZE=2><P>/*</P>
+<P> * Purpose: input stream from a file handler</P>
+<P> * Author:  Vincent Pagel</P>
+<P> */</P>
+
+<P>Input* init_InputFile(FILE* my_file );</P>
+<P>&nbsp;</P>
+</FONT><B><FONT FACE="Arial" SIZE=4><P ALIGN="JUSTIFY"><LI></LI></P>
+<P ALIGN="JUSTIFY"><LI><A NAME="_Toc431812967">File: Parser/parser.h</A></LI></P>
+</B></FONT><FONT FACE="Courier New" SIZE=2><P>/*</P>
+<P> * Purpose: polymorphic type to parse a "pho file"</P>
+<P> * Author:  Vincent Pagel</P>
+<P> */</P>
+
+<P>/* Return values of the nextphone function */</P>
+<P>typedef enum {</P>
+<P>  PHO_OK,</P>
+<P>  PHO_EOF,</P>
+<P>  PHO_FLUSH,</P>
+<P>  PHO_ERROR</P>
+<P>} StatePhone;</P>
+
+<P>&nbsp;</P>
+<P>/* Polymorphic type */</P>
+<P>typedef struct Parser Parser;</P>
+
+<P>typedef void (*reset_ParserFunction)(Parser* ps);</P>
+<P>typedef void (*close_ParserFunction)(Parser* ps);</P>
+<P>typedef StatePhone (*nextphone_ParserFunction)(Parser* ps,Phone** ph);</P>
+
+<P>/* </P>
+<P> * Generic parser :</P>
+<P> *   reset: forget remaining data in the buffer (when the user STOP synthesis for example </P>
+<P> *</P>
+<P> *   close: release the memory</P>
+<P> *</P>
+<P> *   nextphone: return the next Phoneme from input.</P>
+<P> *</P>
+<P> *     PRECONDITION: this phoneme MUST have a pitch point at 0 and 100%</P>
+<P> *</P>
+<P> *     THE CALLER IS IN CHARGE OF CALLING close_Phone ON THE PHONES HE GETS</P>
+<P> *     WITH nextphone</P>
+<P> */</P>
+
+<P>struct Parser</P>
+<P>{</P>
+<P>  void* self;                /* Polymorphic on the real type */</P>
+<P>  reset_ParserFunction reset_Parser;         /* virtual func */</P>
+<P>  close_ParserFunction close_Parser;         /* virtual func */</P>
+<P>  nextphone_ParserFunction nextphone_Parser; /* virtual func */</P>
+<P>};</P>
+<P ALIGN="JUSTIFY"><LI><A NAME="_Toc431812968"></FONT><B><FONT FACE="Arial" SIZE=4>File: Parser/parser_input.h</A></LI></P>
+</B></FONT><FONT FACE="Courier New" SIZE=2><P>/*</P>
+<P> * Purpose: parse a "pho file" from a polymorphic input stream</P>
+<P> *          Instanciation of parser.h</P>
+<P> *</P>
+<P> * Author:  Vincent Pagel</P>
+<P> */</P>
+
+<P>Parser* init_ParserInput(Input* my_input, char* silence, float pitch, char* comment,float time_ratio, float freq_ratio);</P>
+<P>/*</P>
+<P> * Constructor of the parser. Need to know initial default pitch, and</P>
+<P> * initial default phoneme as well</P>
+<P> */</P>
+<P ALIGN="JUSTIFY"><LI><A NAME="_Toc431812969"></FONT><B><FONT FACE="Arial" SIZE=4>File: Parser/phonbuff.h</A></LI></P>
+</B></FONT><FONT FACE="Courier New" SIZE=2><P>/*</P>
+<P> * Purpose: Table of phonemes to implement a simple .pho parser</P>
+<P> *          Buffer of phonemes for pitch interpolation</P>
+<P> * Author:  Vincent Pagel</P>
+<P> */</P>
+
+<P>#define MAXNPHONESINONESHOT 250    /* Max nbr of phonemes without F0 pattern*/</P>
+
+<P>/* A phonetic command buffer and its pitch points */</P>
+<P>typedef struct</P>
+<P>{</P>
+<P>  Input* input;&#9;&#9;/* Polymorphic input stream */</P>
+<P>  </P>
+<P>  Phone* Buff[MAXNPHONESINONESHOT];/* Phonetic command buffer  */</P>
+<P>  int NPhones;     /* Nbr of phones in the phonetic command buffer  */</P>
+<P>  int CurPhone;   /* Index of current phone in the command buffer  */</P>
+<P>  StatePhone state_pho;   /* State of the last phoneme serie: EOF FLUSH OK */</P>
+<P>  bool Closed;&#9;   /* True if the sequence is closed by a pitch point */</P>
+
+<P>  /*</P>
+<P>   * Silence is a special phoneme used for initialization (the first diphone</P>
+<P>   * in the stream is always SILENCE-SILENCE. Also used for termination</P>
+<P>   */</P>
+<P>  char *default_phon;</P>
+<P>  float default_pitch; /* first pitch point of the sequence */</P>
+
+<P>  char *comment_symbol; /* user defined escape char */</P>
+<P>  char *flush_symbol;   /* user defined flush command */</P>
+
+<P>  float TimeRatio;  /* Ratio for the durations of the phones */</P>
+<P>  float FreqRatio;  /* Ratio for the pitch applied to the phones */</P>
+<P>} PhoneBuff;</P>
+
+<P>/* Convenient macro to access Phonetable */</P>
+<P>#define input(X) (X-&gt;input)</P>
+<P>#define CurPho(X) (X-&gt;Buff[X-&gt;CurPhone])</P>
+<P>#define NPhones(X) X-&gt;NPhones</P>
+<P>#define CurPhone(X) X-&gt;CurPhone</P>
+<P>#define Buff(X) X-&gt;Buff</P>
+<P>#define val_PhoneBuff(pt,i) (pt-&gt;Buff[i])</P>
+<P>#define state_pho(pt) (pt-&gt;state_pho)</P>
+<P>#define Closed(pt) (pt-&gt;Closed)</P>
+<P>#define default_phon(pt) (pt-&gt;default_phon)</P>
+<P>#define default_pitch(pt) (pt-&gt;default_pitch)</P>
+
+<P>#define comment_symbol(pt) (pt-&gt;comment_symbol)</P>
+<P>#define flush_symbol(pt) (pt-&gt;flush_symbol)</P>
+
+<P>#define TimeRatio(pt) (pt-&gt;TimeRatio)</P>
+<P>#define FreqRatio(pt) (pt-&gt;FreqRatio)</P>
+
+<P>/* </P>
+<P> * Last phone of the list</P>
+<P> */</P>
+<P>#define tail_PhoneBuff(pt) (val_PhoneBuff(pt,NPhones(pt)))</P>
+
+<P>/* </P>
+<P> * First phone of the list</P>
+<P> */</P>
+<P>#define head_PhoneBuff(pt) (val_PhoneBuff(pt,0))</P>
+
+<P>PhoneBuff* init_PhoneBuff(Input* my_input, char* default_phon,float default_pitch, float time_ratio, float freq_ratio,char* comment, char* flush);</P>
+<P>/* </P>
+<P> * Constructor, needs a phoneme and pitch for default allocation (begin</P>
+<P> * and end of synthesis)</P>
+<P> */</P>
+
+<P>void close_PhoneBuff(PhoneBuff *pt);</P>
+<P>/* free allocated strings in the phonetable */</P>
+
+<P>void reset_PhoneBuff(PhoneBuff *pt);</P>
+<P>/* Before a synthesis sequence initialize the loop with a silence */</P>
+
+<P>StatePhone next_PhoneBuff(PhoneBuff *pt,Phone** ph);</P>
+<P>/*</P>
+<P> * Reads a phone from the phonetic command buffer and prepares the next</P>
+<P> * diphone to synthesize ( prev_diph )</P>
+<P> * Return value may be: PHO_EOF,PHO_FLUSH,PHO_OK, PHO_ERROR</P>
+<P> *</P>
+<P> * NB : Uses only phones from 1 to ... NPhones-1 in the buffer.</P>
+<P> * Phone 0 = memory from previous buffer.</P>
+<P> */</P>
+
+<P>void init_FlushSymbol(PhoneBuff *pt, char *flush);</P>
+<P>/* </P>
+<P> * Build a new sscanf target to spot the flush symbol</P>
+<P> */</P>
+
+<P>void init_CommentSymbol(PhoneBuff *pt, char *comment);</P>
+<P>/* </P>
+<P> * Build a new sscanf target to spot the comment symbol</P>
+<P> */</P>
+
+<P>void init_SilenceSymbol(PhoneBuff *pt, char *silence);</P>
+<P>/* </P>
+<P> * Build a new sscanf target to spot the comment symbol</P>
+<P> */</P>
+</FONT><B><FONT FACE="Arial" SIZE=4><P ALIGN="JUSTIFY"><LI></LI></P>
+<P ALIGN="JUSTIFY"><LI><A NAME="_Toc431812970">File: Parser/phone.h</A></LI></P>
+</B></FONT><FONT FACE="Courier New" SIZE=2><P>/*</P>
+<P> * Purpose: Phone objects</P>
+<P> * Authors: Vincent Pagel</P>
+<P> */</P>
+
+<P>/*</P>
+<P> * STRUCTURES representing phones and diphone sequences to synthesize</P>
+<P> */</P>
+
+<P>/* Pitch pattern point attached to a Phoneme */</P>
+<P>typedef struct</P>
+<P>{</P>
+<P>  float pos;&#9;&#9;        /* relative position within phone in milliseconds */</P>
+<P>  float freq;&#9;&#9;        /* frequency (Hz)*/</P>
+<P>} PitchPatternPoint;</P>
+
+<P>#define pos_Pitch(X) X-&gt;pos</P>
+<P>#define freq_Pitch(X) X-&gt;freq</P>
+
+<P>/* A Phoneme and its pitch points */</P>
+<P>typedef struct</P>
+<P>{</P>
+<P>  char *name;       &#9;              /* Name of the phone       */</P>
+<P>  float length;&#9;                 /* phoneme length in ms    */</P>
+<P>  int  NPitchPatternPoints;        /* Nbr of pattern points   */</P>
+<P>  int  pp_available;               /* number of allocatables pitch points  */</P>
+<P>  PitchPatternPoint* PitchPattern;</P>
+<P>  /* PitchPattern[0] gives F0 at 0% of the duration of a phone,</P>
+<P>&#9;  and the last pattern point (PitchPattern[NPitchPatternPoints-1])</P>
+<P>&#9;  gives F0 at 100% ( reserve 2 slots for 0% and 100% during interpolation )&#9; */</P>
+<P>} Phone;</P>
+
+<P>/* Convenient macro to access Phone structure */</P>
+<P>#define tail_PitchPattern(X) (&amp;(X-&gt;PitchPattern[X-&gt;NPitchPatternPoints-1]))</P>
+<P>#define head_PitchPattern(X) (&amp;(X-&gt;PitchPattern[0]))</P>
+<P>#define val_PitchPattern(X,i) (&amp;(X-&gt;PitchPattern[i]))</P>
+<P>#define length_Phone(X) (X-&gt;length)</P>
+<P>#define name_Phone(X) (X-&gt;name)</P>
+<P>#define NPitchPatternPoints(X) (X-&gt;NPitchPatternPoints)</P>
+<P>#define pp_available(X) (X-&gt;pp_available)</P>
+<P>#define PitchPattern(X) (X-&gt;PitchPattern)</P>
+
+<P>Phone* DLL_EXPORT initSized_Phone(char* name, float length,int nb_pitch);</P>
+<P>/*</P>
+<P> * Initialize a phoneme with its name and length in milliseconds</P>
+<P> * Indicate the planned number of pitch points ( added with appendf0)</P>
+<P> */</P>
+
+<P>Phone* DLL_EXPORT init_Phone(char* name, float length);</P>
+<P>/*</P>
+<P> * Initialize a phoneme with its name and length in milliseconds</P>
+<P> * 2 pitch points is the default (one at 0 one at 100)</P>
+<P> */</P>
+
+<P>void DLL_EXPORT reset_Phone(Phone *ph);</P>
+<P>/* Reset the pitch pattern list of a phoneme */</P>
+
+<P>void DLL_EXPORT close_Phone(Phone *ph);</P>
+<P>/* </P>
+<P> * Release the name in the string </P>
+<P> */</P>
+
+<P>void DLL_EXPORT appendf0_Phone(Phone *ph, float pos, float f0);</P>
+<P>/*</P>
+<P> * Append a pitch point to a phoneme ( position in % and f0 in Hertz )</P>
+<P> * resize the pitch point vector if too small</P>
+<P> */</P>
+
+<P>void applyRatio_Phone(Phone* ph, float ratio);</P>
+<P>/* </P>
+<P> * length and freq modified if the vocal tract length is not 1.0 </P>
+<P> * internal use only</P>
+<P> */</P>
+<P>&nbsp;</P>
+</FONT><B><FONT FACE="Arial" SIZE=4><P ALIGN="JUSTIFY"><LI></LI></P>
+<P ALIGN="JUSTIFY"><LI><A NAME="_Toc431812971">File: Standalone/synth.h</A></LI></P>
+</B></FONT><FONT FACE="Courier New" SIZE=2><P>/*</P>
+<P> * Purpose: Main function of the MBROLA speech synthesizer.</P>
+<P> * Authors: Vincent Pagel</P>
+<P> */</P>
+
+<P>/* </P>
+<P> * In standalone mode, input and ouput through files</P>
+<P> */</P>
+<P>extern FILE *command_file; /* File providing the phonetic input (can be stdin) */ </P>
+<P>extern FILE *output_file;  /* Audio output file (can be stdout)  */</P>
+
+<P>/* used in standalone compilation mode */</P>
+<P>extern int main(int argc, char **argv);</P>
+<P ALIGN="JUSTIFY"><LI><A NAME="_Ref431787204"><A NAME="_Ref431787224"><A NAME="_Ref431787239"><A NAME="_Toc431812972"></FONT><B><FONT FACE="Arial" SIZE=4>File: LibOneChannel/onechannel.h</A></A></A></A></LI></P>
+</B></FONT><FONT FACE="Courier New" SIZE=2><P>/*</P>
+<P> * Purpose: Diphone-based MBROLA speech synthesizer.</P>
+<P> *           One synthesis channel per database</P>
+<P> *</P>
+<P> * Author:  Vincent Pagel</P>
+<P> */</P>
+
+<P>int DLL_EXPORT init_MBR(char *dbaname);</P>
+<P>/* </P>
+<P> * Reads the diphone database</P>
+<P> * 0 if ok, error code otherwise</P>
+<P> */ </P>
+
+<P>int DLL_EXPORT init_rename_MBR(char *dbaname,char* rename,char* clone);</P>
+<P>  /* </P>
+<P>&#9;* Reads the diphone database</P>
+<P>&#9;* Rename and clone the list parsed from the parameter strings</P>
+<P>&#9;*</P>
+<P>&#9;* 0 if ok, error code otherwise</P>
+<P>&#9;*/</P>
+
+<P>void DLL_EXPORT close_MBR(void);</P>
+<P> /*&#9;Free all the allocated memory */</P>
+
+<P>int DLL_EXPORT reset_MBR();</P>
+<P>/* </P>
+<P> * Reset the pho buffer with residual commands -&gt; may be used as a kind of</P>
+<P> * "panic" flush when a sentence is interrupted</P>
+<P> * 0 means fail</P>
+<P> */</P>
+
+<P>int DLL_EXPORT readtype_MBR(void *buffer_out, int nb_wanted, AudioType  sample_type);</P>
+<P>/*</P>
+<P> * Read nb_wanted samples in an audio buffer</P>
+<P> * return the effective number of samples read</P>
+<P> * or the negative error code we catch</P>
+<P> *</P>
+<P> * The sample_type may be LIN16, LIN8, ULAW, ALAW</P>
+<P> */</P>
+
+<P>int DLL_EXPORT read_MBR(void *buffer_out, int nb_wanted);</P>
+<P>/*</P>
+<P> * Read nb_wanted samples in an audio buffer</P>
+<P> * return the effective number of samples read</P>
+<P> * or the negative error code we catch</P>
+<P> *</P>
+<P> * Kept for compatibility</P>
+<P> */</P>
+
+<P>int DLL_EXPORT write_MBR(char *buffer_in);</P>
+<P>/*</P>
+<P> * Write a string of phoneme in the input buffer</P>
+<P> * Return the number of chars actually written</P>
+<P> * 0 mean not enough space in the buffer</P>
+<P> */</P>
+
+<P>int  DLL_EXPORT flush_MBR();</P>
+<P>/*</P>
+<P> * Write a flush command in the stream (0 means fail). Used by client </P>
+<P> * applications in case the flush symbol has been renamed</P>
+<P> */</P>
+
+<P>int  DLL_EXPORT getDatabaseInfo_MBR(char *msg,int nb_wanted,int index);</P>
+<P>/* Retrieve the ith info message, NULL means get the size */ </P>
+
+<P>void DLL_EXPORT setFreq_MBR(int freq);</P>
+<P>/* Set the freq and voice ratio */</P>
+
+<P>int  DLL_EXPORT getFreq_MBR();</P>
+<P>/* Return the output frequency */</P>
+
+<P>void DLL_EXPORT setNoError_MBR(int no_error);</P>
+<P>  /* Tolerance to missing diphones */</P>
+
+<P>int DLL_EXPORT getNoError_MBR();</P>
+<P>  /* Spectral smoothing or not */</P>
+
+<P>void DLL_EXPORT setVolumeRatio_MBR(float volume_ratio);</P>
+<P>  /* Overall volume */</P>
+
+<P>float DLL_EXPORT getVolumeRatio_MBR();</P>
+<P>/* Overall volume */</P>
+
+<P>void DLL_EXPORT setParser_MBR(Parser* parser);</P>
+<P>/* drop the current parser for a new one */</P>
+
+<P>int DLL_EXPORT lastError_MBR();</P>
+<P>/* Return the last error code */</P>
+
+<P>int DLL_EXPORT lastErrorStr_MBR(char *buffer_err,int nb_wanted);</P>
+<P>/* Return the last error message available */</P>
+
+<P>void DLL_EXPORT resetError_MBR();</P>
+<P>/* Clear the Mbrola error buffer */</P>
+
+<P>int DLL_EXPORT getVersion_MBR(char *msg,int nb_wanted);</P>
+<P>/* Return the release number, e.g. "2.05a"  */</P>
+</FONT><B><FONT FACE="Arial" SIZE=4><P ALIGN="JUSTIFY"><LI></LI></P>
+<P ALIGN="JUSTIFY"><LI><A NAME="_Ref431794949"><A NAME="_Toc431812973">File: LibMultiChannel/multichannel.h</A></A></LI></P>
+</B></FONT><FONT FACE="Courier New" SIZE=2><P>/*</P>
+<P> * Purpose: multichannel Mbrola synthesis</P>
+<P> * Authors: Pagel Vincent</P>
+<P> */</P>
+
+<P>Database* DLL_EXPORT init_DatabaseMBR2(char* dbaname, char* rename, char* clone);</P>
+<P>/* </P>
+<P> * Give the name of the file containing the database, and parameters to </P>
+<P> * rename of clone phoneme names</P>
+<P> *</P>
+<P> * NULL on rename or clone means no modification to the database </P>
+<P> */</P>
+
+<P>Database* DLL_EXPORT copyconstructor_DatabaseMBR2(Database* dba);</P>
+<P>/* Creates a copy of a diphone database so that many synthesis engine </P>
+<P> * can use the same database at the same time (duplicate the file handler)</P>
+<P> *</P>
+<P> * Highly recommended with multichannel mbrola, unless you can guaranty</P>
+<P> * mutually exclusive access to the getdiphone function</P>
+<P> */</P>
+
+<P>void DLL_EXPORT close_DatabaseMBR2(Database* dba);</P>
+<P>/* Release the memory */</P>
+
+<P>void DLL_EXPORT close_ParserMBR2(Parser* pars);</P>
+<P>/* </P>
+<P> * Release the memory of the polymorphic type</P>
+<P> */</P>
+
+<P>Mbrola* DLL_EXPORT init_MBR2(Database* db, Parser* parse);</P>
+<P>/* Kick start the engine. Returning NULL means error */</P>
+
+<P>void DLL_EXPORT close_MBR2(Mbrola* mb);</P>
+<P>/*&#9;Free everything */</P>
+
+<P>int DLL_EXPORT reset_MBR2(Mbrola* mb);</P>
+<P>/* </P>
+<P> * Reset the pho buffer with residual commands -&gt; used as a kind of</P>
+<P> * "panic" flush when a sentence is interrupted either with the stop</P>
+<P> * button, or in case of error</P>
+<P> * Return false in case of failure</P>
+<P> */</P>
+
+<P>int DLL_EXPORT readtype_MBR2(Mbrola* mb, void *buffer_out, int nb_wanted, AudioType sample_type);</P>
+<P>/*</P>
+<P> * Reads nb_wanted samples in an audio buffer</P>
+<P> * Returns the effective number of samples read</P>
+<P> */</P>
+
+<P>int DLL_EXPORT getDatabaseInfo_MBR2(Mbrola* mb,char *msg,int nb_wanted,int index);</P>
+<P>/* Retrieve the ith info message, NULL means get the size  */ </P>
+
+<P>void DLL_EXPORT setFreq_MBR2(Mbrola* mb,int freq);</P>
+<P>/* Set the freq and voice ratio */</P>
+
+<P>int  DLL_EXPORT getFreq_MBR2(Mbrola* mb);</P>
+<P>/* Return the output frequency */</P>
+
+<P>void DLL_EXPORT setSmoothing_MBR2(Mbrola* mb, int smoothing);</P>
+<P>/* Spectral smoothing or not */</P>
+
+<P>int DLL_EXPORT getSmoothing_MBR2(Mbrola* mb);</P>
+<P>/* Spectral smoothing or not */</P>
+
+<P>void DLL_EXPORT setNoError_MBR2(Mbrola* mb, int no_error);</P>
+<P>/* Tolerance to missing diphones */</P>
+
+<P>int DLL_EXPORT get_no_error_MBR2(Mbrola* mb);</P>
+<P>/* Spectral smoothing or not */</P>
+
+<P>void DLL_EXPORT set_volume_ratio_MBR2(Mbrola* mb, float volume_ratio);</P>
+<P>/* Overall volume */</P>
+
+<P>float DLL_EXPORT get_volume_ratio_MBR2(Mbrola* mb);</P>
+<P>/* Overall volume */</P>
+
+<P>void DLL_EXPORT set_parser_MBR2(Mbrola* mb, Parser* parser);</P>
+<P>/* drop the current parser for a new one */</P>
+
+<P>int DLL_EXPORT lastError_MBR2();</P>
+<P>/* Return the last error code */</P>
+
+<P>int DLL_EXPORT lastErrorStr_MBR2(char *buffer_err,int nb_wanted);</P>
+<P>/* Return the last error message available */</P>
+
+<P>void DLL_EXPORT reset_error_MBR2();</P>
+<P>/* Clear the Mbrola error buffer */</P>
+
+<P>int DLL_EXPORT getVersion_MBR2(char *msg,int nb_wanted);</P>
+<P>/* Return the release number, e.g. "2.05a"  */</P>
+</FONT><P ALIGN="JUSTIFY"></P>
+<P ALIGN="JUSTIFY"><LI><A NAME="_Toc431812974"><B><FONT FACE="Arial" SIZE=4>Index of symbols</A></LI></P></OL>
+
+</B></FONT><P ALIGN="JUSTIFY">D= data segment, initialized global</P>
+<P ALIGN="JUSTIFY">C= data segment, non initialized globals</P>
+<P ALIGN="JUSTIFY">T= exported function</P>
+<P ALIGN="JUSTIFY">t=  private function</P>
+<P ALIGN="JUSTIFY"></P>
+<FONT FACE="Courier New" SIZE=2><P>Concat&#9;T&#9;Engine/mbrola.c</P>
+<P>FillCommandBuffer&#9;T&#9;Parser/phonbuff.c</P>
+<P>FlushFile&#9;T&#9;Engine/mbrola.c</P>
+<P>GetPitchPeriod&#9;T&#9;Engine/diphone.c</P>
+<P>LowerCase&#9;T&#9;Misc/audio.c</P>
+<P>MBR_malloc&#9;T&#9;Misc/mbralloc.c</P>
+<P>MBR_strdup&#9;T&#9;Misc/mbralloc.c</P>
+<P>MatchProsody&#9;T&#9;Engine/mbrola.c</P>
+<P>NextDiphone&#9;T&#9;Engine/mbrola.c</P>
+<P>OverLapAdd&#9;T&#9;Engine/mbrola.c</P>
+<P>ReadDatabaseHeader&#9;T&#9;Database/database.c</P>
+<P>ReadDatabaseIndex&#9;T&#9;Database/database.c</P>
+<P>ReadDatabaseInfo&#9;T&#9;Database/database.c</P>
+<P>ReadDatabasePitchMark&#9;T&#9;Database/database.c</P>
+<P>ReadDatabaseZstring&#9;T&#9;Database/database.c</P>
+<P>ReadLine&#9;T&#9;Parser/phonbuff.c</P>
+<P>Synthesis&#9;T&#9;Engine/mbrola.c</P>
+<P>add_HashTab&#9;T&#9;Database/hash_tab.c</P>
+<P>append_PhoneBuff&#9;T&#9;Parser/phonbuff.c</P>
+<P>append_RenameList&#9;T&#9;Database/rename_list.c</P>
+<P>appendf0_Phone&#9;T&#9;Parser/phone.c</P>
+<P>applyRatio_Phone&#9;T&#9;Parser/phone.c</P>
+<P>audio_swapped&#9;C&#9;Misc/audio.c</P>
+<P>close_DatabaseBacon&#9;t&#9;Database/database_bacon.c</P>
+<P>close_DatabaseBasic&#9;T&#9;Database/database.c</P>
+<P>close_DatabaseCebab&#9;t&#9;Database/database_cebab.c</P>
+<P>close_DatabaseInfo&#9;T&#9;Database/database.c</P>
+<P>close_DiphoneInfo&#9;T&#9;Database/diphone_info.c</P>
+<P>close_DiphoneSynthesis&#9;T&#9;Engine/diphone.c</P>
+<P>close_HashTab&#9;T&#9;Database/hash_tab.c</P>
+<P>close_InputFile&#9;t&#9;Parser/input_file.c</P>
+<P>close_Mbrola&#9;T&#9;Engine/mbrola.c</P>
+<P>close_ParserInput&#9;t&#9;Parser/parser_input.c</P>
+<P>close_Phone&#9;T&#9;Parser/phone.c</P>
+<P>close_PhoneBuff&#9;T&#9;Parser/phonbuff.c</P>
+<P>close_RenameList&#9;T&#9;Database/rename_list.c</P>
+<P>comment_symbol&#9;D&#9;Standalone/synth.c</P>
+<P>debug_message&#9;T&#9;Misc/vp_error.c</P>
+<P>diphone_clone_HashTab&#9;T&#9;Database/hash_tab.c</P>
+<P>diphone_rename_HashTab&#9;T&#9;Database/hash_tab.c</P>
+<P>equalkey_DiphoneInfo&#9;T&#9;Database/diphone_info.c</P>
+<P>errbuffer&#9;C&#9;Misc/vp_error.c</P>
+<P>fatal_message&#9;T&#9;Misc/vp_error.c</P>
+<P>find_RenameList&#9;T&#9;Database/rename_list.c</P>
+<P>find_file_format&#9;T&#9;Misc/audio.c</P>
+<P>free_residue_PhoneBuff&#9;T&#9;Parser/phonbuff.c</P>
+<P>freq_ratio&#9;D&#9;Standalone/synth.c</P>
+<P>getDatabaseInfo&#9;T&#9;Database/database.c</P>
+<P>get_no_error_Mbrola&#9;T&#9;Engine/mbrola.c</P>
+<P>get_smoothing_Mbrola&#9;T&#9;Engine/mbrola.c</P>
+<P>get_voicefreq_Mbrola&#9;T&#9;Engine/mbrola.c</P>
+<P>get_volume_ratio_Mbrola&#9;T&#9;Engine/mbrola.c</P>
+<P>getdiphone_DatabaseBacon&#9;t&#9;Database/database_bacon.c</P>
+<P>getdiphone_DatabaseBasic&#9;T&#9;Database/database.c</P>
+<P>getdiphone_DatabaseCebab&#9;t&#9;Database/database_cebab.c</P>
+<P>hash_DiphoneInfo&#9;T&#9;Database/diphone_info.c</P>
+<P>init_BaconTable&#9;t&#9;Database/database_bacon.c</P>
+<P>init_CebabTable&#9;t&#9;Database/database_cebab.c</P>
+<P>init_CommentSymbol&#9;T&#9;Parser/phonbuff.c</P>
+<P>init_Database&#9;T&#9;Database/database.c</P>
+<P>init_DatabaseBacon&#9;T&#9;Database/database_bacon.c</P>
+<P>init_DatabaseBasic&#9;T&#9;Database/database.c</P>
+<P>init_DatabaseCebab&#9;T&#9;Database/database_cebab.c</P>
+<P>init_DatabaseOld&#9;T&#9;Database/database_old.c</P>
+<P>init_DiphoneInfo&#9;T&#9;Database/diphone_info.c</P>
+<P>init_DiphoneSynthesis&#9;T&#9;Engine/diphone.c</P>
+<P>init_FlushSymbol&#9;T&#9;Parser/phonbuff.c</P>
+<P>init_Hanning&#9;T&#9;Engine/mbrola.c</P>
+<P>init_HashTab&#9;T&#9;Database/hash_tab.c</P>
+<P>init_InputFile&#9;T&#9;Parser/input_file.c</P>
+<P>init_Mbrola&#9;T&#9;Engine/mbrola.c</P>
+<P>init_ParserInput&#9;T&#9;Parser/parser_input.c</P>
+<P>init_Phone&#9;T&#9;Parser/phone.c</P>
+<P>init_PhoneBuff&#9;T&#9;Parser/phonbuff.c</P>
+<P>init_RenameList&#9;T&#9;Database/rename_list.c</P>
+<P>init_real_frame&#9;T&#9;Database/database.c</P>
+<P>init_rename_Database&#9;T&#9;Database/database.c</P>
+<P>init_tab&#9;D&#9;Database/database.c</P>
+<P>initclone_DiphoneInfo&#9;T&#9;Database/diphone_info.c</P>
+<P>initdummy_PhoneBuff&#9;T&#9;Parser/phonbuff.c</P>
+<P>initSized_Phone&#9;T&#9;Parser/phone.c</P>
+<P>interpolatef0_PhoneBuff&#9;T&#9;Parser/phonbuff.c</P>
+<P>lasterr_code&#9;C&#9;Misc/vp_error.c</P>
+<P>main&#9;T&#9;Standalone/synth.c</P>
+<P>mix&#9;T&#9;Database/hash_tab.c</P>
+<P>my_brole&#9;C&#9;Standalone/synth.c</P>
+<P>my_dba&#9;C&#9;Standalone/synth.c</P>
+<P>my_parse&#9;C&#9;Standalone/synth.c</P>
+<P>my_pitch&#9;C&#9;Standalone/synth.c</P>
+<P>next_PhoneBuff&#9;T&#9;Parser/phonbuff.c</P>
+<P>nextphone_ParserInput&#9;t&#9;Parser/parser_input.c</P>
+<P>one_diphone_clone_HashTab&#9;T&#9;Database/hash_tab.c</P>
+<P>oneshot_Mbrola&#9;T&#9;Engine/mbrola.c</P>
+<P>output_file&#9;C&#9;Standalone/synth.c</P>
+<P>parse_RenameList&#9;T&#9;Database/rename_list.c</P>
+<P>process_one_file&#9;T&#9;Standalone/synth.c</P>
+<P>read_BaconTables&#9;t&#9;Database/database_bacon.c</P>
+<P>read_CebabTables&#9;t&#9;Database/database_cebab.c</P>
+<P>read_int16&#9;T&#9;Database/little_big.c</P>
+<P>read_int16_swapped&#9;T&#9;Database/little_big.c</P>
+<P>read_int16buffer&#9;T&#9;Database/little_big.c</P>
+<P>read_int16buffer_swapped&#9;T&#9;Database/little_big.c</P>
+<P>read_int32&#9;T&#9;Database/little_big.c</P>
+<P>read_int32_swapped&#9;T&#9;Database/little_big.c</P>
+<P>read_uint16&#9;T&#9;Database/little_big.c</P>
+<P>read_uint16_swapped&#9;T&#9;Database/little_big.c</P>
+<P>readline_InputFile&#9;t&#9;Parser/input_file.c</P>
+<P>reset_DiphoneSynthesis&#9;T&#9;Engine/diphone.c</P>
+<P>reset_InputFile&#9;t&#9;Parser/input_file.c</P>
+<P>reset_Mbrola&#9;T&#9;Engine/mbrola.c</P>
+<P>reset_ParserInput&#9;t&#9;Parser/parser_input.c</P>
+<P>reset_Phone&#9;T&#9;Parser/phone.c</P>
+<P>reset_PhoneBuff&#9;T&#9;Parser/phonbuff.c</P>
+<P>search_HashTab&#9;T&#9;Database/hash_tab.c</P>
+<P>searchdiph_HashTab&#9;T&#9;Database/hash_tab.c</P>
+<P>set_no_error_Mbrola&#9;T&#9;Engine/mbrola.c</P>
+<P>set_parser_Mbrola&#9;T&#9;Engine/mbrola.c</P>
+<P>set_smoothing_Mbrola&#9;T&#9;Engine/mbrola.c</P>
+<P>set_voicefreq_Mbrola&#9;T&#9;Engine/mbrola.c</P>
+<P>set_volume_ratio_Mbrola&#9;T&#9;Engine/mbrola.c</P>
+<P>shift_PhoneBuff&#9;T&#9;Parser/phonbuff.c</P>
+<P>size_RenameList&#9;T&#9;Database/rename_list.c</P>
+<P>time_ratio&#9;D&#9;Standalone/synth.c</P>
+<P>warning_message&#9;T&#9;Misc/vp_error.c</P>
+<P>write_header&#9;T&#9;Misc/audio.c</P>
+<P>write_int16&#9;T&#9;Database/little_big.c</P>
+<P>write_int16_swapped&#9;T&#9;Database/little_big.c</P>
+<P>write_int16s&#9;T&#9;Misc/audio.c</P>
+<P>write_int32&#9;T&#9;Database/little_big.c</P>
+<P>write_int32_swapped&#9;T&#9;Database/little_big.c</P>
+
+</FONT><LI><A NAME="_Toc431812975"><B><FONT FACE="Arial" SIZE=5>Support</A></LI></OL>
+
+</B></FONT><P ALIGN="JUSTIFY">Mbrola Team</P>
+<P ALIGN="JUSTIFY">Facult&eacute; Polytechnique de Mons, TCTS Lab,</P>
+<P ALIGN="JUSTIFY">31, bvd Dolez, B-7000 Mons, Belgium.</P>
+<P ALIGN="JUSTIFY">tel : /32/65/374133</P>
+<P ALIGN="JUSTIFY">fax : /32/65/374129</P>
+<P ALIGN="JUSTIFY">e-mail: mbrola@tcts.fpms.ac.be, for general information, questions on the installation.</P></BODY>
+</HTML>
