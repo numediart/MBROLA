@@ -1,0 +1,9 @@
+# Binaries
+Bin/*
+# Eclipse settings
+.cproject
+.project
+.settings/*
+# Temporary files
+*.swp
+
