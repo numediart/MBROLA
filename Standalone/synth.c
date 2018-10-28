@@ -423,10 +423,10 @@ int main(int argc, char **argv)
 				   "        CLONE, RENAME, VOICE, TIME, FREQ, VOLUME, FLUSH, COMMENT,\n"
 				   "        and IGNORE are available\n"
 #ifdef ROMDATABASE_STORE
-				   "-W store the datbase in ROM format\n"
+				   "-W    = store the datbase in ROM format\n"
 #endif
 #ifdef ROMDATABASE_INIT
-				   "-w the database in a ROM dump\n"
+				   "-w    = the database in a ROM dump\n"
 #endif
 				   "\n", argv[0]);
 			return 0;
