@@ -42,6 +42,10 @@
 #include "zstring_list.h"
 #include <stdio.h>
 
+#if defined(__GLIBC__)
+#include <getopt.h>
+#else
+
 #if defined(TARGET_OS_DOS) || defined(TARGET_OS_SUN4) || defined (__STRICT_ANSI__)
 #include <string.h>
 #include "Posix/getopt.c"
@@ -49,6 +53,8 @@
 
 #if defined(__linux) || defined(__EMX__)
 #include <getopt.h>
+#endif
+
 #endif
 
 #include "common.h"
