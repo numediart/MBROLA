@@ -109,6 +109,9 @@ COMMONSRCS += Database/rom_handling.c Database/rom_database.c
 # Signal handling of the standalone version (Unix platforms)
 CFLAGS += -DSIGNAL
 
+# Add external cflags
+CFLAGS += $(EXT_CFLAGS)
+
 # BEGIN_COMM
 BINSRCS = Standalone/synth.c $(COMMONSRCS)
 BINHDRS = Standalone/synth.h $(COMMONHDRS)
