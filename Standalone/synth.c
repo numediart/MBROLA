@@ -47,7 +47,7 @@
 #include "Posix/getopt.c"
 #endif
 
-#if defined(__linux) || defined(__EMX__)
+#if defined(__linux__) || defined(__EMX__)
 #include <getopt.h>
 #endif
 
