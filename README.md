@@ -468,7 +468,7 @@ For a frequency of 266 Hz, it is 3.75 sec.
 
 # Feedback
 
-Report bugs to [MBROLA Issues](https://github.com/mbrola/mbrola/issues) page
+Report bugs to [MBROLA Issues](https://github.com/numediart/MBROLA/issues) page
 on GitHub.
 
 Look at and subscribe to [MBROLA mailing list](https://groups.io/g/mbrola)
