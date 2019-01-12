@@ -28,7 +28,7 @@ information (duration of phonemes and a piecewise linear description
 of pitch), and produces speech samples on 16 bits (linear), at the
 sampling frequency of the diphone database.
 
-Please look at [mbrola-voices](https://github.com/mbrola/mbrola-voices)
+Please look at [MBROLA-voices](https://github.com/numediart/MBROLA-voices)
 project homepage to get the voices.
 
 It is therefore NOT a Text-To-Speech (TTS) synthesizer, since it does
