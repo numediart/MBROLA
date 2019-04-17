@@ -29,7 +29,8 @@ of pitch), and produces speech samples on 16 bits (linear), at the
 sampling frequency of the diphone database.
 
 Please look at [MBROLA-voices](https://github.com/numediart/MBROLA-voices)
-project homepage to get the voices.
+project homepage to get the voices. You may also develop your own voices using
+the [MBROLATOR](https://github.com/numediart/MBROLATOR).
 
 It is therefore NOT a Text-To-Speech (TTS) synthesizer, since it does
 not accept raw text as input. In order to obtain a full TTS system,
@@ -111,7 +112,7 @@ Options can be any of the following:
 ```
 
 Now in order to go further, you need to get a version of an MBROLA
-language/voice database from the [MBROLA-voices](https://github.com/numediart/MBROLA-voices) page. Let us
+language/voice database from the [MBROLA-voices](https://github.com/numediart/MBROLA-voices) page or create one using the [MBROLATOR] (https://github.com/numediart/MBROLATOR). Let us
 assume you have copied the FR1 database and referred to
 the accompanying fr1.txt file for its installation.
 
