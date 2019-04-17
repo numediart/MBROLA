@@ -96,6 +96,7 @@ init_DatabaseFunction init_tab[ ]= { init_DatabaseOld,   /* type 0 */
 };
 
 #define NB_DATABASE_TYPE (sizeof(init_tab)/sizeof(init_DatabaseFunction))
+#define void_(x) if (x) {}
 
 char* ReadDatabaseZstring(FILE* database)
 /* 
@@ -215,8 +216,8 @@ bool ReadDatabaseHeader(Database* dba)
 	readl_int32(&SizeRaw(dba), database);
 	readl_int16(&Freq(dba), database);
   
-	fread(&MBRPeriod(dba), sizeof(MBRPeriod(dba)), 1, database);
-	fread(&Coding(dba), sizeof(Coding(dba)), 1, database);
+	void_(fread(&MBRPeriod(dba), sizeof(MBRPeriod(dba)), 1, database));
+	void_(fread(&Coding(dba), sizeof(Coding(dba)), 1, database));
   
 	if (strcmp( Version(dba), SYNTH_VERSION) > 0 )
     {
@@ -279,8 +280,8 @@ bool ReadDatabaseIndex(Database* dba)
 		new_left= ReadDatabaseZstring(database);
 		new_right= ReadDatabaseZstring(database);
 		readl_int16(& new_halfseg, database);
-		fread(&new_nb_frame, sizeof(new_nb_frame), 1, database);
-		fread(&nb_wframe, sizeof(nb_wframe), 1, database);
+        void_(fread(&new_nb_frame, sizeof(new_nb_frame), 1, database));
+		void_(fread(&nb_wframe, sizeof(nb_wframe), 1, database));
       
 		new_pos_pm= indice_pm;
 		indice_pm+= new_nb_frame;
@@ -420,7 +421,7 @@ bool ReadDatabasePitchMark(Database* dba)
   
 	/* Compress 4 pitch marks in one byte */
 	pmrk(dba)= (FrameType *) MBR_malloc( round_size *sizeof(FrameType) );
-	fread( pmrk(dba), sizeof(FrameType), round_size, database);
+	void_(fread( pmrk(dba), sizeof(FrameType), round_size, database));
   
 	RawOffset(dba)=ftell(database);
 	debug_message1("done Pitchmark\n");

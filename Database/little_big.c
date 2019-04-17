@@ -27,6 +27,8 @@
 
 #include "little_big.h"
 
+#define void_(x) if (x) {}
+
 /* 
  * Read and write operations with/without byte swapping
  */
@@ -58,12 +60,12 @@ void write_int32_swapped(int32 value, FILE *output_file)
 
 void read_int16(int16 *value, FILE *output_file)
 {
-	fread(value,sizeof(int16), 1, output_file);
+	void_(fread(value,sizeof(int16), 1, output_file));
 }
 
 void read_uint16(uint16 *value, FILE *output_file)
 {
-	fread(value,sizeof(uint16), 1, output_file);
+	void_(fread(value,sizeof(uint16), 1, output_file));
 }
 
 size_t read_int16buffer(int16 *ptr, size_t nitems, FILE *stream)
@@ -73,12 +75,12 @@ size_t read_int16buffer(int16 *ptr, size_t nitems, FILE *stream)
 
 void read_int32(int32 *value, FILE *output_file)
 {
-	fread(value,sizeof(int32), 1, output_file);  
+	void_(fread(value,sizeof(int32), 1, output_file));  
 }
 
 void read_int16_swapped(int16 *value, FILE *output_file)
 {
-	fread(value,sizeof(int16), 1, output_file);
+	void_(fread(value,sizeof(int16), 1, output_file));
   
 	*value= (int16) ( ((*value & 0xFF00) >> 8) | ((*value & 0xFF) << 8) );
 }
@@ -92,14 +94,14 @@ size_t read_int16buffer_swapped(int16 *ptr, size_t nitems, FILE *stream)
 
 void read_uint16_swapped(uint16 *value, FILE *output_file)
 {
-	fread(value,sizeof(uint16), 1, output_file);
+	void_(fread(value,sizeof(uint16), 1, output_file));
   
 	*value= (int16) (((*value & 0xFF00) >> 8) | ((*value & 0xFF) << 8));
 }
 
 void read_int32_swapped(int32 *value, FILE *output_file)
 {
-	fread(value,sizeof(int32), 1, output_file);  
+	void_(fread(value,sizeof(int32), 1, output_file));  
 	*value=(((*value&0xFF)<<24) | \
 			((*value&0xFF00)<<8) | \
 			((*value&0xFF0000)>>8) | \

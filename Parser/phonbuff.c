@@ -277,7 +277,7 @@ StatePhone ReadLine(PhoneBuff* pt, char *line, int size)
 		stream_flush=0;
 		leading_blank=0;
       
-		sscanf(line," %n",&leading_blank);
+		sscanf(line," %u",&leading_blank);
 		rest= &line[leading_blank];		
       
 		sscanf(rest, comment_symbol(pt), &comment);

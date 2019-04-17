@@ -28,7 +28,7 @@
 
 typedef struct Input Input;
 
-typedef int (*readline_InputFunction)(Input* in, char *line, int size);
+typedef long (*readline_InputFunction)(Input* in, char *line, int size);
 typedef void (*close_InputFunction)(Input* in);
 typedef void (*reset_InputFunction)(Input* in);
 

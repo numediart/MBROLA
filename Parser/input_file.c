@@ -31,9 +31,9 @@
    directly call with self for all functions, except Close
 */
 
-static int readline_InputFile(Input* in, char *line, int size)
+static long readline_InputFile(Input* in, char *line, int size)
 {
-	return( (int) fgets(line, size, (FILE*)in->self));
+	return( (long) fgets(line, size, (FILE*)in->self));
 }
 
 static void reset_InputFile(Input* in)

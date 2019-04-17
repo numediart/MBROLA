@@ -31,6 +31,8 @@
 
 #include "database.h"
 
+#define void_(x) if (x) {}
+
 #ifndef ROMDATABASE_PURE
 
 /*********************************************************
@@ -132,7 +134,7 @@ Database* init_DatabaseOld(Database* dba)
 		{ 
 			DiphoneEvenOlderFile one_oldfcell;  /* Cell on file */
 	  
-			fread(&one_oldfcell, sizeof(one_oldfcell),1, database(dba));
+			void_(fread(&one_oldfcell, sizeof(one_oldfcell),1, database(dba)));
 	  
 			/* PC format ! */
 #ifdef BIG_ENDIAN  
@@ -156,7 +158,7 @@ Database* init_DatabaseOld(Database* dba)
 		{	/* Renaissance 8 bytes structures */
 			DiphoneOldFile one_fcell;		  /* Cell on file */
 	  
-			fread(&one_fcell,sizeof(one_fcell),1,database(dba));
+			void_(fread(&one_fcell,sizeof(one_fcell),1,database(dba)));
 	  
 			strncpy( left_cell, one_fcell.left,2);
 			strncpy( right_cell, one_fcell.right,2);
@@ -218,7 +220,7 @@ Database* init_DatabaseOld(Database* dba)
 		DiphoneReplace replace;		  /* Replacement on file */
 		int position;
       
-		fread(&replace, sizeof(replace), 1, database(dba));
+		void_(fread(&replace, sizeof(replace), 1, database(dba)));
 		strncpy(left_cell, replace.leftr, 2);
 		strncpy(right_cell, replace.rightr, 2);
 		left_cell[2]=0;
@@ -281,7 +283,7 @@ Database* init_DatabaseOld(Database* dba)
 	if (even_older)
     {
 		pmrk(dba)= (unsigned char *) MBR_malloc(SizeMrk(dba));
-		fread(pmrk(dba), sizeof(char),SizeMrk(dba), database(dba));
+		void_(fread(pmrk(dba), sizeof(char),SizeMrk(dba), database(dba)));
 		RawOffset(dba)=ftell(database(dba));
     }
 	else

@@ -42,6 +42,8 @@
 #include "zstring_list.h"
 #include <stdio.h>
 
+#define void_(x) if (x) {}
+
 #if defined(__GLIBC__)
 #include <getopt.h>
 #else
@@ -336,7 +338,8 @@ int main(int argc, char **argv)
 			" Copyright (c) 1995-2018 Faculte Polytechnique de Mons (TCTS lab) - T.Dutoit\n"
 			" Email mbrola@tcts.fpms.ac.be to freely subscribe as a user\n"
 			" This software may not be sold or incorporated into any product\n"
-			" which is sold without prior permission from the author.\n"
+			" which is sold without prior permission from the author.\n");
+        printf(
 			" When no charge is made, this software may be copied and distributed\n"
 			" freely, provided that the accompanying readme.txt file is copied and\n"
 			" distributed with it.\n"
@@ -344,7 +347,8 @@ int main(int argc, char **argv)
 			" with and only with the voice and language databases made available\n"
 			" by the author from the mbrola project www homepage :\n"
 			"      " WWW_ADDRESS "\n"
-			" All other rights reserved.\n"
+			" All other rights reserved.\n");
+        printf(
 			" THIS SOFTWARE CARRIES NO WARRANTY, EXPRESSED OR IMPLIED.  THE USER\n"
 			" ASSUMES ALL RISKS, KNOWN OR UNKNOWN, DIRECT OR INDIRECT, WHICH INVOLVE\n"
 			" THIS SOFTWARE IN ANY WAY. IN PARTICULAR, THE AUTHOR DOES NOT TAKE ANY\n"
@@ -419,8 +423,8 @@ int main(int argc, char **argv)
 				   "-e    = IGNORE fatal errors on unkown diphone\n"
 				   "-c CC = set COMMENT char (escape sequence in pho files)\n"
 				   "-F FC = set FLUSH command name\n"
-				   "-v VR = VOLUME ratio, float ratio applied to ouput samples\n"
-				   "-f FR = FREQ ratio, float ratio applied to pitch points\n"
+				   "-v VR = VOLUME ratio, float ratio applied to ouput samples\n", argv[0]);
+            printf("-f FR = FREQ ratio, float ratio applied to pitch points\n"
 				   "-t TR = TIME ratio, float ratio applied to phone durations\n"
 				   "-l VF = VOICE freq, target freq for voice quality\n"
 				   "-R RL = Phoneme RENAME list of the form ""a A b B ...""\n"
@@ -434,7 +438,7 @@ int main(int argc, char **argv)
 #ifdef ROMDATABASE_INIT
 				   "-w    = the database in a ROM dump\n"
 #endif
-				   "\n", argv[0]);
+				   "\n");
 			return 0;
 #ifdef ROMDATABASE_STORE
 		case 'W':
@@ -476,7 +480,7 @@ int main(int argc, char **argv)
       
 		/* Allocate the big ROM area and read data in it */
 		romdatabase_pointer= MBR_malloc(rom_size);
-		fread(romdatabase_pointer, 1, rom_size, rom_file );
+		void_(fread(romdatabase_pointer, 1, rom_size, rom_file ));
 		fclose(rom_file);
       
 		my_dba= init_ROM_Database(romdatabase_pointer);
