@@ -111,7 +111,7 @@ Options can be any of the following:
 ```
 
 Now in order to go further, you need to get a version of an MBROLA
-language/voice database from the MBROLA project homepage. Let us
+language/voice database from the[MBROLA-voices](https://github.com/numediart/MBROLA-voices) page. Let us
 assume you have copied the FR1 database and referred to
 the accompanying fr1.txt file for its installation.
 
