@@ -93,7 +93,7 @@ Extension of output_file ( raw, au, wav, aiff ) tells the wanted audio format
 
 Options can be any of the following:
 -i = display the database information if any
--e = IGNORE fatal errors on unkown diphone
+-e = IGNORE fatal errors on unknown diphone
 -c CC = set COMMENT char (escape sequence in pho files)
 -F FC = set FLUSH command name
 -v VR = VOLUME ratio, float ratio applied to ouput samples

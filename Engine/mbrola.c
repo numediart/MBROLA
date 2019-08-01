@@ -297,7 +297,7 @@ StatePhone NextDiphone(Mbrola* mb)
 			PhonemeName temp_right= name_Phone( RightPhone( cur_diph(mb)));
 	  
 			warning_message(ERROR_UNKNOWNSEGMENT,
-							"Warning: %s-%s unkown, replaced with _-_\n", 
+							"Warning: %s-%s unknown, replaced with _-_\n", 
 							name_Phone(LeftPhone( cur_diph(mb))),
 							name_Phone(RightPhone( cur_diph(mb))));
 	  
@@ -315,7 +315,7 @@ StatePhone NextDiphone(Mbrola* mb)
 		if (!success)
       	{ 
 			fatal_message(ERROR_UNKNOWNSEGMENT,
-						  "Fatal error: Unkown recovery for %s-%s segment\n",
+						  "Fatal error: Unknown recovery for %s-%s segment\n",
 						  name_Phone(LeftPhone(cur_diph(mb))),
 						  name_Phone(RightPhone(cur_diph(mb))));
 	  

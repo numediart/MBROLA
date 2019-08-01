@@ -826,7 +826,7 @@ You get a help screen like the following:
 > -i = display the database information if any
 \layout Quotation
 
-> -e = IGNORE fatal errors on unkown diphone
+> -e = IGNORE fatal errors on unknown diphone
 \layout Quotation
 
 > -c CC = set COMMENT char (escape sequence in pho files)

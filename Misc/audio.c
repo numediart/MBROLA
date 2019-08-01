@@ -113,7 +113,7 @@ void* zero_convert(void* buffer_out, int nb_move, AudioType sample_type)
 		break;
 		
     default:
-		fatal_message(WARNING_UPGRADE,"Unkown sample type");
+		fatal_message(WARNING_UPGRADE,"Unknown sample type");
 		return NULL;
     }  
   
@@ -160,7 +160,7 @@ void* move_convert(void* buffer_out,int16* buffer_in,int nb_move, AudioType samp
 											buffer_in,
 											nb_move));
     default:
-		fatal_message(WARNING_UPGRADE,"Unkown sample type");
+		fatal_message(WARNING_UPGRADE,"Unknown sample type");
 		return NULL; /* to please the compiler */
     }
 }

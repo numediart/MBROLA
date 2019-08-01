@@ -420,7 +420,7 @@ int main(int argc, char **argv)
 				   "Extension of output_file ( raw, au, wav, aiff ) tells the wanted audio format\n"
 				   "\nOptions can be any of the following:\n"
 				   "-i    = display the database information if any\n"
-				   "-e    = IGNORE fatal errors on unkown diphone\n"
+				   "-e    = IGNORE fatal errors on unknown diphone\n"
 				   "-c CC = set COMMENT char (escape sequence in pho files)\n"
 				   "-F FC = set FLUSH command name\n"
 				   "-v VR = VOLUME ratio, float ratio applied to ouput samples\n", argv[0]);
