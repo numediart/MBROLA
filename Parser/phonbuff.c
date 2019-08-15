@@ -257,7 +257,8 @@ StatePhone ReadLine(PhoneBuff* pt, char *line, int size)
  * Return value may be: PHO_EOF,PHO_FLUSH,PHO_OK
  */
 {
-	unsigned int comment, stream_flush, leading_blank;
+	unsigned int comment, stream_flush;
+	int leading_blank;
 	float fvalue;
 	char *rest;  
   
@@ -277,7 +278,7 @@ StatePhone ReadLine(PhoneBuff* pt, char *line, int size)
 		stream_flush=0;
 		leading_blank=0;
       
-		sscanf(line," %u",&leading_blank);
+		sscanf(line," %n",&leading_blank);
 		rest= &line[leading_blank];		
       
 		sscanf(rest, comment_symbol(pt), &comment);
