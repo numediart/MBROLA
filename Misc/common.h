@@ -70,6 +70,17 @@
 void swab( const char *from, char *to, int nbytes);
 #endif
 
+#if defined(__GLIBC__)
+#include <endian.h>
+#undef BIG_ENDIAN
+#undef LITTLE_ENDIAN
+#if __BYTE_ORDER == __LITTLE_ENDIAN
+#  define LITTLE_ENDIAN
+#else
+#  define BIG_ENDIAN
+#endif
+#else
+
 /* Intel based machine ? */
 #if defined(__i386) || defined(_M_X86) || defined(TARGET_OS_VMS)
 #undef BIG_ENDIAN
@@ -86,6 +97,7 @@ void swab( const char *from, char *to, int nbytes);
 
 #ifdef __powerpc__
 #include <endian.h>  /* Make sure we see the definitions */
+#endif
 #endif
 
 /* memmove is not defined on SUN4, but memcpy will do */
