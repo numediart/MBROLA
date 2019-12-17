@@ -1,7 +1,7 @@
 # BEGIN_COMM <- flags parenthesize what goes in the commercial Makefile (awk strips)
 # BEGIN_WWW  <- flags parenthesize what goes in the Web Makefile (stripped by awk below)
 # Mbrola Speech Synthesize Makefile ( tune the #define and type "make" )
-VERSION=3.02b
+VERSION=3.3
 
 # To test strict C ANSI compliance
 CC = gcc -ansi -pedantic

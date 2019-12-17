@@ -117,7 +117,7 @@ void swab( const char *from, char *to, int nbytes);
 #include "incdll.h"
 
 /* Release number (automatically changed by "make version") */
-#define SYNTH_VERSION "3.02b"
+#define SYNTH_VERSION "3.3"
 #define WWW_ADDRESS "http://tcts.fpms.ac.be/synthesis"
 
 /* General trace       */
