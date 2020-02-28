@@ -122,7 +122,7 @@ void swab( const char *from, char *to, int nbytes);
 
 /* Release number (automatically changed by "make version") */
 #define SYNTH_VERSION "3.4-dev"
-#define WWW_ADDRESS "http://tcts.fpms.ac.be/synthesis"
+#define WWW_ADDRESS "https://github.com/numediart/MBROLA/"
 
 /* General trace       */
 /*	#define DEBUG           */
