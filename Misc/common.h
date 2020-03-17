@@ -32,7 +32,9 @@
 #include <stdlib.h>
 #include <string.h>
 #include <stdio.h>
+#ifndef _MSC_VER
 #include <unistd.h>
+#endif
 
 /* The Dll version is based on the library one -> export DLL functions */
 #ifdef DLL
@@ -117,7 +119,7 @@ void swab( const char *from, char *to, int nbytes);
 #include "incdll.h"
 
 /* Release number (automatically changed by "make version") */
-#define SYNTH_VERSION "3.4-dev"
+#define SYNTH_VERSION "3.3"
 #define WWW_ADDRESS "http://tcts.fpms.ac.be/synthesis"
 
 /* General trace       */

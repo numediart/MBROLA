@@ -65,6 +65,17 @@
 #include "zstring_list.h"
 #include "onechannel.h"
 
+#ifdef _MSC_VER
+#include "fifo.h"
+#include "input_fifo.h"
+#include "phonbuff.h"
+
+void close_InputFifo(Input* in)
+{
+	MBR_free(in);
+}
+#endif
+
 /* 
  * Globals:  main objects of the channel one 
  */

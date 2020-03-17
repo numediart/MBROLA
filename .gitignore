@@ -6,4 +6,17 @@ Bin/*
 .settings/*
 # Temporary files
 *.swp
-
+# Visual Studio files
+.vs
+*.aps
+*.ncb
+*.db
+*.opendb
+*.plg
+VisualC++6/mbrolalib/Debug
+VisualC++6/mbrolalib/Release
+VisualC++/Win32
+VisualC++/x64
+VisualC++/mbrolalib/Debug
+VisualC++/mbrolalib/Release
+VisualC++/mbrolalib/x64
