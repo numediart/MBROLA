@@ -1,6 +1,6 @@
 # Welcome to MBROLA project
 
-##### This fork contains Microsoft Visual C++ solution and project you need for build on Windows. You need MSVC 6.0 or later for build mbrola.dll. Both legacy MSVC 6.0 project files and MSVC 2015+ solution is included here. If you only need precompiled binary, just download one from [Releases](https://github.com/thiekus/MBROLA/releases).
+#### This fork contains Microsoft Visual C++ solution and project you need for build on Windows. You need MSVC 6.0 or later for build mbrola.dll. Both legacy MSVC 6.0 project files and MSVC 2015+ solution is included here. If you only need precompiled binary, just take from [Releases](https://github.com/thiekus/MBROLA/releases).
 
 __Table of contents__
 
