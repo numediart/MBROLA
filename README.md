@@ -65,7 +65,7 @@ make clean
 Look for [makefile details](README_Makefile.md), if compilation is not successful.
 
 On Windows, you can build standalone program and mbrola.dll using Microsoft Visual C++ by using project 
-solution in `VisualC` directory for VC 2015 and later (recomended), or `VisualC6` for older version 
+solution in `VisualC` directory for VC 2015 or later (recomended), or `VisualC6` for older version 
 from VC 6.0. To build, open `mbrola.sln` on Visual Studio (or `mbrola.dsw` for VC6 version), then build 
 all projects on solution or you can select either `mbrola` to build mbrola standalone program or 
 `mbrolalib` to  build mbrola.dll library.
