@@ -32,6 +32,8 @@
 #include <stdlib.h>
 #include <string.h>
 #include <stdio.h>
+
+/* Visual C++ doesn't have POSIX header out of box */
 #ifndef _MSC_VER
 #include <unistd.h>
 #endif

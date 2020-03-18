@@ -1,0 +1,238 @@
+# Microsoft Developer Studio Generated Dependency File, included by mbrola.mak
+
+..\..\Misc\audio.c : \
+	"..\..\database\little_big.h"\
+	"..\..\misc\audio.h"\
+	"..\..\misc\common.h"\
+	"..\..\misc\g711.h"\
+	"..\..\misc\incdll.h"\
+	"..\..\misc\mbralloc.h"\
+	"..\..\misc\vp_error.h"\
+	"c:\program files (x86)\microsoft visual studio\vc98\include\basetsd.h"\
+	
+
+..\..\Misc\common.c : \
+	"..\..\misc\common.h"\
+	"..\..\misc\incdll.h"\
+	"..\..\misc\mbralloc.h"\
+	"..\..\misc\vp_error.h"\
+	"c:\program files (x86)\microsoft visual studio\vc98\include\basetsd.h"\
+	
+
+..\..\Database\database.c : \
+	"..\..\database\database.h"\
+	"..\..\database\database_old.h"\
+	"..\..\database\diphone_info.h"\
+	"..\..\database\hash_tab.h"\
+	"..\..\database\little_big.h"\
+	"..\..\database\zstring_list.h"\
+	"..\..\engine\diphone.h"\
+	"..\..\misc\audio.h"\
+	"..\..\misc\common.h"\
+	"..\..\misc\incdll.h"\
+	"..\..\misc\mbralloc.h"\
+	"..\..\misc\vp_error.h"\
+	"..\..\parser\phone.h"\
+	"c:\program files (x86)\microsoft visual studio\vc98\include\basetsd.h"\
+	
+
+..\..\Database\database_old.c : \
+	"..\..\database\database.h"\
+	"..\..\database\diphone_info.h"\
+	"..\..\database\hash_tab.h"\
+	"..\..\database\zstring_list.h"\
+	"..\..\engine\diphone.h"\
+	"..\..\misc\audio.h"\
+	"..\..\misc\common.h"\
+	"..\..\misc\incdll.h"\
+	"..\..\misc\mbralloc.h"\
+	"..\..\misc\vp_error.h"\
+	"..\..\parser\phone.h"\
+	"c:\program files (x86)\microsoft visual studio\vc98\include\basetsd.h"\
+	
+
+..\..\Engine\diphone.c : \
+	"..\..\database\diphone_info.h"\
+	"..\..\engine\diphone.h"\
+	"..\..\misc\common.h"\
+	"..\..\misc\incdll.h"\
+	"..\..\misc\mbralloc.h"\
+	"..\..\misc\vp_error.h"\
+	"..\..\parser\phone.h"\
+	"c:\program files (x86)\microsoft visual studio\vc98\include\basetsd.h"\
+	
+
+..\..\Database\diphone_info.c : \
+	"..\..\database\diphone_info.h"\
+	"..\..\misc\common.h"\
+	"..\..\misc\incdll.h"\
+	"..\..\misc\mbralloc.h"\
+	"..\..\misc\vp_error.h"\
+	"c:\program files (x86)\microsoft visual studio\vc98\include\basetsd.h"\
+	
+
+.\dllmain.c : \
+	"c:\program files (x86)\microsoft visual studio\vc98\include\basetsd.h"\
+	
+
+..\..\Parser\fifo.c : \
+	"..\..\misc\common.h"\
+	"..\..\misc\incdll.h"\
+	"..\..\misc\mbralloc.h"\
+	"..\..\misc\vp_error.h"\
+	"..\..\parser\fifo.h"\
+	"c:\program files (x86)\microsoft visual studio\vc98\include\basetsd.h"\
+	
+
+..\..\Misc\g711.c : \
+	"..\..\misc\common.h"\
+	"..\..\misc\incdll.h"\
+	"..\..\misc\mbralloc.h"\
+	"..\..\misc\vp_error.h"\
+	"c:\program files (x86)\microsoft visual studio\vc98\include\basetsd.h"\
+	
+
+..\..\Database\hash_tab.c : \
+	"..\..\database\database.h"\
+	"..\..\database\diphone_info.h"\
+	"..\..\database\hash_tab.h"\
+	"..\..\database\zstring_list.h"\
+	"..\..\engine\diphone.h"\
+	"..\..\engine\mbrola.h"\
+	"..\..\misc\audio.h"\
+	"..\..\misc\common.h"\
+	"..\..\misc\incdll.h"\
+	"..\..\misc\mbralloc.h"\
+	"..\..\misc\vp_error.h"\
+	"..\..\parser\phone.h"\
+	"c:\program files (x86)\microsoft visual studio\vc98\include\basetsd.h"\
+	
+
+..\..\Parser\input_fifo.c : \
+	"..\..\misc\common.h"\
+	"..\..\misc\incdll.h"\
+	"..\..\misc\mbralloc.h"\
+	"..\..\misc\vp_error.h"\
+	"..\..\parser\fifo.h"\
+	"..\..\parser\input.h"\
+	"c:\program files (x86)\microsoft visual studio\vc98\include\basetsd.h"\
+	
+
+..\..\Parser\input_file.c : \
+	"..\..\misc\mbralloc.h"\
+	"..\..\parser\input.h"\
+	"..\..\parser\input_file.h"\
+	
+
+..\..\Database\little_big.c : \
+	"..\..\database\little_big.h"\
+	"..\..\misc\common.h"\
+	"..\..\misc\incdll.h"\
+	"..\..\misc\mbralloc.h"\
+	"..\..\misc\vp_error.h"\
+	"c:\program files (x86)\microsoft visual studio\vc98\include\basetsd.h"\
+	
+
+..\..\Misc\mbralloc.c : \
+	"..\..\misc\common.h"\
+	"..\..\misc\incdll.h"\
+	"..\..\misc\mbralloc.h"\
+	"..\..\misc\vp_error.h"\
+	"c:\program files (x86)\microsoft visual studio\vc98\include\basetsd.h"\
+	
+
+..\..\Engine\mbrola.c : \
+	"..\..\database\database.h"\
+	"..\..\database\diphone_info.h"\
+	"..\..\database\hash_tab.h"\
+	"..\..\database\zstring_list.h"\
+	"..\..\engine\diphone.h"\
+	"..\..\engine\mbrola.h"\
+	"..\..\misc\audio.h"\
+	"..\..\misc\common.h"\
+	"..\..\misc\incdll.h"\
+	"..\..\misc\mbralloc.h"\
+	"..\..\misc\vp_error.h"\
+	"..\..\parser\phone.h"\
+	"c:\program files (x86)\microsoft visual studio\vc98\include\basetsd.h"\
+	
+
+..\..\LibOneChannel\onechannel.c : \
+	"..\..\database\database.h"\
+	"..\..\database\diphone_info.h"\
+	"..\..\database\hash_tab.h"\
+	"..\..\database\zstring_list.h"\
+	"..\..\engine\diphone.h"\
+	"..\..\engine\mbrola.h"\
+	"..\..\LibOneChannel\onechannel.h"\
+	"..\..\misc\audio.h"\
+	"..\..\misc\common.h"\
+	"..\..\misc\incdll.h"\
+	"..\..\misc\mbralloc.h"\
+	"..\..\misc\vp_error.h"\
+	"..\..\parser\fifo.h"\
+	"..\..\parser\input.h"\
+	"..\..\parser\input_fifo.h"\
+	"..\..\parser\parser_input.h"\
+	"..\..\parser\phonbuff.h"\
+	"..\..\parser\phone.h"\
+	"c:\program files (x86)\microsoft visual studio\vc98\include\basetsd.h"\
+	
+
+..\..\Parser\parser_input.c : \
+	"..\..\database\diphone_info.h"\
+	"..\..\engine\diphone.h"\
+	"..\..\misc\common.h"\
+	"..\..\misc\incdll.h"\
+	"..\..\misc\mbralloc.h"\
+	"..\..\misc\vp_error.h"\
+	"..\..\parser\input.h"\
+	"..\..\parser\parser_input.h"\
+	"..\..\parser\phonbuff.h"\
+	"..\..\parser\phone.h"\
+	"c:\program files (x86)\microsoft visual studio\vc98\include\basetsd.h"\
+	
+
+..\..\Parser\phonbuff.c : \
+	"..\..\database\database.h"\
+	"..\..\database\diphone_info.h"\
+	"..\..\database\hash_tab.h"\
+	"..\..\database\zstring_list.h"\
+	"..\..\engine\diphone.h"\
+	"..\..\engine\mbrola.h"\
+	"..\..\misc\audio.h"\
+	"..\..\misc\common.h"\
+	"..\..\misc\incdll.h"\
+	"..\..\misc\mbralloc.h"\
+	"..\..\misc\vp_error.h"\
+	"..\..\parser\input.h"\
+	"..\..\parser\phonbuff.h"\
+	"..\..\parser\phone.h"\
+	"c:\program files (x86)\microsoft visual studio\vc98\include\basetsd.h"\
+	
+
+..\..\Parser\phone.c : \
+	"..\..\misc\common.h"\
+	"..\..\misc\incdll.h"\
+	"..\..\misc\mbralloc.h"\
+	"..\..\misc\vp_error.h"\
+	"..\..\parser\phone.h"\
+	"c:\program files (x86)\microsoft visual studio\vc98\include\basetsd.h"\
+	
+
+..\..\Misc\vp_error.c : \
+	"..\..\misc\common.h"\
+	"..\..\misc\incdll.h"\
+	"..\..\misc\mbralloc.h"\
+	"..\..\misc\vp_error.h"\
+	"c:\program files (x86)\microsoft visual studio\vc98\include\basetsd.h"\
+	
+
+..\..\Database\zstring_list.c : \
+	"..\..\database\zstring_list.h"\
+	"..\..\misc\common.h"\
+	"..\..\misc\incdll.h"\
+	"..\..\misc\mbralloc.h"\
+	"..\..\misc\vp_error.h"\
+	"c:\program files (x86)\microsoft visual studio\vc98\include\basetsd.h"\
+	

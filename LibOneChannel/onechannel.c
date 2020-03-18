@@ -65,6 +65,9 @@
 #include "zstring_list.h"
 #include "onechannel.h"
 
+/* Visual C++ behave differently in handling include headers
+ * Also, close_InputFifo isn't accessible by linker since it was explicitly static
+ */
 #ifdef _MSC_VER
 #include "fifo.h"
 #include "input_fifo.h"

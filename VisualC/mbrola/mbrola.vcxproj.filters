@@ -1,0 +1,93 @@
+﻿<?xml version="1.0" encoding="utf-8"?>
+<Project ToolsVersion="4.0" xmlns="http://schemas.microsoft.com/developer/msbuild/2003">
+  <ItemGroup>
+    <Filter Include="Source Files">
+      <UniqueIdentifier>{4FC737F1-C7A5-4376-A066-2A32D752A2FF}</UniqueIdentifier>
+      <Extensions>cpp;c;cc;cxx;def;odl;idl;hpj;bat;asm;asmx</Extensions>
+    </Filter>
+    <Filter Include="Header Files">
+      <UniqueIdentifier>{93995380-89BD-4b04-88EB-625FBE52EBFB}</UniqueIdentifier>
+      <Extensions>h;hh;hpp;hxx;hm;inl;inc;xsd</Extensions>
+    </Filter>
+    <Filter Include="Resource Files">
+      <UniqueIdentifier>{67DA6AB6-F800-4c08-8B7A-83BB121AAD01}</UniqueIdentifier>
+      <Extensions>rc;ico;cur;bmp;dlg;rc2;rct;bin;rgs;gif;jpg;jpeg;jpe;resx;tiff;tif;png;wav;mfcribbon-ms</Extensions>
+    </Filter>
+    <Filter Include="Mbrola Source Files">
+      <UniqueIdentifier>{d79ab434-b20f-464e-813d-b56d993edee9}</UniqueIdentifier>
+    </Filter>
+  </ItemGroup>
+  <ItemGroup>
+    <ClCompile Include="..\..\Standalone\synth.c">
+      <Filter>Source Files</Filter>
+    </ClCompile>
+    <ClCompile Include="..\..\Database\database.c">
+      <Filter>Mbrola Source Files</Filter>
+    </ClCompile>
+    <ClCompile Include="..\..\Database\database_old.c">
+      <Filter>Mbrola Source Files</Filter>
+    </ClCompile>
+    <ClCompile Include="..\..\Database\diphone_info.c">
+      <Filter>Mbrola Source Files</Filter>
+    </ClCompile>
+    <ClCompile Include="..\..\Database\hash_tab.c">
+      <Filter>Mbrola Source Files</Filter>
+    </ClCompile>
+    <ClCompile Include="..\..\Database\little_big.c">
+      <Filter>Mbrola Source Files</Filter>
+    </ClCompile>
+    <ClCompile Include="..\..\Database\rom_database.c">
+      <Filter>Mbrola Source Files</Filter>
+    </ClCompile>
+    <ClCompile Include="..\..\Database\rom_handling.c">
+      <Filter>Mbrola Source Files</Filter>
+    </ClCompile>
+    <ClCompile Include="..\..\Database\zstring_list.c">
+      <Filter>Mbrola Source Files</Filter>
+    </ClCompile>
+    <ClCompile Include="..\..\Engine\diphone.c">
+      <Filter>Mbrola Source Files</Filter>
+    </ClCompile>
+    <ClCompile Include="..\..\Engine\mbrola.c">
+      <Filter>Mbrola Source Files</Filter>
+    </ClCompile>
+    <ClCompile Include="..\..\Misc\audio.c">
+      <Filter>Mbrola Source Files</Filter>
+    </ClCompile>
+    <ClCompile Include="..\..\Misc\common.c">
+      <Filter>Mbrola Source Files</Filter>
+    </ClCompile>
+    <ClCompile Include="..\..\Misc\g711.c">
+      <Filter>Mbrola Source Files</Filter>
+    </ClCompile>
+    <ClCompile Include="..\..\Misc\mbralloc.c">
+      <Filter>Mbrola Source Files</Filter>
+    </ClCompile>
+    <ClCompile Include="..\..\Misc\vp_error.c">
+      <Filter>Mbrola Source Files</Filter>
+    </ClCompile>
+    <ClCompile Include="..\..\Parser\fifo.c">
+      <Filter>Mbrola Source Files</Filter>
+    </ClCompile>
+    <ClCompile Include="..\..\Parser\input_fifo.c">
+      <Filter>Mbrola Source Files</Filter>
+    </ClCompile>
+    <ClCompile Include="..\..\Parser\input_file.c">
+      <Filter>Mbrola Source Files</Filter>
+    </ClCompile>
+    <ClCompile Include="..\..\Parser\parser_input.c">
+      <Filter>Mbrola Source Files</Filter>
+    </ClCompile>
+    <ClCompile Include="..\..\Parser\phonbuff.c">
+      <Filter>Mbrola Source Files</Filter>
+    </ClCompile>
+    <ClCompile Include="..\..\Parser\phone.c">
+      <Filter>Mbrola Source Files</Filter>
+    </ClCompile>
+  </ItemGroup>
+  <ItemGroup>
+    <ClInclude Include="..\..\Standalone\synth.h">
+      <Filter>Header Files</Filter>
+    </ClInclude>
+  </ItemGroup>
+</Project>

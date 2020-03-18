@@ -1,10 +1,10 @@
-# Microsoft Developer Studio Project File - Name="mbrolalib" - Package Owner=<4>
+# Microsoft Developer Studio Project File - Name="mbrola" - Package Owner=<4>
 # Microsoft Developer Studio Generated Build File, Format Version 6.00
 # ** DO NOT EDIT **
 
-# TARGTYPE "Win32 (x86) Dynamic-Link Library" 0x0102
+# TARGTYPE "Win32 (x86) Console Application" 0x0103
 
-CFG=mbrolalib - Win32 Debug
+CFG=mbrola - Win32 Debug
 !MESSAGE This is not a valid makefile. To build this project using NMAKE,
 !MESSAGE use the Export Makefile command and run
 !MESSAGE 
@@ -13,12 +13,12 @@ CFG=mbrolalib - Win32 Debug
 !MESSAGE You can specify a configuration when running NMAKE
 !MESSAGE by defining the macro CFG on the command line. For example:
 !MESSAGE 
-!MESSAGE NMAKE /f "mbrola.mak" CFG="mbrolalib - Win32 Debug"
+!MESSAGE NMAKE /f "mbrola.mak" CFG="mbrola - Win32 Debug"
 !MESSAGE 
 !MESSAGE Possible choices for configuration are:
 !MESSAGE 
-!MESSAGE "mbrolalib - Win32 Release" (based on "Win32 (x86) Dynamic-Link Library")
-!MESSAGE "mbrolalib - Win32 Debug" (based on "Win32 (x86) Dynamic-Link Library")
+!MESSAGE "mbrola - Win32 Release" (based on "Win32 (x86) Console Application")
+!MESSAGE "mbrola - Win32 Debug" (based on "Win32 (x86) Console Application")
 !MESSAGE 
 
 # Begin Project
@@ -26,10 +26,9 @@ CFG=mbrolalib - Win32 Debug
 # PROP Scc_ProjName ""
 # PROP Scc_LocalPath ""
 CPP=cl.exe
-MTL=midl.exe
 RSC=rc.exe
 
-!IF  "$(CFG)" == "mbrolalib - Win32 Release"
+!IF  "$(CFG)" == "mbrola - Win32 Release"
 
 # PROP BASE Use_MFC 0
 # PROP BASE Use_Debug_Libraries 0
@@ -41,20 +40,18 @@ RSC=rc.exe
 # PROP Output_Dir "Release"
 # PROP Intermediate_Dir "Release"
 # PROP Target_Dir ""
-# ADD BASE CPP /nologo /MT /W3 /GX /O2 /D "WIN32" /D "NDEBUG" /D "_WINDOWS" /D "_MBCS" /D "_USRDLL" /D "MBROLA_EXPORTS" /YX /FD /c
-# ADD CPP /nologo /MT /W3 /GX /O2 /I "..\..\Database" /I "..\..\Engine" /I "..\..\Misc" /I "..\..\Parser" /D "WIN32" /D "NDEBUG" /D "_WINDOWS" /D "_MBCS" /D "_USRDLL" /D "_CRT_SECURE_NO_WARNINGS" /D "MBROLA_EXPORTS" /D "TARGET_OS_DOS" /D "LITTLE_ENDIAN" /D "DLL" /YX /FD /c
-# ADD BASE MTL /nologo /D "NDEBUG" /mktyplib203 /win32
-# ADD MTL /nologo /D "NDEBUG" /mktyplib203 /win32
+# ADD BASE CPP /nologo /W3 /GX /O2 /D "WIN32" /D "NDEBUG" /D "_CONSOLE" /D "_MBCS" /YX /FD /c
+# ADD CPP /nologo /W3 /GX /O2 /I "..\..\Standalone" /I "..\..\Database" /I "..\..\Engine" /I "..\..\Misc" /I "..\..\Parser" /D "WIN32" /D "NDEBUG" /D "_CONSOLE" /D "_MBCS" /D "_CRT_SECURE_NO_WARNINGS" /D "TARGET_OS_DOS" /D "LITTLE_ENDIAN" /YX /FD /c
 # ADD BASE RSC /l 0x3809 /d "NDEBUG"
 # ADD RSC /l 0x3809 /d "NDEBUG"
 BSC32=bscmake.exe
 # ADD BASE BSC32 /nologo
 # ADD BSC32 /nologo
 LINK32=link.exe
-# ADD BASE LINK32 kernel32.lib user32.lib gdi32.lib winspool.lib comdlg32.lib advapi32.lib shell32.lib ole32.lib oleaut32.lib uuid.lib odbc32.lib odbccp32.lib /nologo /dll /machine:I386
-# ADD LINK32 kernel32.lib user32.lib gdi32.lib winspool.lib comdlg32.lib advapi32.lib shell32.lib ole32.lib oleaut32.lib uuid.lib odbc32.lib odbccp32.lib /nologo /dll /machine:I386
+# ADD BASE LINK32 kernel32.lib user32.lib gdi32.lib winspool.lib comdlg32.lib advapi32.lib shell32.lib ole32.lib oleaut32.lib uuid.lib odbc32.lib odbccp32.lib kernel32.lib user32.lib gdi32.lib winspool.lib comdlg32.lib advapi32.lib shell32.lib ole32.lib oleaut32.lib uuid.lib odbc32.lib odbccp32.lib /nologo /subsystem:console /machine:I386
+# ADD LINK32 kernel32.lib user32.lib gdi32.lib winspool.lib comdlg32.lib advapi32.lib shell32.lib ole32.lib oleaut32.lib uuid.lib odbc32.lib odbccp32.lib /nologo /subsystem:console /machine:I386
 
-!ELSEIF  "$(CFG)" == "mbrolalib - Win32 Debug"
+!ELSEIF  "$(CFG)" == "mbrola - Win32 Debug"
 
 # PROP BASE Use_MFC 0
 # PROP BASE Use_Debug_Libraries 1
@@ -65,27 +62,24 @@ LINK32=link.exe
 # PROP Use_Debug_Libraries 1
 # PROP Output_Dir "Debug"
 # PROP Intermediate_Dir "Debug"
-# PROP Ignore_Export_Lib 0
 # PROP Target_Dir ""
-# ADD BASE CPP /nologo /MTd /W3 /Gm /GX /ZI /Od /D "WIN32" /D "_DEBUG" /D "_WINDOWS" /D "_MBCS" /D "_USRDLL" /D "MBROLA_EXPORTS" /YX /FD /GZ /c
-# ADD CPP /nologo /MTd /W3 /Gm /GX /ZI /Od /I "..\..\Database" /I "..\..\Engine" /I "..\..\Misc" /I "..\..\Parser" /D "WIN32" /D "_DEBUG" /D "_WINDOWS" /D "_MBCS" /D "_USRDLL" /D "_CRT_SECURE_NO_WARNINGS" /D "MBROLA_EXPORTS" /D "TARGET_OS_DOS" /D "LITTLE_ENDIAN" /D "DLL" /YX /FD /GZ /c
-# ADD BASE MTL /nologo /D "_DEBUG" /mktyplib203 /win32
-# ADD MTL /nologo /D "_DEBUG" /mktyplib203 /win32
+# ADD BASE CPP /nologo /W3 /Gm /GX /ZI /Od /D "WIN32" /D "_DEBUG" /D "_CONSOLE" /D "_MBCS" /YX /FD /GZ /c
+# ADD CPP /nologo /W3 /Gm /GX /ZI /Od /I "..\..\Standalone" /I "..\..\Database" /I "..\..\Engine" /I "..\..\Misc" /I "..\..\Parser" /D "WIN32" /D "_DEBUG" /D "_CONSOLE" /D "_MBCS" /D "_CRT_SECURE_NO_WARNINGS" /D "TARGET_OS_DOS" /D "LITTLE_ENDIAN" /YX /FD /GZ /c
 # ADD BASE RSC /l 0x3809 /d "_DEBUG"
 # ADD RSC /l 0x3809 /d "_DEBUG"
 BSC32=bscmake.exe
 # ADD BASE BSC32 /nologo
 # ADD BSC32 /nologo
 LINK32=link.exe
-# ADD BASE LINK32 kernel32.lib user32.lib gdi32.lib winspool.lib comdlg32.lib advapi32.lib shell32.lib ole32.lib oleaut32.lib uuid.lib odbc32.lib odbccp32.lib /nologo /dll /debug /machine:I386 /pdbtype:sept
-# ADD LINK32 kernel32.lib user32.lib gdi32.lib winspool.lib comdlg32.lib advapi32.lib shell32.lib ole32.lib oleaut32.lib uuid.lib odbc32.lib odbccp32.lib /nologo /dll /debug /machine:I386 /pdbtype:sept
+# ADD BASE LINK32 kernel32.lib user32.lib gdi32.lib winspool.lib comdlg32.lib advapi32.lib shell32.lib ole32.lib oleaut32.lib uuid.lib odbc32.lib odbccp32.lib kernel32.lib user32.lib gdi32.lib winspool.lib comdlg32.lib advapi32.lib shell32.lib ole32.lib oleaut32.lib uuid.lib odbc32.lib odbccp32.lib /nologo /subsystem:console /debug /machine:I386 /pdbtype:sept
+# ADD LINK32 kernel32.lib user32.lib gdi32.lib winspool.lib comdlg32.lib advapi32.lib shell32.lib ole32.lib oleaut32.lib uuid.lib odbc32.lib odbccp32.lib /nologo /subsystem:console /debug /machine:I386 /pdbtype:sept
 
 !ENDIF 
 
 # Begin Target
 
-# Name "mbrolalib - Win32 Release"
-# Name "mbrolalib - Win32 Debug"
+# Name "mbrola - Win32 Release"
+# Name "mbrola - Win32 Debug"
 # Begin Group "Source Files"
 
 # PROP Default_Filter "cpp;c;cxx;rc;def;r;odl;idl;hpj;bat"
@@ -112,10 +106,6 @@ SOURCE=..\..\Engine\diphone.c
 # Begin Source File
 
 SOURCE=..\..\Database\diphone_info.c
-# End Source File
-# Begin Source File
-
-SOURCE=.\dllmain.c
 # End Source File
 # Begin Source File
 
@@ -151,14 +141,6 @@ SOURCE=..\..\Engine\mbrola.c
 # End Source File
 # Begin Source File
 
-SOURCE=.\mbrola.def
-# End Source File
-# Begin Source File
-
-SOURCE=..\..\LibOneChannel\onechannel.c
-# End Source File
-# Begin Source File
-
 SOURCE=..\..\Parser\parser_input.c
 # End Source File
 # Begin Source File
@@ -168,6 +150,18 @@ SOURCE=..\..\Parser\phonbuff.c
 # Begin Source File
 
 SOURCE=..\..\Parser\phone.c
+# End Source File
+# Begin Source File
+
+SOURCE=..\..\Database\rom_database.c
+# End Source File
+# Begin Source File
+
+SOURCE=..\..\Database\rom_handling.c
+# End Source File
+# Begin Source File
+
+SOURCE=..\..\Standalone\synth.c
 # End Source File
 # Begin Source File
 
@@ -183,16 +177,12 @@ SOURCE=..\..\Database\zstring_list.c
 # PROP Default_Filter "h;hpp;hxx;hm;inl"
 # Begin Source File
 
-SOURCE=..\..\LibOneChannel\onechannel.h
+SOURCE=..\..\Standalone\synth.h
 # End Source File
 # End Group
 # Begin Group "Resource Files"
 
 # PROP Default_Filter "ico;cur;bmp;dlg;rc2;rct;bin;rgs;gif;jpg;jpeg;jpe"
-# Begin Source File
-
-SOURCE=.\mbrola.rc
-# End Source File
 # End Group
 # End Target
 # End Project

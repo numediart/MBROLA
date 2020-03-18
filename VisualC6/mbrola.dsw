@@ -3,7 +3,19 @@ Microsoft Developer Studio Workspace File, Format Version 6.00
 
 ###############################################################################
 
-Project: "mbrola"=".\mbrolalib\mbrola.dsp" - Package Owner=<4>
+Project: "mbrola"=.\mbrola\mbrola.dsp - Package Owner=<4>
+
+Package=<5>
+{{{
+}}}
+
+Package=<4>
+{{{
+}}}
+
+###############################################################################
+
+Project: "mbrolalib"=.\mbrolalib\mbrola.dsp - Package Owner=<4>
 
 Package=<5>
 {{{
