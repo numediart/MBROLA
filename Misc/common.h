@@ -123,6 +123,7 @@ void swab( const char *from, char *to, int nbytes);
 /* Release number (automatically changed by "make version") */
 #define SYNTH_VERSION "3.4-dev"
 #define WWW_ADDRESS "https://github.com/numediart/MBROLA/"
+#define DB_ADDRESS "https://github.com/numediart/MBROLA-voices/"
 
 /* General trace       */
 /*	#define DEBUG           */
