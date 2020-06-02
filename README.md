@@ -43,7 +43,7 @@ See more at [development history](Documentation/HISTORY.txt).
 
 # Compilation
 
-You need C compiler and libraries to compile the project. On Debian-based Linux
+You need C compiler and libraries to compile the project. On Debian-based Linux or MinGW
 you need to install following packages:
 
 ```
