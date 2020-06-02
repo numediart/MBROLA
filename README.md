@@ -43,7 +43,7 @@ See more at [development history](Documentation/HISTORY.txt).
 
 # Compilation
 
-You need C compiler and libraries to compile the project. On Debian-based Linux
+You need C compiler and libraries to compile the project. On Debian-based Linux or MinGW
 you need to install following packages:
 
 ```
@@ -303,6 +303,14 @@ Type:
 
 ```
 mbrola fr1/fr1 TEST/bonjour.pho bonjour.wav
+```
+
+## On MinGW/Windows
+
+Type(If current location is in MBROLA git repo with mintty):
+
+```
+Bin/mbrola ../MBROLA-voices/data/fr1/fr1 ../MBROLA-voices/data/fr1/TEST/bonjour.pho $TMP/ms.wav && cat $TMP/ms.wav | vlc -Idummy --play-and-exit - && rm $TMP/ms.wav
 ```
 
 Then you can play the RIFF Wav file with windows sound utility or
