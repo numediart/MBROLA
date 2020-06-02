@@ -71,7 +71,9 @@
 
 /* For beboxes and Mac use a hand-made version of swab */
 #if defined(TARGET_OS_VMS) || defined(TARGET_OS_BEOS) || defined(TARGET_OS_MAC) || defined(__STRICT_ANSI__)
+#if ! defined(__MINGW64__) && ! defined(__MINGW32__)
 void swab( const char *from, char *to, int nbytes);
+#endif
 #endif
 
 #if defined(__GLIBC__)

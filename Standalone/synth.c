@@ -318,8 +318,13 @@ int main(int argc, char **argv)
 	/*
 	 * Plug the reset signal handler (but don't overide parent's Signal Ignore
 	 */
+#if ! defined(__MINGW64__) && ! defined(__MINGW32__)
 	if (signal (SIGUSR1, reset_handler) == SIG_IGN)
 		signal (SIGUSR1, SIG_IGN);
+#else
+	if (signal (SIGINT, reset_handler) == SIG_IGN)
+		signal (SIGINT, SIG_IGN);
+#endif
 
 #endif
 
