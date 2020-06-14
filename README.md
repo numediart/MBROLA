@@ -4,6 +4,7 @@ __Table of contents__
 
 - [A brief description of MBROLA](#a-brief-description-of-mbrola)
 - [Compilation](#compilation)
+- [Installation](#installation)
 - [Execution](#execution)
   - [Using Pipes](#using-pipes)
   - [Renaming and Cloning phonemes](#renaming-and-cloning-phonemes)
@@ -72,6 +73,14 @@ all projects on solution or you can select either `mbrola` to build mbrola stand
 
 More documentation for developers is located in [Documentation](Documentation) folder
 of the project.
+
+# Installation
+
+To make executable file acessible using just its name, copy it to the standard folder for executable files:
+
+```
+sudo cp Bin/mbrola /usr/bin/mbrola
+```
 
 # Execution
 
