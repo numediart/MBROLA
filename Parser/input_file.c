@@ -23,6 +23,7 @@
  * 22/06/98 : Created
  */
 
+#include <errno.h>
 #include "mbralloc.h"
 #include "input_file.h"
 
@@ -33,7 +34,13 @@
 
 static long readline_InputFile(Input* in, char *line, int size)
 {
-	return( (long) fgets(line, size, (FILE*)in->self));
+	char *ret;
+
+	do
+		ret = fgets(line, size, (FILE*)in->self);
+	while (ret == NULL && errno == EINTR);
+
+	return ret != NULL;
 }
 
 static void reset_InputFile(Input* in)
