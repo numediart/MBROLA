@@ -345,13 +345,15 @@ int main(int argc, char **argv)
 			" This program is free software: you can redistribute it and/or modify\n"
 			" it under the terms of the GNU Affero General Public License.\n"
 			" See the https://www.gnu.org/licenses/agpl-3.0.html for more details.\n"
-			" \n"
+			" \n");
+		printf(
 			" Note that MBROLA language databases are provided with different licences.\n"
 			" See licencing information for them provided at " DB_ADDRESS "\n"
 			" \n"
 			" For more information look at " WWW_ADDRESS "\n"
 			" or contact mbrola@tcts.fpms.ac.be.\n"
-			" \n"
+			" \n");
+		printf(
 			" THIS SOFTWARE CARRIES NO WARRANTY, EXPRESSED OR IMPLIED.  THE USER\n"
 			" ASSUMES ALL RISKS, KNOWN OR UNKNOWN, DIRECT OR INDIRECT, WHICH INVOLVE\n"
 			" THIS SOFTWARE IN ANY WAY. IN PARTICULAR, THE AUTHOR DOES NOT TAKE ANY\n"
