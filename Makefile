@@ -128,7 +128,7 @@ BINOBJS = $(BINSRCS:%.c=Bin/Standalone/%.o)
 PROJ = mbrola
 
 $(PROJ): install_dir  $(BINOBJS) 
-	$(CCPURE) $(CFLAGS) -o $(MBRDIR)/$(PROJ) $(BINOBJS) $(LIB)	
+	$(CCPURE) $(CFLAGS) $(LDFLAGS) -o $(MBRDIR)/$(PROJ) $(BINOBJS) $(LIB)
 
 clean:
 	\rm -f $(MBRDIR)/$(PROJ) $(PROJ).a core demo* TAGS $(BIN)/lib*.o $(BINOBJS) 
@@ -147,7 +147,7 @@ net:
 	\rm -f *~ */*~
 
 $(BINDIR)/%.o: %.c
-	$(CCPURE) $(CFLAGS) -o $@ -c $<
+	$(CCPURE) $(CPPFLAGS) $(CFLAGS) -o $@ -c $<
 
 # to create the compilation directory, if necessary
 install_dir: 
@@ -156,25 +156,25 @@ install_dir:
 	fi
 
 lib1 : LibOneChannel/lib1.c
-	$(CCPURE) $(CFLAGS) -o Bin/LibOneChannel/lib1.o -c LibOneChannel/lib1.c
+	$(CCPURE) $(CPPFLAGS) $(CFLAGS) -o Bin/LibOneChannel/lib1.o -c LibOneChannel/lib1.c
 
 demo1:  install_dir lib1 LibOneChannel/demo1.c
-	$(CCPURE) $(CFLAGS) -c -o Bin/LibOneChannel/demo1.o LibOneChannel/demo1.c
-	$(CCPURE) $(CFLAGS) -o demo1 Bin/LibOneChannel/demo1.o Bin/LibOneChannel/lib1.o $(LIB)		
+	$(CCPURE) $(CPPFLAGS) $(CFLAGS) -c -o Bin/LibOneChannel/demo1.o LibOneChannel/demo1.c
+	$(CCPURE) $(CFLAGS) $(LDFLAGS) -o demo1 Bin/LibOneChannel/demo1.o Bin/LibOneChannel/lib1.o $(LIB)
 
 # END_WWW
 
 demo1b:  install_dir lib1 LibOneChannel/demo1b.c
-	$(CCPURE) $(CFLAGS) -c -o Bin/LibOneChannel/demo1b.o LibOneChannel/demo1b.c
-	$(CCPURE) $(CFLAGS) -o demo1b Bin/LibOneChannel/demo1b.o Bin/LibOneChannel/lib1.o $(LIB)	
+	$(CCPURE) $(CPPFLAGS) $(CFLAGS) -c -o Bin/LibOneChannel/demo1b.o LibOneChannel/demo1b.c
+	$(CCPURE) $(CFLAGS) $(LDFLAGS) -o demo1b Bin/LibOneChannel/demo1b.o Bin/LibOneChannel/lib1.o $(LIB)
 
 
 lib2 : LibMultiChannel/lib2.c
-	$(CCPURE) $(CFLAGS) -o Bin/LibMultiChannel/lib2.o -c LibMultiChannel/lib2.c
+	$(CCPURE) $(CPPFLAGS) $(CFLAGS) -o Bin/LibMultiChannel/lib2.o -c LibMultiChannel/lib2.c
 
 demo2: install_dir lib2 LibMultiChannel/demo2.c	
-	$(CCPURE) $(CFLAGS) -c -o Bin/LibMultiChannel/demo2.o LibMultiChannel/demo2.c
-	$(CCPURE) $(CFLAGS) -o demo2 Bin/LibMultiChannel/demo2.o Bin/LibMultiChannel/lib2.o $(LIB)		
+	$(CCPURE) $(CPPFLAGS) $(CFLAGS) -c -o Bin/LibMultiChannel/demo2.o LibMultiChannel/demo2.c
+	$(CCPURE) $(CFLAGS) $(LDFLAGS) -o demo2 Bin/LibMultiChannel/demo2.o Bin/LibMultiChannel/lib2.o $(LIB)
 # END_COMM
 
 # Check the integrity of the new Mbrola version by comparing the output 
