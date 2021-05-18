@@ -70,10 +70,14 @@
 #endif
 
 /* For beboxes and Mac use a hand-made version of swab */
-#if defined(TARGET_OS_VMS) || defined(TARGET_OS_BEOS) || defined(TARGET_OS_MAC) || defined(__STRICT_ANSI__)
-#if ! defined(__MINGW64__) && ! defined(__MINGW32__)
+#if defined(TARGET_OS_VMS) || defined(TARGET_OS_BEOS) || defined(__STRICT_ANSI__)
+#if ! defined(__MINGW64__) && ! defined(__MINGW32__) && ! defined(TARGET_OS_MAC)
 void swab( const char *from, char *to, int nbytes);
 #endif
+#endif
+
+#if defined(TARGET_OS_MAC)
+#define swab(a, b, c) memcpy(a, b, c)
 #endif
 
 #if defined(__GLIBC__)
