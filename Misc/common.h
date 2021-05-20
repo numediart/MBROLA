@@ -76,10 +76,6 @@ void swab( const char *from, char *to, int nbytes);
 #endif
 #endif
 
-#if defined(TARGET_OS_MAC)
-#define swab(a, b, c) memcpy(a, b, c)
-#endif
-
 #if defined(__GLIBC__)
 #include <endian.h>
 #undef BIG_ENDIAN
@@ -92,7 +88,7 @@ void swab( const char *from, char *to, int nbytes);
 #else
 
 /* Intel based machine ? */
-#if defined(__i386) || defined(_M_X86) || defined(TARGET_OS_VMS)
+#if defined(__i386) || defined(_M_X86) || defined(TARGET_OS_VMS) || defined(TARGET_OS_MAC)
 #undef BIG_ENDIAN
 #undef LITTLE_ENDIAN
 # define LITTLE_ENDIAN
@@ -103,6 +99,10 @@ void swab( const char *from, char *to, int nbytes);
 #undef BIG_ENDIAN
 #undef LITTLE_ENDIAN
 #define BIG_ENDIAN
+#endif
+
+#if defined(LITTLE_ENDIAN) && defined(BIG_ENDIAN)
+#error "Both LITTLE_ENDIAN and BIG_ENDIAN are defined. It should not happen and this probably means your platform is not fully tested and handled."
 #endif
 
 #ifdef __powerpc__
