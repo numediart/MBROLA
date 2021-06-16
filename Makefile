@@ -4,12 +4,13 @@
 VERSION=3.4-dev
 
 # To test strict C ANSI compliance
-CC = gcc -ansi -pedantic
+CC = gcc
+CFLAGS += -ansi -pedantic
 LIB= -lm
 
 # This allow you to write commands like "make PURE=purify demo1"
 # or "make PURE=quantify lib2"
-CCPURE = $(PURE) $(CC)
+CCPURE = $(PURE) $(CC) $(CFLAGS)
 
 ########################
 # Machine specific #define, uncomment as needed
