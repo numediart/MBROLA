@@ -3,8 +3,7 @@
 # Mbrola Speech Synthesize Makefile ( tune the #define and type "make" )
 VERSION=3.4-dev
 
-# To test strict C ANSI compliance
-CC = gcc -ansi -pedantic
+CC = gcc
 LIB= -lm
 
 # This allow you to write commands like "make PURE=purify demo1"
@@ -32,8 +31,9 @@ CFLAGS += -DLITTLE_ENDIAN
 #######################
 # GENERAL FLAGS FOR GCC
 
-# Optimized code
-CFLAGS += -O6
+ # To test strict C ANSI compliance
+ANSIFLAGS = -ansi -pedantic
+CFLAGS += ${ANSIFLAGS}
 
 # Debug mode with gdb
 #CFLAGS += -g 
