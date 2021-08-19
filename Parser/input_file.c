@@ -38,7 +38,7 @@ static long readline_InputFile(Input* in, char *line, int size)
 
 	do
 		ret = fgets(line, size, (FILE*)in->self);
-	while (ret == NULL && errno == EINTR);
+	while (ret == NULL && !feof((FILE*)in->self) && errno == EINTR);
 
 	return ret != NULL;
 }
