@@ -146,7 +146,7 @@ tags:
 net:
 	\rm -f *~ */*~
 
-$(BINDIR)/%.o: %.c
+$(BINDIR)/%.o: %.c install_dir
 	$(CCPURE) $(CPPFLAGS) $(CFLAGS) -o $@ -c $<
 
 # to create the compilation directory, if necessary
