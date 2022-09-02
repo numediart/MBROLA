@@ -8,7 +8,7 @@ __Table of contents__
 - [Execution](#execution)
   - [Using Pipes](#using-pipes)
   - [Renaming and Cloning phonemes](#renaming-and-cloning-phonemes)
-  - [On MSDOS/Windows](#on-msdoswindows)
+  - [On MS-DOS/Windows](#on-msdoswindows)
   - [On modern Linux](#on-modern-linux)
   - [On Sun4 or with machines with an old audio interface](#on-sun4-or-with-machines-with-an-old-audio-interface)
   - [On VAX or AXP workstations](#on-vax-or-axp-workstations)
@@ -65,10 +65,10 @@ make clean
 
 Look for [makefile details](README_Makefile.md), if compilation is not successful.
 
-On Windows, you can build standalone program and mbrola.dll using Microsoft Visual C++ by using project 
-solution in `VisualC` directory for VC 2015 or later (recomended), or `VisualC6` for older version 
-from VC 6.0. To build, open `mbrola.sln` on Visual Studio (or `mbrola.dsw` for VC6 version), then build 
-all projects on solution or you can select either `mbrola` to build mbrola standalone program or 
+On Windows, you can build standalone program and mbrola.dll using Microsoft Visual C++ by using project
+solution in `VisualC` directory for VC 2015 or later (recommended), or `VisualC6` for older version
+from VC 6.0. To build, open `mbrola.sln` on Visual Studio (or `mbrola.dsw` for VC6 version), then build
+all projects on solution or you can select either `mbrola` to build mbrola standalone program or
 `mbrolalib` to  build mbrola.dll library.
 
 More documentation for developers is located in [Documentation](Documentation) folder
@@ -76,7 +76,7 @@ of the project.
 
 # Installation
 
-To make executable file acessible using just its name, copy it to the standard folder for executable files:
+To make executable file accessible using just its name, copy it to the standard folder for executable files:
 
 ```
 sudo cp Bin/mbrola /usr/bin/mbrola
@@ -121,7 +121,7 @@ Options can be any of the following:
 -I IF = Initialization file containing one command per line
  CLONE, RENAME, VOICE, TIME, FREQ, VOLUME, FLUSH, COMMENT,
  and IGNORE are available
--W = store the datbase in ROM format
+-W = store the database in ROM format
 -w = the database in a ROM dump
 -d = Show list of diphones in the database
 ```
@@ -145,7 +145,7 @@ voice/language database (16 kHz for the diphone database supplied by
 the author of MBROLA : Fr1). MBROLA can produce different audio file
 formats: .au, .wav, .aiff, .aif, and .raw files depending on the
 ouput_file extension. If the extension is not recognized, the format
-is RAW (no header). We recommand .wav for Windows, and .au for Unix
+is RAW (no header). We recommend .wav for Windows, and .au for Unix
 platforms.
 
 To display information about the phoneme set used by the database,
@@ -160,7 +160,7 @@ about the database.
 
 Option `-e` makes Mbrola ignore wrong or missing diphone sequences
 (replaced by silence) which can be quite useful when debugging your
-TTS. Equivallent to "IGNORE" directive in the initialization file (N.B
+TTS. Equivalent to "IGNORE" directive in the initialization file (N.B
 replace the obsolete ;;E=OFF , unsupported in .pho file).
 
 Optional parameters let you shorten or lengthen synthetic speech and
@@ -199,7 +199,7 @@ the voice of a Troll). The same command in an initialization file
 becomes "VOICE 10000".
 
 Option `-v` specifies a VolumeRatio which multiplies each output
-sample. In the example below, each sample is multipliead by 0.7 (the
+sample. In the example below, each sample is multiplied by 0.7 (the
 loudness goes down). Warning: setting VolumeRatio too high generates
 saturation.
 
@@ -254,16 +254,16 @@ mbrola -R "a my_a b my_b" fr1/fr1 test.pho test.wav
 
 You can give as many renaming pairs as you want. Circular definition
 are not a problem -> "a b b c" will rename original [a] into [b] and
-original [b] into [c] independantly ([a] won't be renamed to [c]).
+original [b] into [c] independently ([a] won't be renamed to [c]).
 
 LIMITATION: you can't rename a phoneme into another that already
 exists.
 
 The cloning mechanism does exactly the same thing, though the old
-phoneme still exists after renaming. This is usefull if you have 2
+phoneme still exists after renaming. This is useful if you have 2
 allophones in your alphabet, but the Mbrola voice only provides one.
 
-Imagine for instance, that you make the disctinction between the
+Imagine for instance, that you make the distinction between the
 voiced [r] and its unvoiced counterpart [r0] and that you are using a
 syllabic version [r=]. If as a first approximation using [r] for both
 is OK, then you may use an Mbrola voice that only provides one version
@@ -306,7 +306,7 @@ into `mbrola -I en1mrpa en1 ...`.
 
 BELOW ARE A NUMBER OF MACHINE DEPENDANT HINTS FOR BEST USING MBROLA
 
-## On MSDOS/Windows
+## On MS-DOS/Windows
 
 Type:
 
@@ -329,7 +329,7 @@ where `aplay` is your audio file player (`aplay` for ALSA
 If your audioplayer has problems with sun .AU files, try with .raw
 Never use .wav format when you pipe the ouput (mbrola can't rewind the
 file to write the audio size in the header). Wav format was not
-developped for Unix (on the contrary Au format let you specify in the
+developed for Unix (on the contrary Au format let you specify in the
 header "we're on a pipe, read until end of file").
 
 ## On Sun4 or with machines with an old audio interface
@@ -501,4 +501,3 @@ This program is distributed in the hope that it will be useful,
 but WITHOUT ANY WARRANTY; without even the implied warranty of
 MERCHANTABILITY or FITNESS FOR A PARTICULAR PURPOSE. See the
 [GNU Affero General Public License](LICENSE) for more details.
-
