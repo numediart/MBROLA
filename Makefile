@@ -25,7 +25,7 @@ CCPURE = $(PURE) $(CC)
 
 # If endianess of your machine is not automatically detected in Misc/common.h
 # you should manually specify here
-CFLAGS += -DLITTLE_ENDIAN
+#CFLAGS += -DLITTLE_ENDIAN
 #CFLAGS += -DBIG_ENDIAN
 
 #######################
