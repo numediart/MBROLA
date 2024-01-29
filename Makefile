@@ -3,7 +3,7 @@
 # Mbrola Speech Synthesize Makefile ( tune the #define and type "make" )
 VERSION=3.4-dev
 
-CC = gcc
+CC ?= gcc -ansi -pedantic
 LIB= -lm
 
 # This allow you to write commands like "make PURE=purify demo1"
@@ -25,7 +25,7 @@ CCPURE = $(PURE) $(CC)
 
 # If endianess of your machine is not automatically detected in Misc/common.h
 # you should manually specify here
-CFLAGS += -DLITTLE_ENDIAN
+#CFLAGS += -DLITTLE_ENDIAN
 #CFLAGS += -DBIG_ENDIAN
 
 #######################

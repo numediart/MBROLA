@@ -76,11 +76,11 @@ void swab( const char *from, char *to, int nbytes);
 #endif
 #endif
 
-#if defined(__GLIBC__)
+#if defined(__GLIBC__) || defined(TARGET_OS_NETBSD)
 #include <endian.h>
 #undef BIG_ENDIAN
 #undef LITTLE_ENDIAN
-#if __BYTE_ORDER == __LITTLE_ENDIAN
+#if __BYTE_ORDER == __LITTLE_ENDIAN || _BYTE_ORDER == _LITTLE_ENDIAN
 #  define LITTLE_ENDIAN
 #else
 #  define BIG_ENDIAN
