@@ -3,7 +3,8 @@
 # Mbrola Speech Synthesize Makefile ( tune the #define and type "make" )
 VERSION=3.4-dev
 
-CC ?= gcc -ansi -pedantic
+CC ?= gcc
+CFLAGS += -ansi -pedantic
 LIB= -lm
 
 # This allow you to write commands like "make PURE=purify demo1"
